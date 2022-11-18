@@ -1,0 +1,26 @@
+.classes_value {
+    flex: auto;
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.character {
+    min-width: 180px;
+    padding: 1rem;
+    opacity: 0.5;
+}
+
+.character__image {
+    max-width: 80px;
+
+}
+
+.classes {
+    display: flex;
+    flex-flow: row;
+    position: relative;
+    width: 100%;
+}
+

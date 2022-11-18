@@ -17,7 +17,7 @@ export interface Weapon {
 }
 
 
-const ASSAULT_RIFLES: Weapon[] = [
+export const ASSAULT_RIFLES: Weapon[] = [
     { level_index: 0, name: "M-8 Avenger", image: "AssaultRifle_Avenger.png", },
     { level_index: 1, name: "Collector Rifle", image: "AssaultRifle_Collector.png" },
     { level_index: 2, name: "Geth Pulse Rifle", image: "AssaultRifle_Geth.png" },
@@ -38,7 +38,7 @@ const ASSAULT_RIFLES: Weapon[] = [
     { level_index: 627, name: "Adas Anti-Synthetic Rifle", image: "AssaultRifle_Adas_MP.png" },
 ];
 
-const SNIPER_RIFLES: Weapon[] = [
+export const SNIPER_RIFLES: Weapon[] = [
     { level_index: 8, name: "M-29 Incisor", image: "SniperRifle_Incisor.png", },
     { level_index: 9, name: "M-92 Mantis", image: "SniperRifle_Mantis.png", },
     { level_index: 10, name: "M-13 Raptor", image: "SniperRifle_Raptor.png", },
@@ -53,7 +53,7 @@ const SNIPER_RIFLES: Weapon[] = [
     { level_index: 532, name: "Collector Sniper Rifle", image: "SniperRifle_Collector.png", },
 ];
 
-const SHOTGUNS: Weapon[] = [
+export const SHOTGUNS: Weapon[] = [
     { level_index: 14, name: "M-300 Claymore", image: "Shotgun_Claymore.png", },
     { level_index: 15, name: "M-22 Eviscerator", image: "Shotgun_Eviscerator.png", },
     { level_index: 16, name: "Geth Plasma Shotgun", image: "Shotgun_Geth.png", },
@@ -69,7 +69,7 @@ const SHOTGUNS: Weapon[] = [
     { level_index: 525, name: "Venom Shotgun", image: "Shotgun_Salarian_MP.png", },
 ];
 
-const PISTOLS: Weapon[] = [
+export const PISTOLS: Weapon[] = [
     { level_index: 21, name: "M-6 Carnifex", image: "Pistol_Carnifex.png", },
     { level_index: 22, name: "M-358 Talon", image: "Pistol_Talon.png", },
     { level_index: 23, name: "Arc Pistol", image: "Pistol_Thor.png", },
@@ -83,7 +83,7 @@ const PISTOLS: Weapon[] = [
     { level_index: 629, name: "M-11 Suppressor", image: "Pistol_Silencer_MP.png", },
 ];
 
-const SUB_MACHINE_GUNS: Weapon[] = [
+export const SUB_MACHINE_GUNS: Weapon[] = [
     { level_index: 27, name: "M-12 Locust", image: "SMG_Locust.png", },
     { level_index: 28, name: "M-25 Hornet", image: "SMG_Hornet.png", },
     { level_index: 29, name: "M-4 Shuriken", image: "SMG_Shuriken.png", },
@@ -94,10 +94,115 @@ const SUB_MACHINE_GUNS: Weapon[] = [
     { level_index: 624, name: "Blood Pack Punisher", image: "SMG_Bloodpack_MP.png", },
 ];
 
-const WEAPON_CATEGORIES: Weapon[][] = [
-    ASSAULT_RIFLES,
-    SNIPER_RIFLES,
-    SHOTGUNS,
-    PISTOLS,
-    SUB_MACHINE_GUNS,
+
+export interface WeaponCategory {
+    name: string,
+    values: Weapon[],
+}
+
+export const WEAPON_CATEGORIES: WeaponCategory[] = [
+    { name: "Assault Rifles", values: ASSAULT_RIFLES },
+    { name: "Sniper Rifles", values: SNIPER_RIFLES },
+    { name: "Shotguns", values: SHOTGUNS },
+    { name: "Pistols", values: PISTOLS },
+    { name: "Sub Machine Guns", values: SUB_MACHINE_GUNS }
+];
+
+export interface Character {
+    index: number,
+    name: string,
+    image: string;
+}
+
+export const ADEPT_CHARACTERS: Character[] = [
+    { index: 217, name: "Asari", image: "MP_Asari0.png" },
+    { index: 218, name: "Drell", image: "MP_Drell0.png" },
+    { index: 247, name: "Human Female", image: "AdeptHumanFemale.png" },
+    { index: 248, name: "Human Male", image: "AdeptHumanMale.png" },
+    { index: 273, name: "Asari Justicar", image: "MP_AsariComm.png" },
+    { index: 282, name: "Phoenix", image: "MP_Cerberus.png" },
+    { index: 373, name: "N7 Fury", image: "MP_AllianceADP.png" },
+    { index: 500, name: "Volus", image: "MP_VolusADP.png" },
+    { index: 508, name: "Batarian Slasher", image: "MP_BatarianADP.png" },
+    { index: 514, name: "Krogan Shaman", image: "MP_KroganADP.png" },
+    { index: 577, name: "Awakened Collector", image: "MP_CollectADP.png" },
+];
+export const ENGINEER_CHARACTERS: Character[] = [
+    { index: 219, name: "Quarian", image: "MP_Quarian0.png" },
+    { index: 220, name: "Salarian", image: "MP_Salarian0.png" },
+    { index: 238, name: "Geth", image: "MP_GethEngineer.png" },
+    { index: 249, name: "Human Female", image: "EngineerHumanFemale.png" },
+    { index: 250, name: "Human Male", image: "EngineerHumanMale.png" },
+    { index: 280, name: "Quarian Male", image: "MP_QuarianMale0.png" },
+    { index: 374, name: "N7 Demolisher", image: "MP_AllianceENG.png" },
+    { index: 501, name: "Volus", image: "MP_VolusENG.png" },
+    { index: 503, name: "Turian Saboteur", image: "MP_TurianENG.png" },
+    { index: 509, name: "Vorcha Hunter", image: "MP_VorchaENG.png" },
+    { index: 584, name: "Talon Mercenary", image: "MP_MercENG.png" },
+];
+export const INFILTRATOR_CHARACTERS: Character[] = [
+    { index: 221, name: "Salarian", image: "MP_Salarian0.png" },
+    { index: 222, name: "Quarian", image: "MP_Quarian0.png" },
+    { index: 239, name: "Geth", image: "MP_GethInfiltrator.png" },
+    { index: 251, name: "Human Female", image: "InfiltratorHumanFemale.png" },
+    { index: 252, name: "Human Male", image: "InfiltratorHumanMale.png" },
+    { index: 281, name: "Quarian Male", image: "MP_QuarianMale0.png" },
+    { index: 281, name: "N7 Shadow", image: "MP_AllianceINF.png" },
+    { index: 381, name: "Turian Ghost", image: "MP_TurianINF.png" },
+    { index: 504, name: "Drell Assassin", image: "MP_DrellINF.png" },
+    { index: 510, name: "Asari Huntress", image: "MP_AsariINF.png" },
+    { index: 602, name: "Alliance Infiltration Unit", image: "MP_FBotINF.png" },
+    
+];
+export const SENTINEL_CHARACTERS: Character[] = [
+    { index: 223, name: "Turian", image: "MP_Turian0.png" },
+    { index: 224, name: "Krogan", image: "MP_Krogan0.png" },
+    { index: 253, name: "Human Female", image: "SentinelHumanFemale.png" },
+    { index: 254, name: "Human Male", image: "SentinelHumanMale.png" },
+    { index: 267, name: "Batarian", image: "MP_Batarian.png" },
+    { index: 279, name: "Vorcha", image: "MP_Vorcha.png" },
+    { index: 375, name: "N7 Paladin", image: "MP_AllianceSEN.png" },
+    { index: 505, name: "Volus Mercenary", image: "MP_VolusENG2.png" },
+    { index: 511, name: "Asari Valkyrie", image: "MP_AsariSEN.png" },
+    { index: 583, name: "Krogan Warlord", image: "MP_BloodSEN.png" },
+
+];
+export const SOLDIER_CHARACTERS: Character[] = [
+    { index: 225, name: "Krogan", image: "MP_Krogan0.png" },
+    { index: 226, name: "Turian", image: "MP_Turian0.png" },
+    { index: 240, name: "Batarian", image: "MP_Batarian.png" },
+    { index: 255, name: "Human Female", image: "SoldierHumanFemale.png" },
+    { index: 256, name: "Human Male", image: "SoldierHumanMale.png" },
+    { index: 268, name: "Battlefield 3", image: "MP_FB_HMM0.png" },
+    { index: 278, name: "Vorcha", image: "MP_Vorcha.png" },
+    { index: 378, name: "N7 Destroyer", image: "MP_AllianceSOL.png" },
+    { index: 480, name: "Turian Havoc", image: "MP_TurianSLD.png" },
+    { index: 506, name: "Geth Trooper", image: "MP_GethSLD.png" },
+    { index: 512, name: "Quarian Marksman", image: "MP_QuarianMSLD.png" },
+    { index: 576, name: "Geth Juggernaut", image: "MP_GethPSLD.png" },
+];
+export const VANGUARD_CHARACTERS: Character[] = [
+    { index: 227, name: "Drell", image: "MP_Drell0.png" },
+    { index: 228, name: "Asari", image: "MP_Asari0.png" },
+    { index: 257, name: "Human Female", image: "VanguardHumanFemale.png" },
+    { index: 258, name: "Human Male", image: "VanguardHumanMale.png" },
+    { index: 272, name: "Krogan", image: "MP_Krogan0.png" },
+    { index: 283, name: "Phoenix", image: "MP_Cerberus.png" },
+    { index: 376, name: "N7 Slayer", image: "MP_AllianceVAN.png" },
+    { index: 507, name: "Volus Protector", image: "MP_VolusVAN.png" },
+    { index: 513, name: "Batarian Brawler", image: "MP_BatarianVAN.png" },
+    { index: 592, name: "Cabal", image: "MP_TurianVAN.png" },
+];
+
+export interface CharacterClass {
+    name: string;
+    values: Character[],
+}
+
+export const CHARACTER_CLASSES: CharacterClass[] = [
+    {name: "Adept", values: ADEPT_CHARACTERS},
+    {name: "Engineer", values: ENGINEER_CHARACTERS},
+    {name: "Infiltrator", values: INFILTRATOR_CHARACTERS},
+    {name: "Sentinel", values: SENTINEL_CHARACTERS},
+    {name: "Vanguard", values: VANGUARD_CHARACTERS}
 ]
