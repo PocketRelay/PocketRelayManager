@@ -428,45 +428,46 @@ export const GEAR_MAX: number = 5;
 export interface GearConsumable {
     index: number;
     name: string;
+    text: string;
     image: string;
 }
 
 export const GEAR_CONSUMABLES: GearConsumable[] = [
-    { index: 330, name: "Hydraulic Joints", image: "Gear_MeleeDamage.png" },
-    { index: 331, name: "Vulnerability VI", image: "Gear_HeadshotDamage.png" },
-    { index: 332, name: "Mental Focuser", image: "Gear_PowerBonus_Damage.png" },
-    { index: 333, name: "Structural Ergonomics", image: "Gear_PowerBonus_Cooldown.png" },
-    { index: 334, name: "Shield Booster", image: "Gear_ShieldStrength.png" },
-    { index: 335, name: "Multicapacitor", image: "Gear_ShieldRegen.png" },
-    { index: 337, name: "Assault Rifle Amp", image: "Gear_WeaponDamage_AssaultRifle.png" },
-    { index: 338, name: "Sniper Rifle Amp", image: "Gear_WeaponDamage_SniperRifle.png" },
-    { index: 339, name: "Shotgun Amp", image: "Gear_WeaponDamage_Shotgun.png" },
-    { index: 340, name: "Pistol Amp", image: "Gear_WeaponDamage_Pistol.png" },
-    { index: 341, name: "SMG Amp", image: "Gear_WeaponDamage_SMG.png" },
-    { index: 343, name: "Grenade Capacity", image: "Gear_GrenadeCapacity.png" },
-    { index: 344, name: "Warfighter Package", image: "Gear_Combo_AssaultDamageGrenadeCap.png" },
-    { index: 345, name: "Commando Package", image: "Gear_Combo_PistolDamageBioticDamage.png" },
-    { index: 346, name: "Stronghold Package", image: "Gear_Combo_ShieldStrengthShieldRegen.png" },
-    { index: 347, name: "Berserker Package", image: "Gear_Combo_ShotgunDamageMeleeDamage.png" },
-    { index: 348, name: "Expert Package", image: "Gear_Combo_SMGDamagePowerCooldown.png" },
-    { index: 349, name: "Operative Package", image: "Gear_Combo_SniperDamageTechDamage.png" },
-    { index: 416, name: "Combatives Upgrade", image: "Gear_Combo_AssaultRifleDamagePistolDamage.png" },
-    { index: 417, name: "Martial Biotic Amp", image: "Gear_Combo_MeleeDamageBioticDamage.png" },
-    { index: 418, name: "Juggernaut Shield", image: "Gear_Combo_ShieldStrengthMeleeDamage.png" },
-    { index: 419, name: "Shock Trooper Upgrade", image: "Gear_Combo_ShotgunDamageGrenadeCap.png" },
-    { index: 420, name: "Guerrilla Upgrade", image: "Gear_Combo_SniperDamageSMGDamage.png" },
-    { index: 421, name: "Omni-Capacitors", image: "Gear_Combo_TechDamagePowerCooldown.png" },
-    { index: 422, name: "Barrage Upgrade", image: "Gear_Combo_WeaponStabilityAmmoCapacity.png" },
-    { index: 423, name: "Thermal Clip Storage", image: "Gear_AmmoCapacity.png" },
-    { index: 424, name: "Adaptive War Amp", image: "Gear_BioticDamage.png" },
-    { index: 425, name: "Engineering Kit", image: "Gear_TechDamage.png" },
-    { index: 436, name: "Medi-Gel Transmitter", image: "Gear_MassMedigel.png" },
-    { index: 437, name: "Armored Compartments", image: "Gear_CobraCapacity.png" },
-    { index: 538, name: "Responder Loadout", image: "Gear_MedigelCapacity.png" },
-    { index: 539, name: "Survivor Loadout", image: "Gear_SurvivalCapacity.png" },
-    { index: 540, name: "Assault Loadout", image: "Gear_ThermalCapacity.png" },
-    { index: 603, name: "Geth Scanner", image: "Gear_VisionHelmet.png" },
-    { index: 604, name: "Batarian Gauntlet", image: "Gear_BatarianGauntlet.png" },
+    { index: 330, name: "Hydraulic Joints", text: "Improve armor joints to maximize the force and damage delivered through melee blows.", image: "Gear_MeleeDamage.png" },
+    { index: 331, name: "Vulnerability VI", text: "Use targeting VIs to pinpoint enemy weak points. Aim will be autocorrected to maximize damage.", image: "Gear_HeadshotDamage.png" },
+    { index: 332, name: "Mental Focuser", text: "Sharpen mental alertness and precision under stress to aid the performance of tech or biotic powers.", image: "Gear_PowerBonus_Damage.png" },
+    { index: 333, name: "Structural Ergonomics", text: "Enhance the ability of armor to bear loads, speeding up cooldown so that powers can be used more often.", image: "Gear_PowerBonus_Cooldown.png" },
+    { index: 334, name: "Shield Booster", text: "Amplify the power systems that generate shields to raise their effective strength.", image: "Gear_ShieldStrength.png" },
+    { index: 335, name: "Multicapacitor", text: "Add a backup power supply to the user's shields, decreasing the time before they can be brought back online.", image: "Gear_ShieldRegen.png" },
+    { index: 337, name: "Assault Rifle Amp", text: "Add power to assault rifles to increase round velocity and damage.", image: "Gear_WeaponDamage_AssaultRifle.png" },
+    { index: 338, name: "Sniper Rifle Amp", text: "Add power to sniper rifles to increase round velocity and damage.", image: "Gear_WeaponDamage_SniperRifle.png" },
+    { index: 339, name: "Shotgun Amp", text: "Add power to shotguns to increase round velocity and damage.", image: "Gear_WeaponDamage_Shotgun.png" },
+    { index: 340, name: "Pistol Amp", text: "Add power to pistols to increase round velocity and damage.", image: "Gear_WeaponDamage_Pistol.png" },
+    { index: 341, name: "SMG Amp", text: "Add power to submachine guns to increase round velocity and damage.", image: "Gear_WeaponDamage_SMG.png" },
+    { index: 343, name: "Grenade Capacity", text: "Add extra grenade storage compartments to the user's armor.", image: "Gear_GrenadeCapacity.png" },
+    { index: 344, name: "Warfighter Package", text: "Deploy this modification package to increase assault rifle power and grenade storage.", image: "Gear_Combo_AssaultDamageGrenadeCap.png" },
+    { index: 345, name: "Commando Package", text: "Optimize pistol and biotic amp power to increase damage.", image: "Gear_Combo_PistolDamageBioticDamage.png" },
+    { index: 346, name: "Stronghold Package", text: "Optimize shield strength and the speed of shield restoration.", image: "Gear_Combo_ShieldStrengthShieldRegen.png" },
+    { index: 347, name: "Berserker Package", text: "Optimize shotgun and armor hydraulic power to increase shotgun and melee damage.", image: "Gear_Combo_ShotgunDamageMeleeDamage.png" },
+    { index: 348, name: "Expert Package", text: "Optimize energy supplies with multicore VIs to increase submachine gun damage and to recharge powers faster.", image: "Gear_Combo_SMGDamagePowerCooldown.png" },
+    { index: 349, name: "Operative Package", text: "Optimize sniper rifle and tech power damage.", image: "Gear_Combo_SniperDamageTechDamage.png" },
+    { index: 416, name: "Combatives Upgrade", text: "Increase the lethality of the assault rifle and pistol.", image: "Gear_Combo_AssaultRifleDamagePistolDamage.png" },
+    { index: 417, name: "Martial Biotic Amp", text: "Use an advanced biotic amp to increase the strength of biotic attacks, including melee damage.", image: "Gear_Combo_MeleeDamageBioticDamage.png" },
+    { index: 418, name: "Juggernaut Shield", text: "Use high-capacity kinetic barrier generators to provide bonuses to both shield strength and melee damage.", image: "Gear_Combo_ShieldStrengthMeleeDamage.png" },
+    { index: 419, name: "Shock Trooper Upgrade", text: "Increase the lethality of the shotgun, and increase grenade storage.",image: "Gear_Combo_ShotgunDamageGrenadeCap.png" },
+    { index: 420, name: "Guerrilla Upgrade",text: "Increase the lethality of the sniper rifle and SMG.", image: "Gear_Combo_SniperDamageSMGDamage.png" },
+    { index: 421, name: "Omni-Capacitors",text: "Provide more power to tech abilities to decrease recharge time.", image: "Gear_Combo_TechDamagePowerCooldown.png" },
+    { index: 422, name: "Barrage Upgrade",text: "Boost the effectiveness of all weapons by increasing stability and thermal clip capacities.", image: "Gear_Combo_WeaponStabilityAmmoCapacity.png" },
+    { index: 423, name: "Thermal Clip Storage", text: "Add compartments to the user's armor to increase the capacity for thermal clips without sacrificing armor integrity.",image: "Gear_AmmoCapacity.png" },
+    { index: 424, name: "Adaptive War Amp", text: "Use an advanced biotic amp to increase the strength of damaging biotic powers.",image: "Gear_BioticDamage.png" },
+    { index: 425, name: "Engineering Kit", text: "Install a variety of omni-tool upgrades to enhance the potency of tech attacks.",image: "Gear_TechDamage.png" },
+    { index: 436, name: "Medi-Gel Transmitter",text: "Short-range transmitters control medi-gel dispensers in teammates' armor, reviving self and nearby teammates simultaneously.", image: "Gear_MassMedigel.png" },
+    { index: 437, name: "Armored Compartments",text: "Stores additional thermal clips and missiles in armored compartments to shield them from incoming fire.", image: "Gear_CobraCapacity.png" },
+    { index: 538, name: "Responder Loadout",text: "Optimizes shields for fast recovery and utilizes medi-gel dispensers more efficiently, increasing capacity.", image: "Gear_MedigelCapacity.png" },
+    { index: 539, name: "Survivor Loadout",text: "Increases standard kinetic barriers as well as additional shield layers if available.", image: "Gear_SurvivalCapacity.png" },
+    { index: 540, name: "Assault Loadout",text: "Armor capacitors boost the kinetic coil in handheld weapons for greater firing power, and larger compartments allow for more thermal clips.", image: "Gear_ThermalCapacity.png" },
+    { index: 603, name: "Geth Scanner",text: "Highlight enemy activity nearby with geth scanner technology. This does not stack with other target-scanning effects.", image: "Gear_VisionHelmet.png" },
+    { index: 604, name: "Batarian Gauntlet", text: "Batarian gauntlet that turns your heavy melee into a slow, heavy-hitting attack.",image: "Gear_BatarianGauntlet.png" },
 ]
 
 
@@ -474,6 +475,7 @@ export interface CoreConsumable {
     stock_index: number;
     capacity_index: number;
     name: string;
+    text: string;
     stock_image: string;
     capacity_image: string;
 }
@@ -482,6 +484,7 @@ export const CORE_CONSUMABLES: CoreConsumable[] = [
     {
         stock_index: 86,
         capacity_index: 242,
+        text: "Refills your thermal clips and grenade supply during a mission.",
         name: "Thermal Clip Pack",
         stock_image: "Consumable_Ammo.png",
         capacity_image: "MPCapacity_Ammo.png"
@@ -490,6 +493,7 @@ export const CORE_CONSUMABLES: CoreConsumable[] = [
         stock_index: 87,
         capacity_index: 243,
         name: "Medi-Gel",
+        text: "Revive yourself when incapacitated in combat.",
         stock_image: "Consumable_Revive.png",
         capacity_image: "MPCapacity_Revive.png"
     },
@@ -497,12 +501,15 @@ export const CORE_CONSUMABLES: CoreConsumable[] = [
         stock_index: 88,
         capacity_index: 244,
         name: "Cobra Missile Launcher",
+        text: "A one-shot missile launcher useful for taking out hardened targets.",
         stock_image: "Consumable_Rocket.png",
         capacity_image: "MPCapacity_Rocket.png"
     },
     {
         stock_index: 89,
-        capacity_index: 245, name: "Ops Survival Pack",
+        capacity_index: 245,
+        name: "Ops Survival Pack",
+        text: "Emergency pack fully restores health and shields during a mission.",
         stock_image: "Consumable_Shield.png",
         capacity_image: "MPCapacity_Shield.png"
     },
