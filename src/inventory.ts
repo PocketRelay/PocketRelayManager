@@ -7,6 +7,8 @@ export enum WeaponType {
     SMG,
 }
 
+export const MAX_LEVEL_UNSAFE: number = 255;
+
 export interface Weapon {
     // Index of weapon level in inventory
     level_index: number;
@@ -16,6 +18,7 @@ export interface Weapon {
     image: string;
 }
 
+export const MAX_WEAPON_LEVEL: number = 10;
 
 export const ASSAULT_RIFLES: Weapon[] = [
     { level_index: 0, name: "M-8 Avenger", image: "AssaultRifle_Avenger.png", },
@@ -205,4 +208,81 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     {name: "Infiltrator", values: INFILTRATOR_CHARACTERS},
     {name: "Sentinel", values: SENTINEL_CHARACTERS},
     {name: "Vanguard", values: VANGUARD_CHARACTERS}
+]
+
+export interface WeaponMod {
+    level_index: number;
+    name: string;
+    image: string;
+}
+
+export const ASSAULT_RIFLE_MODS: WeaponMod[] = [
+    { level_index: 31, name: "Extended Barrel", image: "AssaultRifleDamage.png", },
+    { level_index: 32, name: "Precision Scope", image: "AssaultRifleAccuracy.png", },
+    { level_index: 33, name: "Stability Dampner", image: "AssaultRifleStability.png", },
+    { level_index: 34, name: "Magazine Upgrade", image: "AssaultRifleMagSize.png", },
+    { level_index: 35, name: "Piercing Mod", image: "AssaultRifleForce.png", },
+    { level_index: 406, name: "Thermal Scope", image: "AssaultRifleSuperScope.png", },
+    { level_index: 466, name: "Omni-Blade", image: "AssaultRifleMelee.png", },
+    { level_index: 467, name: "High-Velocity Barrel", image: "AssaultRifleSuperPen.png", },
+    { level_index: 653, name: "Ultralight Materials", image: "AssaultRifleUltraLight_MP5.png", },
+];
+
+export const SNIPER_RIFLE_MODS: WeaponMod[] = [
+    { level_index: 36, name: "Extended Barrel", image: "SniperRifleDamage.png", },
+    { level_index: 37, name: "Enhanced Scope", image: "SniperRifleAccuracy.png", },
+    { level_index: 38, name: "Spare Thermal Clip", image: "SniperRifleReloadSpeed.png", },
+    { level_index: 40, name: "Piercing Mod", image: "SniperRifleConstraintDamage.png", },
+    { level_index: 414, name: "High-Velocity Barrel", image: "SniperRifleDamageAndPen.png", },
+    { level_index: 415, name: "Thermal Scope", image: "SniperRifleSuperScope.png", },
+    { level_index: 654, name: "Ultralight Materials", image: "SniperRifleUltraLight_MP5.png", },
+];
+
+export const SHOTGUN_MODS: WeaponMod[] = [
+    { level_index: 41, name: "High Caliber Barrel", image: "ShotgunDamage.png", },
+    { level_index: 42, name: "Blade Attachment", image: "ShotgunMeleeDamage.png", },
+    { level_index: 43, name: "Spare Thermal Clip", image: "ShotgunReloadSpeed.png", },
+    { level_index: 44, name: "Smart Choke", image: "ShotgunAccuracy.png", },
+    { level_index: 45, name: "Shredder Mod", image: "ShotgunReloadSpeed.png", },
+    { level_index: 410, name: "High-Velocity Barrel", image: "ShotgunDamageAndPen.png", },
+    { level_index: 411, name: "Omni-Blade", image: "ShotgunSuperMelee.png", },
+    { level_index: 655, name: "Ultralight Materials", image: "ShotgunUltraLight_MP5.png", },
+];
+
+export const PISTOL_MODS: WeaponMod[] = [
+    { level_index: 46, name: "High-Caliber Barrel", image: "PistolDamage.png", },
+    { level_index: 47, name: "Scope", image: "PistolAccuracy.png", },
+    { level_index: 48, name: "Melee Stunner", image: "PistolStability.png", },
+    { level_index: 49, name: "Magazine Upgrade", image: "PistolMagSize.png", },
+    { level_index: 50, name: "Piercing Mod", image: "PistolReloadSpeed.png", },
+    { level_index: 407, name: "Cranial Trauma System", image: "PistolHeadShot.png", },
+    { level_index: 408, name: "Heavy Barrel", image: "PistolSuperDamage.png", },
+    { level_index: 409, name: "Ultralight Materials", image: "PistolUltraLight.png", },
+    { level_index: 656, name: "Power Magnifier", image: "PistolPowerDamage_MP5.png", },
+];
+
+export const SUB_MACHINE_GUN_MODS: WeaponMod[] = [
+    { level_index: 51, name: "High Caliber Barrel", image: "SMGDamage.png", },
+    { level_index: 52, name: "Scope", image: "SMGAccuracy.png", },
+    { level_index: 53, name: "Ultralight Materials", image: "SMGStability.png", },
+    { level_index: 54, name: "Magazine Upgrade", image: "SMGMagSize.png", },
+    { level_index: 55, name: "Heat Sink", image: "SMGConstraintDamage.png", },
+    { level_index: 412, name: "High-Velocity Barrel", image: "SMGPenetration.png", },
+    { level_index: 413, name: "Recoil System", image: "SMGStabilization.png", },
+    { level_index: 657, name: "Power Magnifier", image: "SMGPowerDamage_MP5.png", },
+];
+
+export interface WeaponModCategory {
+    name: string;
+    values: WeaponMod[]
+}
+
+export const MAX_WEAPON_MOD_LEVEL: number = 5;
+
+export const WEAPON_MODS: WeaponModCategory[] = [
+    {name: "Assault Rifle", values: ASSAULT_RIFLE_MODS},
+    {name: "Sniper Rifle", values: SNIPER_RIFLE_MODS},
+    {name: "Shotugn", values: SHOTGUN_MODS},
+    {name: "Pistol", values: PISTOL_MODS},
+    {name: "SMG", values: SUB_MACHINE_GUN_MODS}
 ]
