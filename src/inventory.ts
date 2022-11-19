@@ -16,6 +16,8 @@ export interface Weapon {
     name: string;
     // Path to the weapon image
     image: string;
+    // Unused flag for unused weapons
+    unused?: boolean;
 }
 
 export const MAX_WEAPON_LEVEL: number = 10;
@@ -155,7 +157,7 @@ export const INFILTRATOR_CHARACTERS: Character[] = [
     { index: 504, name: "Drell Assassin", image: "MP_DrellINF.png" },
     { index: 510, name: "Asari Huntress", image: "MP_AsariINF.png" },
     { index: 602, name: "Alliance Infiltration Unit", image: "MP_FBotINF.png" },
-    
+
 ];
 export const SENTINEL_CHARACTERS: Character[] = [
     { index: 223, name: "Turian", image: "MP_Turian0.png" },
@@ -203,11 +205,11 @@ export interface CharacterClass {
 }
 
 export const CHARACTER_CLASSES: CharacterClass[] = [
-    {name: "Adept", values: ADEPT_CHARACTERS},
-    {name: "Engineer", values: ENGINEER_CHARACTERS},
-    {name: "Infiltrator", values: INFILTRATOR_CHARACTERS},
-    {name: "Sentinel", values: SENTINEL_CHARACTERS},
-    {name: "Vanguard", values: VANGUARD_CHARACTERS}
+    { name: "Adept", values: ADEPT_CHARACTERS },
+    { name: "Engineer", values: ENGINEER_CHARACTERS },
+    { name: "Infiltrator", values: INFILTRATOR_CHARACTERS },
+    { name: "Sentinel", values: SENTINEL_CHARACTERS },
+    { name: "Vanguard", values: VANGUARD_CHARACTERS }
 ]
 
 export interface WeaponMod {
@@ -280,9 +282,248 @@ export interface WeaponModCategory {
 export const MAX_WEAPON_MOD_LEVEL: number = 5;
 
 export const WEAPON_MODS: WeaponModCategory[] = [
-    {name: "Assault Rifle", values: ASSAULT_RIFLE_MODS},
-    {name: "Sniper Rifle", values: SNIPER_RIFLE_MODS},
-    {name: "Shotugn", values: SHOTGUN_MODS},
-    {name: "Pistol", values: PISTOL_MODS},
-    {name: "SMG", values: SUB_MACHINE_GUN_MODS}
+    { name: "Assault Rifle", values: ASSAULT_RIFLE_MODS },
+    { name: "Sniper Rifle", values: SNIPER_RIFLE_MODS },
+    { name: "Shotugn", values: SHOTGUN_MODS },
+    { name: "Pistol", values: PISTOL_MODS },
+    { name: "SMG", values: SUB_MACHINE_GUN_MODS }
+]
+
+export const CONSUMABLE_MAX: number = 255;
+
+export interface Consumable {
+    // The base name of the consumable
+    name: string;
+    // The consumable icon image
+    image: string;
+    // The indexes of each tier of the consumable
+    indexes: number[];
+    /// Optional unused marker flag
+    unused?: boolean;
+}
+
+export const ARMOR_CONSUMABLES: Consumable[] = [
+    {
+        name: "Adrenaline Module",
+        image: "SpeedBonus.png",
+        indexes: [126, 127, 128],
+    },
+    {
+        name: "Cyclonic Modulator",
+        image: "ShieldBonus.png",
+        indexes: [129, 130, 131, 490],
+    },
+    {
+        name: "Power Amplifier Module",
+        image: "PowerBonusDamage.png",
+        indexes: [259, 260, 261, 489],
+    },
+    {
+        name: "Power Efficiency Module",
+        image: "PowerBonus.png",
+        indexes: [105, 106, 107],
+    },
+    {
+        name: "Shield Power Cells",
+        image: "ShieldRegenBonus.png",
+        indexes: [76, 77, 78],
+    },
+    {
+        name: "Stabilization Module",
+        image: "StabilityBonus.png",
+        indexes: [73, 74, 75],
+    },
+
+];
+
+export const WEAPON_CONSUMABLES: Consumable[] = [
+    {
+        name: "Assault Rifle Rail Amp",
+        image: "WeaponDamageBonus_AssaultRifle.png",
+        indexes: [111, 112, 113],
+    },
+    {
+        name: "Pistol Rail Amp",
+        image: "WeaponDamageBonus_Pistol.png",
+        indexes: [120, 121, 122],
+    },
+    {
+        name: "SMG Rail Amp",
+        image: "WeaponDamageBonus_SMG.png",
+        indexes: [123, 124, 125],
+    },
+    {
+        name: "Shotgun Rail Amp",
+        image: "WeaponDamageBonus_Shotgun.png",
+        indexes: [117, 118, 119],
+    },
+    {
+        name: "Sniper Rifle Rail Amp",
+        image: "WeaponDamageBonus_SniperRifle.png",
+        indexes: [114, 115, 116],
+    },
+    {
+        name: "Strength Enhancer",
+        image: "MeleeDamage.png",
+        indexes: [79, 80, 81],
+    },
+    {
+        name: "Targeting VI",
+        image: "HeadshotDamage.png",
+        indexes: [82, 83, 84],
+    },
+];
+
+export const AMMO_CONSUMABLES: Consumable[] = [
+    {
+        name: "Armor Piercing Rounds",
+        image: "AmmoPower_ArmorPiercing.png",
+        indexes: [96, 97, 98, 486],
+    },
+    {
+        name: "Cryo Rounds",
+        image: "AmmoPower_Cryo.png",
+        indexes: [102, 103, 104, 488],
+    },
+    {
+        name: "Disruptor Rounds",
+        image: "AmmoPower_Disruptor.png",
+        indexes: [93, 94, 95, 485],
+    },
+    {
+        name: "Drill Rounds",
+        image: "AmmoPower_Eraser.png",
+        indexes: [518, 523, 528],
+    },
+    {
+        name: "Explosive Rounds",
+        image: "AmmoPower_Needler.png",
+        indexes: [517, 522, 527],
+    },
+    {
+        name: "Incendiary Rounds",
+        image: "AmmoPower_Incendiary.png",
+        indexes: [90, 91, 92, 484],
+    },
+    {
+        name: "Phasic Rounds",
+        image: "AmmoPower_Phasic.png",
+        indexes: [519, 524, 529],
+    },
+    {
+        name: "Warp Rounds",
+        image: "AmmoPower_Warp.png",
+        indexes: [99, 100, 101, 487],
+    },
+    {
+        name: "Polonium Rounds",
+        image: "AmmoPower_Polonium.png",
+        indexes: [515, 520, 525],
+        unused: true
+    },
+];
+
+export const GEAR_MAX: number = 5;
+
+export interface GearConsumable {
+    index: number;
+    name: string;
+    image: string;
+}
+
+export const GEAR_CONSUMABLES: GearConsumable[] = [
+    { index: 330, name: "Hydraulic Joints", image: "Gear_MeleeDamage.png" },
+    { index: 331, name: "Vulnerability VI", image: "Gear_HeadshotDamage.png" },
+    { index: 332, name: "Mental Focuser", image: "Gear_PowerBonus_Damage.png" },
+    { index: 333, name: "Structural Ergonomics", image: "Gear_PowerBonus_Cooldown.png" },
+    { index: 334, name: "Shield Booster", image: "Gear_ShieldStrength.png" },
+    { index: 335, name: "Multicapacitor", image: "Gear_ShieldRegen.png" },
+    { index: 337, name: "Assault Rifle Amp", image: "Gear_WeaponDamage_AssaultRifle.png" },
+    { index: 338, name: "Sniper Rifle Amp", image: "Gear_WeaponDamage_SniperRifle.png" },
+    { index: 339, name: "Shotgun Amp", image: "Gear_WeaponDamage_Shotgun.png" },
+    { index: 340, name: "Pistol Amp", image: "Gear_WeaponDamage_Pistol.png" },
+    { index: 341, name: "SMG Amp", image: "Gear_WeaponDamage_SMG.png" },
+    { index: 343, name: "Grenade Capacity", image: "Gear_GrenadeCapacity.png" },
+    { index: 344, name: "Warfighter Package", image: "Gear_Combo_AssaultDamageGrenadeCap.png" },
+    { index: 345, name: "Commando Package", image: "Gear_Combo_PistolDamageBioticDamage.png" },
+    { index: 346, name: "Stronghold Package", image: "Gear_Combo_ShieldStrengthShieldRegen.png" },
+    { index: 347, name: "Berserker Package", image: "Gear_Combo_ShotgunDamageMeleeDamage.png" },
+    { index: 348, name: "Expert Package", image: "Gear_Combo_SMGDamagePowerCooldown.png" },
+    { index: 349, name: "Operative Package", image: "Gear_Combo_SniperDamageTechDamage.png" },
+    { index: 416, name: "Combatives Upgrade", image: "Gear_Combo_AssaultRifleDamagePistolDamage.png" },
+    { index: 417, name: "Martial Biotic Amp", image: "Gear_Combo_MeleeDamageBioticDamage.png" },
+    { index: 418, name: "Juggernaut Shield", image: "Gear_Combo_ShieldStrengthMeleeDamage.png" },
+    { index: 419, name: "Shock Trooper Upgrade", image: "Gear_Combo_ShotgunDamageGrenadeCap.png" },
+    { index: 420, name: "Guerrilla Upgrade", image: "Gear_Combo_SniperDamageSMGDamage.png" },
+    { index: 421, name: "Omni-Capacitors", image: "Gear_Combo_TechDamagePowerCooldown.png" },
+    { index: 422, name: "Barrage Upgrade", image: "Gear_Combo_WeaponStabilityAmmoCapacity.png" },
+    { index: 423, name: "Thermal Clip Storage", image: "Gear_AmmoCapacity.png" },
+    { index: 424, name: "Adaptive War Amp", image: "Gear_BioticDamage.png" },
+    { index: 425, name: "Engineering Kit", image: "Gear_TechDamage.png" },
+    { index: 436, name: "Medi-Gel Transmitter", image: "Gear_MassMedigel.png" },
+    { index: 437, name: "Armored Compartments", image: "Gear_CobraCapacity.png" },
+    { index: 538, name: "Responder Loadout", image: "Gear_MedigelCapacity.png" },
+    { index: 539, name: "Survivor Loadout", image: "Gear_SurvivalCapacity.png" },
+    { index: 540, name: "Assault Loadout", image: "Gear_ThermalCapacity.png" },
+    { index: 603, name: "Geth Scanner", image: "Gear_VisionHelmet.png" },
+    { index: 604, name: "Batarian Gauntlet", image: "Gear_BatarianGauntlet.png" },
+]
+
+
+export interface CoreConsumable {
+    stock_index: number;
+    capacity_index: number;
+    name: string;
+    stock_image: string;
+    capacity_image: string;
+}
+
+export const CORE_CONSUMABLES: CoreConsumable[] = [
+    {
+        stock_index: 86,
+        capacity_index: 242,
+        name: "Thermal Clip Pack",
+        stock_image: "Consumable_Ammo.png",
+        capacity_image: "MPCapacity_Ammo.png"
+    },
+    {
+        stock_index: 87,
+        capacity_index: 243,
+        name: "Medi-Gel",
+        stock_image: "Consumable_Revive.png",
+        capacity_image: "MPCapacity_Revive.png"
+    },
+    {
+        stock_index: 88,
+        capacity_index: 244,
+        name: "Cobra Missile Launcher",
+        stock_image: "Consumable_Rocket.png",
+        capacity_image: "MPCapacity_Rocket.png"
+    },
+    {
+        stock_index: 89,
+        capacity_index: 245, name: "Ops Survival Pack",
+        stock_image: "Consumable_Shield.png",
+        capacity_image: "MPCapacity_Shield.png"
+    },
+];
+
+export interface OtherConsumable {
+    index: number;
+    name: string;
+    image: string;
+}
+
+export const OTHER_CONSUMABLES: OtherConsumable[] = [
+    { index: 246, name: "Reset Powers", image: "MPRespec.png" }
+]
+
+
+export interface Flag {
+    index: number;
+    name: string;
+}
+
+export const FLAGS: Flag[] = [
+    { index: 270, name: "Wecome screen" }
 ]
