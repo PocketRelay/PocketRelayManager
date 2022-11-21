@@ -1,0 +1,16 @@
+.inventory {
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+}
+
+.inventory__nav {
+    background-color: red;
+}
+
+.inventory__content {
+    width: 100%;
+    flex: auto;
+    overflow: auto;
+}

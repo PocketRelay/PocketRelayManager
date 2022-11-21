@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
-import Characters from "./components/Characters";
 import Inventory, { InventoryState } from "./components/Inventory";
 import { parseInventory } from "./inventory";
 

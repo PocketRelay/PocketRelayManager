@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Characters from "./Characters";
+import Characters from "./inventory/Characters";
 import Consumables from "./Consumables";
 import Gears from "./Gear";
 import WeaponMods from "./WeaponMods";
