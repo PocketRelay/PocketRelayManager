@@ -1,26 +1,47 @@
+
 .classes_value {
     flex: auto;
     display: flex;
     flex-flow: row;
+    flex-wrap: wrap;
     width: 100%;
     overflow-x: auto;
+    gap: 1rem;
+    margin: 1rem;
 }
 
 .character {
     min-width: 180px;
+    border: 1px solid #415999;
+    max-width: 200px;
+    width: 50%;
+
+    display: flex;
+    flex-flow: column;
+}
+
+.character__details {
+    flex: auto;
     padding: 1rem;
-    opacity: 0.5;
+    background-color: #202b46;
+}
+
+.character__name {
+font-size: 1rem;
 }
 
 .character__image {
-    max-width: 80px;
-
+    padding: 1rem;
+    width: 100px;
+    margin: 0 auto;
 }
+
 
 .classes {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     position: relative;
     width: 100%;
+    padding: 2rem;
 }
 

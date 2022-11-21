@@ -128,24 +128,40 @@ export interface Character {
 }
 
 export const ADEPT_CHARACTERS: Character[] = [
+    { index: 248, name: "Human Male", image: "AdeptHumanMale.png" },
+    { index: 247, name: "Human Female", image: "AdeptHumanFemale.png" },
     { index: 217, name: "Asari", image: "MP_Asari0.png" },
     { index: 218, name: "Drell", image: "MP_Drell0.png" },
-    { index: 247, name: "Human Female", image: "AdeptHumanFemale.png" },
-    { index: 248, name: "Human Male", image: "AdeptHumanMale.png" },
     { index: 273, name: "Asari Justicar", image: "MP_AsariComm.png" },
     { index: 282, name: "Phoenix", image: "MP_Cerberus.png" },
     { index: 373, name: "N7 Fury", image: "MP_AllianceADP.png" },
     { index: 500, name: "Volus", image: "MP_VolusADP.png" },
-    { index: 508, name: "Batarian Slasher", image: "MP_BatarianADP.png" },
     { index: 514, name: "Krogan Shaman", image: "MP_KroganADP.png" },
+    { index: 508, name: "Batarian Slasher", image: "MP_BatarianADP.png" },
     { index: 577, name: "Awakened Collector", image: "MP_CollectADP.png" },
 ];
+
+export const SOLDIER_CHARACTERS: Character[] = [
+    { index: 256, name: "Human Male", image: "SoldierHumanMale.png" },
+    { index: 255, name: "Human Female", image: "SoldierHumanFemale.png" },
+    { index: 225, name: "Krogan", image: "MP_Krogan0.png" },
+    { index: 226, name: "Turian", image: "MP_Turian0.png" },
+    { index: 268, name: "Battlefield 3", image: "MP_BF_HMM0.png" },
+    { index: 240, name: "Batarian", image: "MP_Batarian.png" },
+    { index: 278, name: "Vorcha", image: "MP_Vorcha.png" },
+    { index: 378, name: "N7 Destroyer", image: "MP_AllianceSOL.png" },
+    { index: 480, name: "Turian Havoc", image: "MP_TurianSLD.png" },
+    { index: 506, name: "Geth Trooper", image: "MP_GethSLD.png" },
+    { index: 512, name: "Quarian Marksman", image: "MP_QuarianMSLD.png" },
+    { index: 576, name: "Geth Juggernaut", image: "MP_GethPSLD.png" },
+];
+
 export const ENGINEER_CHARACTERS: Character[] = [
+    { index: 250, name: "Human Male", image: "EngineerHumanMale.png" },
+    { index: 249, name: "Human Female", image: "EngineerHumanFemale.png" },
     { index: 219, name: "Quarian", image: "MP_Quarian0.png" },
     { index: 220, name: "Salarian", image: "MP_Salarian0.png" },
     { index: 238, name: "Geth", image: "MP_GethEngineer.png" },
-    { index: 249, name: "Human Female", image: "EngineerHumanFemale.png" },
-    { index: 250, name: "Human Male", image: "EngineerHumanMale.png" },
     { index: 280, name: "Quarian Male", image: "MP_QuarianMale0.png" },
     { index: 374, name: "N7 Demolisher", image: "MP_AllianceENG.png" },
     { index: 501, name: "Volus", image: "MP_VolusENG.png" },
@@ -153,25 +169,12 @@ export const ENGINEER_CHARACTERS: Character[] = [
     { index: 509, name: "Vorcha Hunter", image: "MP_VorchaENG.png" },
     { index: 584, name: "Talon Mercenary", image: "MP_MercENG.png" },
 ];
-export const INFILTRATOR_CHARACTERS: Character[] = [
-    { index: 221, name: "Salarian", image: "MP_Salarian0.png" },
-    { index: 222, name: "Quarian", image: "MP_Quarian0.png" },
-    { index: 239, name: "Geth", image: "MP_GethInfiltrator.png" },
-    { index: 251, name: "Human Female", image: "InfiltratorHumanFemale.png" },
-    { index: 252, name: "Human Male", image: "InfiltratorHumanMale.png" },
-    { index: 281, name: "Quarian Male", image: "MP_QuarianMale0.png" },
-    { index: 281, name: "N7 Shadow", image: "MP_AllianceINF.png" },
-    { index: 381, name: "Turian Ghost", image: "MP_TurianINF.png" },
-    { index: 504, name: "Drell Assassin", image: "MP_DrellINF.png" },
-    { index: 510, name: "Asari Huntress", image: "MP_AsariINF.png" },
-    { index: 602, name: "Alliance Infiltration Unit", image: "MP_FBotINF.png" },
 
-];
 export const SENTINEL_CHARACTERS: Character[] = [
+    { index: 254, name: "Human Male", image: "SentinelHumanMale.png" },
+    { index: 253, name: "Human Female", image: "SentinelHumanFemale.png" },
     { index: 223, name: "Turian", image: "MP_Turian0.png" },
     { index: 224, name: "Krogan", image: "MP_Krogan0.png" },
-    { index: 253, name: "Human Female", image: "SentinelHumanFemale.png" },
-    { index: 254, name: "Human Male", image: "SentinelHumanMale.png" },
     { index: 267, name: "Batarian", image: "MP_Batarian.png" },
     { index: 279, name: "Vorcha", image: "MP_Vorcha.png" },
     { index: 375, name: "N7 Paladin", image: "MP_AllianceSEN.png" },
@@ -180,25 +183,28 @@ export const SENTINEL_CHARACTERS: Character[] = [
     { index: 583, name: "Krogan Warlord", image: "MP_BloodSEN.png" },
 
 ];
-export const SOLDIER_CHARACTERS: Character[] = [
-    { index: 225, name: "Krogan", image: "MP_Krogan0.png" },
-    { index: 226, name: "Turian", image: "MP_Turian0.png" },
-    { index: 240, name: "Batarian", image: "MP_Batarian.png" },
-    { index: 255, name: "Human Female", image: "SoldierHumanFemale.png" },
-    { index: 256, name: "Human Male", image: "SoldierHumanMale.png" },
-    { index: 268, name: "Battlefield 3", image: "MP_FB_HMM0.png" },
-    { index: 278, name: "Vorcha", image: "MP_Vorcha.png" },
-    { index: 378, name: "N7 Destroyer", image: "MP_AllianceSOL.png" },
-    { index: 480, name: "Turian Havoc", image: "MP_TurianSLD.png" },
-    { index: 506, name: "Geth Trooper", image: "MP_GethSLD.png" },
-    { index: 512, name: "Quarian Marksman", image: "MP_QuarianMSLD.png" },
-    { index: 576, name: "Geth Juggernaut", image: "MP_GethPSLD.png" },
+
+export const INFILTRATOR_CHARACTERS: Character[] = [
+    { index: 252, name: "Human Male", image: "InfiltratorHumanMale.png" },
+    { index: 251, name: "Human Female", image: "InfiltratorHumanFemale.png" },
+    { index: 221, name: "Salarian", image: "MP_Salarian0.png" },
+    { index: 222, name: "Quarian", image: "MP_Quarian0.png" },
+    { index: 239, name: "Geth", image: "MP_GethInfiltrator.png" },
+    { index: 281, name: "Quarian Male", image: "MP_QuarianMale0.png" },
+    { index: 281, name: "N7 Shadow", image: "MP_AllianceINF.png" },
+    { index: 381, name: "Turian Ghost", image: "MP_TurianINF.png" },
+    { index: 504, name: "Drell Assassin", image: "MP_DrellINF.png" },
+    { index: 510, name: "Asari Huntress", image: "MP_AsariINF.png" },
+    { index: 602, name: "Alliance Infiltration Unit", image: "MP_FBotINF.png" },
+
 ];
+
+
 export const VANGUARD_CHARACTERS: Character[] = [
+    { index: 258, name: "Human Male", image: "VanguardHumanMale.png" },
+    { index: 257, name: "Human Female", image: "VanguardHumanFemale.png" },
     { index: 227, name: "Drell", image: "MP_Drell0.png" },
     { index: 228, name: "Asari", image: "MP_Asari0.png" },
-    { index: 257, name: "Human Female", image: "VanguardHumanFemale.png" },
-    { index: 258, name: "Human Male", image: "VanguardHumanMale.png" },
     { index: 272, name: "Krogan", image: "MP_Krogan0.png" },
     { index: 283, name: "Phoenix", image: "MP_Cerberus.png" },
     { index: 376, name: "N7 Slayer", image: "MP_AllianceVAN.png" },
@@ -214,9 +220,10 @@ export interface CharacterClass {
 
 export const CHARACTER_CLASSES: CharacterClass[] = [
     { name: "Adept", values: ADEPT_CHARACTERS },
+    { name: "Soldier", values: SOLDIER_CHARACTERS },
     { name: "Engineer", values: ENGINEER_CHARACTERS },
-    { name: "Infiltrator", values: INFILTRATOR_CHARACTERS },
     { name: "Sentinel", values: SENTINEL_CHARACTERS },
+    { name: "Infiltrator", values: INFILTRATOR_CHARACTERS },
     { name: "Vanguard", values: VANGUARD_CHARACTERS }
 ]
 
@@ -542,3 +549,13 @@ export interface Flag {
 export const FLAGS: Flag[] = [
     { index: 270, name: "Wecome screen" }
 ]
+
+export function parseInventory(inventory: string): number[] {
+    let values: number[] = [];
+    for (let index = 0; index < inventory.length; index += 2) {
+        let first: string = inventory.substring(index, index + 2);
+        let value: number = parseInt(first, 16);
+        values.push(value);
+    }
+    return values;
+}
