@@ -1,4 +1,4 @@
-import { WEAPON_CATEGORIES, Weapon, Consumable, CONSUMABLES } from "../inventory";
+import { WEAPON_CATEGORIES, Weapon, Consumable, CONSUMABLES, CoreConsumable, CORE_CONSUMABLES, OtherConsumable, OTHER_CONSUMABLES } from "../inventory";
 import { InventoryState } from "./Inventory";
 
 import "./Consumables.css";
@@ -42,6 +42,38 @@ function ConsumableElm({ consumable, inventory: [values, setValues] }: { consuma
         </div>
     )
 }
+function CoreConsumableElm({ consumable, inventory: [values, setValues] }: { consumable: CoreConsumable, inventory: InventoryState }) {
+    const image_url = "/assets/consumables/" + consumable.stock_image;
+
+    let capacity = values[consumable.capacity_index];
+    let stock = values[consumable.stock_index];
+
+
+    return (
+        <div className="consumable">
+            <img src={image_url} className="consumable__image" />
+            <div className="consumable__details">
+                <h2 className="consumable__name">{consumable.name}</h2>
+                <input type="number" value={stock} />
+                <input type="number" value={capacity} />
+            </div>
+        </div>
+    )
+}
+function OtherConsumableElm({ consumable, inventory: [values, setValues] }: { consumable: OtherConsumable, inventory: InventoryState }) {
+    const image_url = "/assets/consumables/" + consumable.image;
+    let amount = values[consumable.index];
+
+    return (
+        <div className="consumable">
+            <img src={image_url} className="consumable__image" />
+            <div className="consumable__details">
+                <h2 className="consumable__name">{consumable.name}</h2>
+                <input type="number" value={amount} />
+            </div>
+        </div>
+    )
+}
 
 interface ConsumablesProperties {
     inventory: InventoryState,
@@ -52,6 +84,13 @@ export default function Consumables({ inventory }: ConsumablesProperties) {
 
     return (
         <div className="consumables">
+            <div className="consumable_category">
+                <h1>Basic</h1>
+                <div className="consumables_value">
+                    {CORE_CONSUMABLES.map((value, index) => <CoreConsumableElm key={index} consumable={value} inventory={inventory} />)}
+                    {OTHER_CONSUMABLES.map((value, index) => <OtherConsumableElm key={index} consumable={value} inventory={inventory}  />)}
+                </div>
+            </div>
             {CONSUMABLES.map((category, index) => (
                 <div className="consumable_category" key={index}>
                     <h1>{category.name}</h1>
@@ -60,6 +99,7 @@ export default function Consumables({ inventory }: ConsumablesProperties) {
                     </div>
                 </div>
             ))}
+
 
         </div>
     )
