@@ -30,81 +30,83 @@ export interface Weapon {
 
 export const MAX_WEAPON_LEVEL: number = 10;
 
-export const ASSAULT_RIFLES: Weapon[] = [
-    { level_index: 0, rarity: Rarity.Common, name: "M-8 Avenger", image: "AssaultRifle_Avenger.png", },
-    { level_index: 3, rarity: Rarity.Uncommon, name: "M-96 Mattock", image: "AssaultRifle_Mattock.png" },
-    { level_index: 4, rarity: Rarity.Uncommon, name: "Phaeston", image: "AssaultRifle_Cobra.png" },
-    { level_index: 7, rarity: Rarity.Uncommon, name: "M-15 Vindicator", image: "AssaultRifle_Vindicator.png" },
-    { level_index: 1, rarity: Rarity.Rare, name: "Collector Rifle", image: "AssaultRifle_Collector.png" },
-    { level_index: 2, rarity: Rarity.Rare, name: "Geth Pulse Rifle", image: "AssaultRifle_Geth.png" },
-    { level_index: 5, rarity: Rarity.Rare, name: "M-37 Falcon", image: "AssaultRifle_Falcon.png" },
-    { level_index: 6, rarity: Rarity.Rare, name: "M-76 Revenant", image: "AssaultRifle_Revenant.png" },
-    { level_index: 274, rarity: Rarity.Rare, name: "Striker Assault Rifle", image: "AssaultRifle_Krogan.png" },
-    { level_index: 367, rarity: Rarity.Rare, name: "M-55 Argus", image: "AssaultRifle_Argus.png" },
-    { level_index: 627, rarity: Rarity.Rare, name: "Adas Anti-Synthetic Rifle", image: "AssaultRifle_Adas_MP.png" },
-    { level_index: 135, rarity: Rarity.UltraRare, name: "M-99 Saber", image: "AssaultRifle_Saber.png" },
-    { level_index: 286, rarity: Rarity.UltraRare, name: "Cerberus Harrier", image: "AssaultRifle_Cerberus.png" },
-    { level_index: 358, rarity: Rarity.UltraRare, name: "Particle Rifle", image: "AssaultRifle_Prothean_MP.png" },
-    { level_index: 368, rarity: Rarity.UltraRare, name: "N7 Valkyrie", image: "AssaultRifle_Valkyrie.png" },
-    { level_index: 468, rarity: Rarity.UltraRare, name: "N7 Typhoon", image: "AssaultRifle_LMG.png" },
-    { level_index: 623, rarity: Rarity.UltraRare, name: "M-7 Lancer", image: "AssaultRifle_Lancer_MP.png" },
-    { level_index: 626, rarity: Rarity.UltraRare, name: "Geth Spitfire", image: "AssaultRifle_Spitfire.png" },
-];
 
 export const SNIPER_RIFLES: Weapon[] = [
-    { level_index: 9, rarity: Rarity.Common, name: "M-92 Mantis", image: "SniperRifle_Mantis.png", },
-    { level_index: 12, rarity: Rarity.Uncommon, name: "M-97 Viper", image: "SniperRifle_Viper.png", },
+    { level_index: 136, rarity: Rarity.UltraRare, name: "Black Widow", image: "SniperRifle_Widow.png", },
     { level_index: 10, rarity: Rarity.Uncommon, name: "M-13 Raptor", image: "SniperRifle_Raptor.png", },
-    { level_index: 8, rarity: Rarity.Uncommon, name: "M-29 Incisor", image: "SniperRifle_Incisor.png", },
-    { level_index: 13, rarity: Rarity.Rare, name: "M-98 Widow", image: "SniperRifle_Widow.png", },
-    { level_index: 288, rarity: Rarity.Rare, name: "Krysae Sniper Rifle", image: "SniperRifle_Turian.png", },
-    { level_index: 532, rarity: Rarity.Rare, name: "Collector Sniper Rifle", image: "SniperRifle_Collector.png", },
-    { level_index: 275, rarity: Rarity.Rare, name: "Kishock Harpoon Gun", image: "SniperRifle_Batarian.png", },
+    { level_index: 12, rarity: Rarity.Uncommon, name: "M-97 Viper", image: "SniperRifle_Viper.png", },
     { level_index: 110, rarity: Rarity.UltraRare, name: "N7 Valiant", image: "SniperRifle_Valiant.png", },
+    { level_index: 9, rarity: Rarity.Common, name: "M-92 Mantis", image: "SniperRifle_Mantis.png", },
     { level_index: 11, rarity: Rarity.UltraRare, name: "Javelin", image: "SniperRifle_Javelin.png", },
     { level_index: 369, rarity: Rarity.UltraRare, name: "M-90 Indra", image: "SniperRifle_Indra.png", },
-    { level_index: 136, rarity: Rarity.UltraRare, name: "Black Widow", image: "SniperRifle_Widow.png", },
+    { level_index: 8, rarity: Rarity.Uncommon, name: "M-29 Incisor", image: "SniperRifle_Incisor.png", },
+    { level_index: 13, rarity: Rarity.Rare, name: "M-98 Widow", image: "SniperRifle_Widow.png", },
+    { level_index: 275, rarity: Rarity.Rare, name: "Kishock Harpoon Gun", image: "SniperRifle_Batarian.png", },
+    { level_index: 288, rarity: Rarity.Rare, name: "Krysae Sniper Rifle", image: "SniperRifle_Turian.png", },
+    { level_index: 532, rarity: Rarity.Rare, name: "Collector Sniper Rifle", image: "SniperRifle_Collector.png", },
 ];
 
-export const SHOTGUNS: Weapon[] = [
-    { level_index: 17, rarity: Rarity.Common, name: "M-23 Katana", image: "Shotgun_Katana.png", },
-    { level_index: 20, rarity: Rarity.Uncommon, name: "M-27 Scimitar", image: "Shotgun_Scimitar.png", },
-    { level_index: 15, rarity: Rarity.Uncommon, name: "M-22 Eviscerator", image: "Shotgun_Eviscerator.png", },
-    { level_index: 370, rarity: Rarity.Rare, name: "AT-12 Raider", image: "Shotgun_Raider.png", },
-    { level_index: 287, rarity: Rarity.Rare, name: "Reegar Carbine", image: "Shotgun_Quarian.png", },
-    { level_index: 18, rarity: Rarity.Rare, name: "Graal Spike Thrower", image: "Shotgun_Graal.png", },
-    { level_index: 16, rarity: Rarity.Rare, name: "Geth Plasma Shotgun", image: "Shotgun_Geth.png", },
-    { level_index: 19, rarity: Rarity.Rare, name: "Disciple", image: "Shotgun_Disciple.png", },
-    { level_index: 14, rarity: Rarity.Rare, name: "M-300 Claymore", image: "Shotgun_Claymore.png", },
-    { level_index: 469, rarity: Rarity.Rare, name: "N7 Piranha", image: "Shotgun_Assault.png", },
-    { level_index: 137, rarity: Rarity.UltraRare, name: "M-11 Wraith", image: "Shotgun_Striker.png", },
-    { level_index: 525, rarity: Rarity.UltraRare, name: "Venom Shotgun", image: "Shotgun_Salarian_MP.png", },
-    { level_index: 262, rarity: Rarity.UltraRare, name: "N7 Crusader", image: "Shotgun_Crusader.png", },
-];
-
-export const PISTOLS: Weapon[] = [
-    { level_index: 25, rarity: Rarity.Common, name: "M-3 Predator", image: "Pistol_Predator.png", },
-    { level_index: 24, rarity: Rarity.Uncommon, name: "M-5 Phalanx", image: "Pistol_Phalanx.png", },
-    { level_index: 23, rarity: Rarity.Rare, name: "Arc Pistol", image: "Pistol_Thor.png", },
-    { level_index: 629, rarity: Rarity.Rare, name: "M-11 Suppressor", image: "Pistol_Silencer_MP.png", },
-    { level_index: 21, rarity: Rarity.Rare, name: "M-6 Carnifex", image: "Pistol_Carnifex.png", },
-    { level_index: 628, rarity: Rarity.Rare, name: "Executioner Pistol", image: "Pistol_Bloodpack_MP.png", },
-    { level_index: 470, rarity: Rarity.Rare, name: "Acolyte", image: "Pistol_Asari.png", },
-    { level_index: 22, rarity: Rarity.UltraRare, name: "M-358 Talon", image: "Pistol_Talon.png", },
-    { level_index: 26, rarity: Rarity.UltraRare, name: "Scorpion", image: "Pistol_Scorpion.png", },
-    { level_index: 138, rarity: Rarity.UltraRare, name: "M-77 Paladin", image: "Pistol_Ivory.png", },
-    { level_index: 263, rarity: Rarity.UltraRare, name: "N7 Eagle", image: "Pistol_Eagle.png", },
+export const ASSAULT_RIFLES: Weapon[] = [
+    { level_index: 0, rarity: Rarity.Common, name: "M-8 Avenger", image: "AssaultRifle_Avenger.png", },
+    { level_index: 2, rarity: Rarity.Rare, name: "Geth Pulse Rifle", image: "AssaultRifle_Geth.png" },
+    { level_index: 4, rarity: Rarity.Uncommon, name: "Phaeston", image: "AssaultRifle_Cobra.png" },
+    { level_index: 3, rarity: Rarity.Uncommon, name: "M-96 Mattock", image: "AssaultRifle_Mattock.png" },
+    { level_index: 367, rarity: Rarity.Rare, name: "M-55 Argus", image: "AssaultRifle_Argus.png" },
+    { level_index: 7, rarity: Rarity.Uncommon, name: "M-15 Vindicator", image: "AssaultRifle_Vindicator.png" },
+    { level_index: 368, rarity: Rarity.UltraRare, name: "N7 Valkyrie", image: "AssaultRifle_Valkyrie.png" },
+    { level_index: 135, rarity: Rarity.UltraRare, name: "M-99 Saber", image: "AssaultRifle_Saber.png" },
+    { level_index: 6, rarity: Rarity.Rare, name: "M-76 Revenant", image: "AssaultRifle_Revenant.png" },
+    { level_index: 5, rarity: Rarity.Rare, name: "M-37 Falcon", image: "AssaultRifle_Falcon.png" },
+    { level_index: 1, rarity: Rarity.Rare, name: "Collector Rifle", image: "AssaultRifle_Collector.png" },
+    { level_index: 274, rarity: Rarity.Rare, name: "Striker Assault Rifle", image: "AssaultRifle_Krogan.png" },
+    { level_index: 358, rarity: Rarity.UltraRare, name: "Particle Rifle", image: "AssaultRifle_Prothean_MP.png" },
+    { level_index: 286, rarity: Rarity.UltraRare, name: "Cerberus Harrier", image: "AssaultRifle_Cerberus.png" },
+    { level_index: 468, rarity: Rarity.UltraRare, name: "N7 Typhoon", image: "AssaultRifle_LMG.png" },
+    { level_index: 626, rarity: Rarity.UltraRare, name: "Geth Spitfire", image: "AssaultRifle_Spitfire.png" },
+    { level_index: 623, rarity: Rarity.UltraRare, name: "M-7 Lancer", image: "AssaultRifle_Lancer_MP.png" },
+    { level_index: 627, rarity: Rarity.Rare, name: "Adas Anti-Synthetic Rifle", image: "AssaultRifle_Adas_MP.png" },
 ];
 
 export const SUB_MACHINE_GUNS: Weapon[] = [
-    { level_index: 29, rarity: Rarity.Common, name: "M-4 Shuriken", image: "SMG_Shuriken.png", },
-    { level_index: 27, rarity: Rarity.Uncommon, name: "M-12 Locust", image: "SMG_Locust.png", },
-    { level_index: 30, rarity: Rarity.Uncommon, name: "M-9 Tempest", image: "SMG_Tempest.png", },
     { level_index: 28, rarity: Rarity.Rare, name: "M-25 Hornet", image: "SMG_Hornet.png", },
-    { level_index: 276, rarity: Rarity.Rare, name: "Geth Plasma SMG", image: "SMG_Geth.png", },
+    { level_index: 29, rarity: Rarity.Common, name: "M-4 Shuriken", image: "SMG_Shuriken.png", },
     { level_index: 264, rarity: Rarity.UltraRare, name: "N7 Hurricane", image: "SMG_Hurricane.png", },
+    { level_index: 30, rarity: Rarity.Uncommon, name: "M-9 Tempest", image: "SMG_Tempest.png", },
+    { level_index: 27, rarity: Rarity.Uncommon, name: "M-12 Locust", image: "SMG_Locust.png", },
+    { level_index: 276, rarity: Rarity.Rare, name: "Geth Plasma SMG", image: "SMG_Geth.png", },
     { level_index: 533, rarity: Rarity.UltraRare, name: "Collector SMG", image: "SMG_Collector.png", },
     { level_index: 624, rarity: Rarity.UltraRare, name: "Blood Pack Punisher", image: "SMG_Bloodpack_MP.png", },
+];
+
+
+export const SHOTGUNS: Weapon[] = [
+    { level_index: 17, rarity: Rarity.Common, name: "M-23 Katana", image: "Shotgun_Katana.png", },
+    { level_index: 16, rarity: Rarity.Rare, name: "Geth Plasma Shotgun", image: "Shotgun_Geth.png", },
+    { level_index: 137, rarity: Rarity.UltraRare, name: "M-11 Wraith", image: "Shotgun_Striker.png", },
+    { level_index: 20, rarity: Rarity.Uncommon, name: "M-27 Scimitar", image: "Shotgun_Scimitar.png", },
+    { level_index: 370, rarity: Rarity.Rare, name: "AT-12 Raider", image: "Shotgun_Raider.png", },
+    { level_index: 18, rarity: Rarity.Rare, name: "Graal Spike Thrower", image: "Shotgun_Graal.png", },
+    { level_index: 15, rarity: Rarity.Uncommon, name: "M-22 Eviscerator", image: "Shotgun_Eviscerator.png", },
+    { level_index: 19, rarity: Rarity.Rare, name: "Disciple", image: "Shotgun_Disciple.png", },
+    { level_index: 262, rarity: Rarity.UltraRare, name: "N7 Crusader", image: "Shotgun_Crusader.png", },
+    { level_index: 14, rarity: Rarity.Rare, name: "M-300 Claymore", image: "Shotgun_Claymore.png", },
+    { level_index: 287, rarity: Rarity.Rare, name: "Reegar Carbine", image: "Shotgun_Quarian.png", },
+    { level_index: 469, rarity: Rarity.Rare, name: "N7 Piranha", image: "Shotgun_Assault.png", },
+    { level_index: 525, rarity: Rarity.UltraRare, name: "Venom Shotgun", image: "Shotgun_Salarian_MP.png", },
+];
+
+export const PISTOLS: Weapon[] = [
+    { level_index: 24, rarity: Rarity.Uncommon, name: "M-5 Phalanx", image: "Pistol_Phalanx.png", },
+    { level_index: 22, rarity: Rarity.UltraRare, name: "M-358 Talon", image: "Pistol_Talon.png", },
+    { level_index: 23, rarity: Rarity.Rare, name: "Arc Pistol", image: "Pistol_Thor.png", },
+    { level_index: 26, rarity: Rarity.UltraRare, name: "Scorpion", image: "Pistol_Scorpion.png", },
+    { level_index: 25, rarity: Rarity.Common, name: "M-3 Predator", image: "Pistol_Predator.png", },
+    { level_index: 138, rarity: Rarity.UltraRare, name: "M-77 Paladin", image: "Pistol_Ivory.png", },
+    { level_index: 263, rarity: Rarity.UltraRare, name: "N7 Eagle", image: "Pistol_Eagle.png", },
+    { level_index: 21, rarity: Rarity.Rare, name: "M-6 Carnifex", image: "Pistol_Carnifex.png", },
+    { level_index: 470, rarity: Rarity.Rare, name: "Acolyte", image: "Pistol_Asari.png", },
+    { level_index: 629, rarity: Rarity.Rare, name: "M-11 Suppressor", image: "Pistol_Silencer_MP.png", },
+    { level_index: 628, rarity: Rarity.Rare, name: "Executioner Pistol", image: "Pistol_Bloodpack_MP.png", },
 ];
 
 
@@ -114,11 +116,11 @@ export interface WeaponCategory {
 }
 
 export const WEAPON_CATEGORIES: WeaponCategory[] = [
-    { name: "Assault Rifles", values: ASSAULT_RIFLES },
     { name: "Sniper Rifles", values: SNIPER_RIFLES },
+    { name: "Assault Rifles", values: ASSAULT_RIFLES },
+    { name: "Sub Machine Guns", values: SUB_MACHINE_GUNS },
     { name: "Shotguns", values: SHOTGUNS },
     { name: "Pistols", values: PISTOLS },
-    { name: "Sub Machine Guns", values: SUB_MACHINE_GUNS }
 ];
 
 export interface Character {
