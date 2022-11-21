@@ -1,0 +1,46 @@
+
+.consumables_value {
+    flex: auto;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.consumable {
+    min-width: 180px;
+    border: 1px solid #415999;
+    max-width: 200px;
+    width: 50%;
+
+    display: flex;
+    flex-flow: column;
+}
+
+.consumable__details {
+    flex: auto;
+    padding: 1rem;
+    background-color: #202b46;
+}
+
+.consumable__name {
+font-size: 1rem;
+}
+
+.consumable__image {
+    width: 160px;
+    margin: 0 auto;
+}
+
+
+.consumables {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+}
+

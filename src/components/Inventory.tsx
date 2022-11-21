@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Characters from "./Characters";
+import Consumables from "./Consumables";
+import WeaponMods from "./WeaponMods";
 import Weapons from "./Weapons";
 
 
@@ -21,6 +23,10 @@ export default function Inventory(props: InventoryProperties) {
         content = <Characters inventory={props.inventory} />
     } else if (selected == 'weapons') {
         content = <Weapons inventory={props.inventory}/>
+    } else if (selected == 'weapon-mods') {
+        content = <WeaponMods inventory={props.inventory}/>
+    } else if (selected == 'consumables') {
+        content = <Consumables inventory={props.inventory}/>
     }
 
     return (

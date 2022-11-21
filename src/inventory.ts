@@ -440,6 +440,17 @@ export const AMMO_CONSUMABLES: Consumable[] = [
     },
 ];
 
+export interface ConsumableCategory {
+    name: string;
+    values: Consumable[],
+}
+
+export const CONSUMABLES: ConsumableCategory[] = [
+    { name: "Armor", values: ARMOR_CONSUMABLES },
+    { name: "Weapon", values: WEAPON_CONSUMABLES },
+    { name: "Ammo", values: AMMO_CONSUMABLES }
+]
+
 export const GEAR_MAX: number = 5;
 
 export interface GearConsumable {
