@@ -59,7 +59,7 @@ export const SNIPER_RIFLES: Weapon[] = [
     { level_index: 13, rarity: Rarity.Rare, name: "M-98 Widow", image: "SniperRifle_Widow.png", },
     { level_index: 288, rarity: Rarity.Rare, name: "Krysae Sniper Rifle", image: "SniperRifle_Turian.png", },
     { level_index: 532, rarity: Rarity.Rare, name: "Collector Sniper Rifle", image: "SniperRifle_Collector.png", },
-    { level_index: 275, rarity: Rarity.Rare, name: "Kishock Harpoon Gun", image: "SniperRifle_Baterian.png", },
+    { level_index: 275, rarity: Rarity.Rare, name: "Kishock Harpoon Gun", image: "SniperRifle_Batarian.png", },
     { level_index: 110, rarity: Rarity.UltraRare, name: "N7 Valiant", image: "SniperRifle_Valiant.png", },
     { level_index: 11, rarity: Rarity.UltraRare, name: "Javelin", image: "SniperRifle_Javelin.png", },
     { level_index: 369, rarity: Rarity.UltraRare, name: "M-90 Indra", image: "SniperRifle_Indra.png", },
