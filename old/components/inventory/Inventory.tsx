@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Characters from "./inventory/Characters";
+import { Dispatch, SetStateAction, useState } from "react";
+import Characters from "./Characters";
 import Consumables from "./Consumables";
 import Gears from "./Gear";
 import WeaponMods from "./WeaponMods";
@@ -7,11 +7,9 @@ import Weapons from "./Weapons";
 
 
 export interface InventoryProperties {
-    inventory: InventoryState,
+    inventory: number[],
 }
 
-
-export type InventoryState = [number[], (values: number[]) => void]
 
 export default function Inventory(props: InventoryProperties) {
 

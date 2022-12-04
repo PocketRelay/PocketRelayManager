@@ -1,17 +1,16 @@
-import { WEAPON_CATEGORIES, Weapon, Consumable, CONSUMABLES, CoreConsumable, CORE_CONSUMABLES, OtherConsumable, OTHER_CONSUMABLES } from "../inventory";
-import { InventoryState } from "./Inventory";
+import { WEAPON_CATEGORIES, Weapon, Consumable, CONSUMABLES, CoreConsumable, CORE_CONSUMABLES, OtherConsumable, OTHER_CONSUMABLES } from "../../inventory";
 
 import "./Consumables.css";
 
 
-function ConsumableElm({ consumable, inventory: [values, setValues] }: { consumable: Consumable, inventory: InventoryState }) {
+function ConsumableElm({ consumable, inventory }: { consumable: Consumable, inventory: number[] }) {
     const image_url = "/assets/consumables/" + consumable.image;
 
     let content = [];
     let tier_names = ["I", "II", "III", "IV", "V"]
     for (let i = 0; i < consumable.indexes.length; i++) {
         let index = consumable.indexes[i];
-        let amount = values[index];
+        let amount = inventory[index];
         let owned = amount > 0;
         let tier = tier_names[i];
         if (owned) {
@@ -42,11 +41,11 @@ function ConsumableElm({ consumable, inventory: [values, setValues] }: { consuma
         </div>
     )
 }
-function CoreConsumableElm({ consumable, inventory: [values, setValues] }: { consumable: CoreConsumable, inventory: InventoryState }) {
+function CoreConsumableElm({ consumable, inventory }: { consumable: CoreConsumable, inventory: number[] }) {
     const image_url = "/assets/consumables/" + consumable.stock_image;
 
-    let capacity = values[consumable.capacity_index];
-    let stock = values[consumable.stock_index];
+    let capacity = inventory[consumable.capacity_index];
+    let stock = inventory[consumable.stock_index];
 
 
     return (
@@ -60,9 +59,9 @@ function CoreConsumableElm({ consumable, inventory: [values, setValues] }: { con
         </div>
     )
 }
-function OtherConsumableElm({ consumable, inventory: [values, setValues] }: { consumable: OtherConsumable, inventory: InventoryState }) {
+function OtherConsumableElm({ consumable, inventory }: { consumable: OtherConsumable, inventory: number[] }) {
     const image_url = "/assets/consumables/" + consumable.image;
-    let amount = values[consumable.index];
+    let amount = inventory[consumable.index];
 
     return (
         <div className="consumable">
@@ -76,7 +75,7 @@ function OtherConsumableElm({ consumable, inventory: [values, setValues] }: { co
 }
 
 interface ConsumablesProperties {
-    inventory: InventoryState,
+    inventory: number[],
 }
 
 

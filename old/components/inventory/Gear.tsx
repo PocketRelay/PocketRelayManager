@@ -1,12 +1,11 @@
-import { WEAPON_CATEGORIES, Weapon, GearConsumable, GEAR_CONSUMABLES } from "../inventory";
-import { InventoryState } from "./Inventory";
+import { WEAPON_CATEGORIES, Weapon, GearConsumable, GEAR_CONSUMABLES } from "../../inventory";
 
 import "./Gear.css";
 
 
-function GearElm({ gear, inventory: [values, setValues] }: { gear: GearConsumable, inventory: InventoryState }) {
+function GearElm({ gear, inventory }: { gear: GearConsumable, inventory: number[] }) {
     const image_url = "/assets/gear/" + gear.image;
-    let level = values[gear.index]
+    let level = inventory[gear.index]
     let owned = level > 0;
     let button;
     if (owned) {
@@ -36,7 +35,7 @@ function GearElm({ gear, inventory: [values, setValues] }: { gear: GearConsumabl
 }
 
 interface GearsProperties {
-    inventory: InventoryState,
+    inventory: number[],
 }
 
 

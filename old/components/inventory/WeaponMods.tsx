@@ -1,12 +1,11 @@
-import { WEAPON_CATEGORIES, Weapon, WEAPON_MODS, WeaponMod } from "../inventory";
-import { InventoryState } from "./Inventory";
+import { WEAPON_CATEGORIES, Weapon, WEAPON_MODS, WeaponMod } from "../../inventory";
 
 import "./WeaponMods.css";
 
 
-function WeaponModElm({ mod, inventory: [values, setValues] }: { mod: WeaponMod, inventory: InventoryState }) {
+function WeaponModElm({ mod, inventory }: { mod: WeaponMod, inventory: number[] }) {
     const image_url = "/assets/weapon_mods/" + mod.image;
-    let level = values[mod.level_index];
+    let level = inventory[mod.level_index];
     let owned = level > 0;
     let button;
     if (owned) {
@@ -36,7 +35,7 @@ function WeaponModElm({ mod, inventory: [values, setValues] }: { mod: WeaponMod,
 }
 
 interface WeaponModsProperties {
-    inventory: InventoryState,
+    inventory: number[],
 }
 
 
