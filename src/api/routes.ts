@@ -1,4 +1,4 @@
-import { Token } from "../contexts/AppContext";
+import { AppContext, Token } from "../contexts/AppContext";
 import { ServerDetails } from "./models";
 
 // Http request method types
@@ -53,3 +53,4 @@ export async function getServerDetails(baseURL: string): Promise<ServerDetails> 
     let response = await makeRequest<ServerDetails>("GET", baseURL, "api/server");
     return response;
 }
+

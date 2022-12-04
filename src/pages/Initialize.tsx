@@ -1,7 +1,7 @@
-import { stat } from "fs";
 import { ChangeEvent, useState } from "react";
 import { ServerDetails } from "../api/models";
-import { getServerDetails, RequestError } from "../api/routes";
+import { getServerDetails } from "../api/routes";
+import { useAppContext } from "../contexts/AppContext";
 import "./Initialize.scss";
 
 enum State {
@@ -23,6 +23,7 @@ interface InitState {
  */
 export default function Initialize() {
 
+    const {setServerState} = useAppContext();
     const [state, setState] = useState<InitState>({
         url: "",
         error: "",
@@ -41,6 +42,7 @@ export default function Initialize() {
         try {
             let details: ServerDetails = await getServerDetails(url);
             console.table(details);
+            setServerState(url, details.version);
         } catch (e) {
             console.log(e);
             setState(state => ({
