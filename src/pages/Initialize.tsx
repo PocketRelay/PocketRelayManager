@@ -11,9 +11,9 @@ enum State {
 }
 
 interface InitState {
-    state: State,
     url: string;
     error: string;
+    state: State,
 }
 
 
@@ -79,18 +79,19 @@ export default function Initialize() {
      * 
      * @param event The input changed event
      */
-    function onValueChange(event: ChangeEvent<HTMLInputElement>) {
+     function onValueChange(event: ChangeEvent<HTMLInputElement>) {
         const element: HTMLInputElement = event.target;
+        const name: string = element.name;
         setState(state => ({
             ...state,
-            url: element.value
+            [name]: element.value
         }));
     }
 
     return (
-        <div className="init-wrapper">
-            <div className="init">
-                <h1 className="init__title">Connect</h1>
+        <div className="modal-wrapper">
+            <div className="modal">
+                <h1 className="modal__title">Connect</h1>
 
                 {(state.state == State.ERROR) && (
                     <p className="init__error">
@@ -108,15 +109,16 @@ export default function Initialize() {
                         alt="Connection URL"
                         disabled={inputDisabled}
                         placeholder="e.g localhost"
+                        name="url"
                     />
                 </label>
 
-                <p className="init__text">
+                <p className="modal__text">
                     The connection url is the url to the see the documentation
                     <a href="https://github.com/PocketRelay/Client" target="_blank"> Here</a>
                 </p>
 
-                <button className="button init__connect" onClick={tryConnect} disabled={buttonDisbaled}>
+                <button className="button" onClick={tryConnect} disabled={buttonDisbaled}>
                     Connect
                 </button>
 
