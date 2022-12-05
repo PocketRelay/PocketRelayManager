@@ -41,8 +41,7 @@
 }
 
 .class__characters[data-collapsed="true"] {
-    height: 0;
-    padding: 0;
+    display: none;
 }
 
 .class__characters::-webkit-scrollbar {
