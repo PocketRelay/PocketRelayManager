@@ -12,17 +12,15 @@ function App() {
     return <Loader />
   } else {
     return (
-      <div className="root">
-        <Routes>
-          <Route path="/init" element={<Initialize />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/*" element={
-            <RequireAuth>
-              <Manage />
-            </RequireAuth>
-          }/>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/init" element={<Initialize />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/*" element={
+          <RequireAuth>
+            <Manage />
+          </RequireAuth>
+        } />
+      </Routes>
     )
   }
 }
