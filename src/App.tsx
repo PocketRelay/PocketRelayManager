@@ -1,27 +1,30 @@
-import { ReactNode } from "react";
+import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader";
+import RequireAuth from "./components/RequireAuth";
 import { useAppContext } from "./contexts/AppContext";
-import Home from "./pages/Home";
+import Manage from "./pages/manage/Manage";
 import Initialize from "./pages/Initialize";
 import Login from "./pages/Login";
 
 function App() {
-  const { serverState, token, loading } = useAppContext();
-  let content: ReactNode;
+  const { loading } = useAppContext();
   if (loading) {
-    content = <Loader />
-  } else if (serverState == null) {
-    content = <Initialize />
-  } else if (token == null) {
-    content = <Login serverState={serverState} />
+    return <Loader />
   } else {
-    content = <Home />
+    return (
+      <div className="root">
+        <Routes>
+          <Route path="/init" element={<Initialize />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={
+            <RequireAuth>
+              <Manage />
+            </RequireAuth>
+          }/>
+        </Routes>
+      </div>
+    )
   }
-  return (
-    <div className="root">
-      {content}
-    </div>
-  )
 }
 
 export default App;

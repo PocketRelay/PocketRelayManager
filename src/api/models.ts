@@ -33,3 +33,19 @@ export interface TokenValidateResponse {
     // The expiry time if the token is valid
     expiry_time: number | null;
 }
+
+/// Structure of a player
+export interface Player {
+    id: number;
+    email: string;
+    display_name: string;
+    origin: boolean;
+    credits: number;
+    inventory: string;
+    csreward: number;
+}
+
+export interface GetPlayersResponse {
+    players: Player[];
+    more: boolean;
+}

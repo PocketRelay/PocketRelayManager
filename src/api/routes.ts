@@ -1,4 +1,5 @@
-import { ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
+import { AppContext } from "../contexts/AppContext";
+import { GetPlayersResponse, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -64,7 +65,7 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
  * @returns Promise for the server details
  */
 export function getServerDetails(baseURL: string): Promise<ServerDetails> {
-    return makeRequest<ServerDetails>({
+    return makeRequest({
         method: "GET",
         baseURL,
         url: "api/server"
@@ -81,7 +82,7 @@ export function getServerDetails(baseURL: string): Promise<ServerDetails> {
  * @returns The token response
  */
 export function getToken(baseURL: string, username: string, password: string): Promise<TokenResponse> {
-    return makeRequest<TokenResponse>({
+    return makeRequest({
         method: "POST",
         baseURL,
         url: "api/token",
@@ -101,9 +102,18 @@ export function getToken(baseURL: string, username: string, password: string): P
  * @returns The token validation response
  */
 export function validateToken(baseURL: string, token: string): Promise<TokenValidateResponse> {
-    return makeRequest<TokenValidateResponse>({
+    return makeRequest({
         method: "GET",
         baseURL,
         url: `api/token?token=${token}`
+    });
+}
+
+export function getPlayers(context: AppContext, offset: number, count: number): Promise<GetPlayersResponse> {
+    return makeRequest({
+        method: "GET",
+        baseURL: context.serverState.baseURL,
+        token: context.token,
+        url: `api/players?offset=${offset}&count=${count}`
     });
 }

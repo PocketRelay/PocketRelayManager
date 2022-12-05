@@ -1,11 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { TokenResponse } from "../api/models";
 import { getToken, RequestError } from "../api/routes";
 import { ServerState, useAppContext } from "../contexts/AppContext"
-
-interface Properties {
-    serverState: ServerState,
-}
 
 enum State {
     INITIAL,
@@ -20,14 +17,19 @@ interface LoginState {
     state: State;
 }
 
-export default function Login({ serverState }: Properties) {
-    const { setToken, clearServerState } = useAppContext();
+export default function Login() {
+    const navigate = useNavigate();
+    const { setToken, clearServerState, serverState } = useAppContext();
     const [state, setState] = useState<LoginState>({
         username: "",
         password: "",
         error: "",
         state: State.INITIAL,
     });
+
+    if (!serverState) {
+        return <Navigate to="/init"/>
+    }
 
     function onValueChange(event: ChangeEvent<HTMLInputElement>) {
         const element: HTMLInputElement = event.target;
@@ -47,6 +49,7 @@ export default function Login({ serverState }: Properties) {
             let details: TokenResponse = await getToken(serverState.baseURL, state.username, state.password);
             console.table(details);
             setToken(details.token);
+            navigate("/");
         } catch (e) {
             const err: RequestError = e as RequestError;
             console.log(err);

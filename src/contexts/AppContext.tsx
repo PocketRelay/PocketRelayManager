@@ -1,4 +1,5 @@
-import { Context, createContext, ReactNode, useContext, useState } from "react";
+import { Context, createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useEffectOnce from "react-use/lib/useEffectOnce";
 import { ServerDetails, TokenValidateResponse } from "../api/models";
 import { getServerDetails, validateToken } from "../api/routes";
@@ -49,11 +50,21 @@ export function useAppContext(): AppContext {
  */
 export function AppContextProvider({ children }: { children: ReactNode }) {
 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [tokenState, setTokenState] = useState<string>(null!);
     const [serverState, setServerStateImpl] = useState<ServerState>(null!);
 
     useEffectOnce(() => { loadServerState().then().catch() });
+
+    useEffect(() => {
+        if (serverState == null) {
+            console.log("Tried to navigate to init")
+            navigate("/init");
+        } else if (tokenState == null) {
+            navigate("/login");
+        }
+    }, [tokenState, serverState]);
 
 
     /**
