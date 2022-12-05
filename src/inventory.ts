@@ -572,3 +572,19 @@ export function parseInventory(inventory: string): number[] {
     }
     return values;
 }
+
+export function encodeInventory(inventory: number[]): string {
+    let output = "";
+    for (let value of inventory) {
+        if (value > 255) {
+            output += "FF";
+        } else {
+            let hex = value.toString(16).toUpperCase();
+            while (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            output += hex;
+        }
+    }
+    return output;
+}

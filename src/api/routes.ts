@@ -1,5 +1,5 @@
 import { AppContext } from "../contexts/AppContext";
-import { GetPlayersResponse, Player, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
+import { GetPlayersResponse, Player, PlayerUpdate, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -124,5 +124,15 @@ export function getPlayer(context: AppContext, id: string): Promise<Player> {
         baseURL: context.serverState.baseURL,
         token: context.token,
         url: `api/players/${id}`
+    });
+}
+
+export function updatePlayer(context: AppContext, id: number, update: PlayerUpdate): Promise<Player> {
+  return makeRequest({
+        method: "PUT",
+        baseURL: context.serverState.baseURL,
+        token: context.token,
+        url: `api/players/${id}`,
+        body: update,
     });
 }

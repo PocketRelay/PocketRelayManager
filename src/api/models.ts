@@ -49,3 +49,13 @@ export interface GetPlayersResponse {
     players: Player[];
     more: boolean;
 }
+
+export interface PlayerUpdate {
+    email?: string;
+    display_name?: string;
+    origin?: boolean;
+    password?: string;
+    credits?: number;
+    inventory?: string;
+    csreward?: string;
+}
