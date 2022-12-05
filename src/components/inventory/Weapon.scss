@@ -6,7 +6,7 @@
     flex: 0 0 auto;
     gap: 0.5rem;
 
-    max-width: 250px;
+    max-width: 300px;
     width: 100%;
 
 
@@ -22,20 +22,60 @@
 
 }
 
-.weapon[data-owned="true"] {
-    border-color: #4e4e9c;
 
-    background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
-}  
+// Common Rarirty
+.weapon[data-rarity="0"] {
+    border-color: #232331;
+    background-color: #19191f;
+
+    &[data-owned="true"] {
+        border-color: #4e4e9c;
+        background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
+    }
+}
+
+// Uncommon Rarirty
+.weapon[data-rarity="1"] {
+    border-color: #29292b;
+    background-color: #1b1b25;
+
+    &[data-owned="true"] {
+        border-color: #7a7a7a;
+        background: linear-gradient(45deg, #505050 0%, #707070 50% 20%, #3b3737);
+    }
+}
+
+// Rare Rarirty
+.weapon[data-rarity="2"] {
+    border-color: #363408;
+    background-color: #232331;
+
+    &[data-owned="true"] {
+        border-color: #a39906;
+        background: linear-gradient(25deg, #5c560b, #a39906, #666114);
+    }
+}
+
+// UltraRare Rarirty
+.weapon[data-rarity="3"] {
+    border-color: #272727;
+    background: linear-gradient(90deg, #141414 25% 25%, #311615 30% 70%, #141414 75% 75%);
+
+    &[data-owned="true"] {
+        border-color: #474747;
+        background: linear-gradient(90deg, #141414 25% 25%, #7e2e2c 30% 70%, #141414 75% 75%);
+    }
+}
 
 .weapon__img-wrapper {
     width: 100%;
     background-color: rgb(37, 37, 58, 0.5);
     border-radius: 0.45rem;
+    height: 85px;
 }
 
 .weapon__img {
-    max-width: 140px;
+    max-width: 160px;
     width: 100%;
     margin: 0 auto;
 }
@@ -62,7 +102,43 @@
     border-radius: 0.25rem;
 }
 
-.weapon[data-owned="true"] .weapon__action  {
+.weapon[data-owned="true"] .weapon__action {
     background-color: #4d3455;
 
+}
+
+.level {
+    background-color: #25253a90;
+    padding: 0.5rem;
+    opacity: 1;
+    border-radius: 0.4rem;
+}
+
+.level__input__name {
+    color: white !important;
+}
+
+.level[data-disabled="true"] {
+    opacity: 0.25;
+}
+
+.level__actions {
+    display: flex;
+    flex-flow: row;
+    justify-content: stretch;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.level__actions__button {
+    flex: auto;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    background-color: rgb(71, 60, 82);
+    border: none;
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
 }
