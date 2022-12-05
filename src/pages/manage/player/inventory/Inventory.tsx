@@ -1,33 +1,15 @@
-import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { Route, Routes } from "react-router-dom"
-import { Player } from "../../../../api/models"
-import { updatePlayer } from "../../../../api/routes"
-import { useAppContext } from "../../../../contexts/AppContext"
-import { encodeInventory, parseInventory } from "../../../../inventory"
 import Characters from "./Characters"
+import Weapons from "./Weapons"
 
 interface Properties {
-    player: Player,
+    inventory: number[],
+    saveInventory(): Promise<void>;
 }
 
-export default function Inventory({ player }: Properties) {
-    const context = useAppContext();
-    const inventory = useMemo(() => parseInventory(player.inventory), [player]);
-
-    async function saveInventory(): Promise<void> {
-        try {
-            let value = encodeInventory(inventory);
-            console.log(value);
-            let _ = await updatePlayer(context, player.id, {
-                inventory: value
-            });
-            player.inventory = value;
-        } catch (e) {
-            alert("Failed to save inventory");
-        }
-    }
-
+export default function Inventory({ inventory, saveInventory }: Properties) {
+    console.log("Render inventory");
     return (
         <div className="inventory">
             <h1>Inventory</h1>
@@ -40,11 +22,11 @@ export default function Inventory({ player }: Properties) {
                 <Link to="gear">Gear</Link>
             </nav>
             <Routes >
-                <Route path="characters" element={<Characters inventory={inventory} />}></Route>
-                <Route path="weapons"></Route>
-                <Route path="weapon-mods"></Route>
-                <Route path="consumables"></Route>
-                <Route path="gear"></Route>
+                <Route path="characters" element={<Characters inventory={inventory} />} />
+                <Route path="weapons" element={<Weapons inventory={inventory} />} />
+                <Route path="weapon-mods" />
+                <Route path="consumables" />
+                <Route path="gear" />
             </Routes>
         </div>
     )
