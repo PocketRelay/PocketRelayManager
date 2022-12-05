@@ -1,4 +1,6 @@
 import { ChangeEvent, useState } from "react";
+import { TokenResponse } from "../api/models";
+import { getToken, RequestError } from "../api/routes";
 import { ServerState, useAppContext } from "../contexts/AppContext"
 
 interface Properties {
@@ -36,16 +38,36 @@ export default function Login({ serverState }: Properties) {
         }));
     }
 
+    async function tryLogin() {
+        setState(state => ({
+            ...state,
+            state: State.CONNECTING,
+        }));
+        try {
+            let details: TokenResponse = await getToken(serverState.baseURL, state.username, state.password);
+            console.table(details);
+            setToken(details.token);
+        } catch (e) {
+            const err: RequestError = e as RequestError;
+            console.log(err);
+            setState(state => ({
+                ...state,
+                error: "Unable to connect or server url was not a Pocket Relay server",
+                state: State.ERROR,
+            }));
+        }
+    }
+
     return (
         <div className="modal-wrapper">
             <div className="modal">
                 <button onClick={clearServerState} className="button">Clear Server</button>
                 <h1 className="modal__title">Login</h1>
                 <p className="modal__text">
-                   Version: v{serverState.version}
+                    Version: v{serverState.version}
                 </p>
                 <p className="modal__text">
-                   Host: {serverState.baseURL}
+                    Host: {serverState.baseURL}
                 </p>
                 <div>
 
@@ -67,7 +89,7 @@ export default function Login({ serverState }: Properties) {
                         <span className="input__name">Password</span>
                         <input
                             className="input__value"
-                            type="passwrod"
+                            type="password"
                             value={state.password}
                             onChange={onValueChange}
                             alt="Password"
@@ -76,7 +98,7 @@ export default function Login({ serverState }: Properties) {
                         />
                     </label>
 
-                    <button className="button">Login</button>
+                    <button className="button" onClick={tryLogin}>Login</button>
                 </div>
             </div>
         </div>

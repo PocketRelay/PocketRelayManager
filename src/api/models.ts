@@ -17,3 +17,19 @@ export interface Service {
     // The type of service
     type: ServiceType;
 }
+
+// Structure of a response for a succesfull authentication attempt
+export interface TokenResponse {
+    // The authentication token
+    token: string;
+    // Unix timestamp of when the token expires
+    expiry_time: number;
+}
+
+// Structure of a response for validating a token
+export interface TokenValidateResponse {
+    // Whether the token is valid
+    valid: boolean;
+    // The expiry time if the token is valid
+    expiry_time: number | null;
+}
