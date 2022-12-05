@@ -57,16 +57,6 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
 
     useEffectOnce(() => { loadServerState().then().catch() });
 
-    useEffect(() => {
-        if (serverState == null) {
-            console.log("Tried to navigate to init")
-            navigate("/init");
-        } else if (tokenState == null) {
-            navigate("/login");
-        }
-    }, [tokenState, serverState]);
-
-
     /**
      * Sets the current server state from the provided baseURL
      * and version and stores the baseURL in the local storage
@@ -114,6 +104,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
             clearServerState();
         }
         setLoading(false);
+        navigate("/");
     }
 
     /**

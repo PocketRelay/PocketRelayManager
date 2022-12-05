@@ -1,29 +1,27 @@
-import { ReactNode } from "react";
+import { Route, Routes } from "react-router-dom";
 import { useAppContext } from "../../contexts/AppContext";
+import Games from "./Games";
+import Home from "./Home";
+import Player from "./player/Player";
+import Players from "./Players";
 
-export default function Home() {
-   
-    const { setToken, serverState } = useAppContext();
+export default function Manage() {
+
+    const { setToken } = useAppContext();
 
     function logout(): void {
         setToken(null);
     }
 
-    let content: ReactNode;
-
     return (
-        <div>
+        <div className="manage">
             <button onClick={logout}>Logout</button>
-            <h1>Home</h1>
-
-            
-
-            <button>
-                Players
-            </button>
-            <button>
-                Games
-            </button>
+            <Routes>
+                <Route index element={<Home/>}/>
+                <Route path="/players" element={<Players/>}/>
+                <Route path="/players/:id" element={<Player/>}/>
+                <Route path="/games" element={<Games/>}/>
+            </Routes>
         </div>
     )
 }

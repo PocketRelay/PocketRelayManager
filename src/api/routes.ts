@@ -1,5 +1,5 @@
 import { AppContext } from "../contexts/AppContext";
-import { GetPlayersResponse, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
+import { GetPlayersResponse, Player, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -115,5 +115,14 @@ export function getPlayers(context: AppContext, offset: number, count: number): 
         baseURL: context.serverState.baseURL,
         token: context.token,
         url: `api/players?offset=${offset}&count=${count}`
+    });
+}
+
+export function getPlayer(context: AppContext, id: number): Promise<Player> {
+    return makeRequest({
+        method: "GET",
+        baseURL: context.serverState.baseURL,
+        token: context.token,
+        url: `api/players/${id}`
     });
 }

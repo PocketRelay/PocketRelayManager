@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/init" element={<Initialize />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={
+          <Route path="/*" element={
             <RequireAuth>
               <Manage />
             </RequireAuth>
