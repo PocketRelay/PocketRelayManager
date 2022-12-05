@@ -118,7 +118,7 @@ export function getPlayers(context: AppContext, offset: number, count: number): 
     });
 }
 
-export function getPlayer(context: AppContext, id: number): Promise<Player> {
+export function getPlayer(context: AppContext, id: string): Promise<Player> {
     return makeRequest({
         method: "GET",
         baseURL: context.serverState.baseURL,

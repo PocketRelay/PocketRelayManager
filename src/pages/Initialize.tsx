@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ServerDetails } from "../api/models";
 import { getServerDetails } from "../api/routes";
 import { useAppContext } from "../contexts/AppContext";
@@ -23,6 +24,8 @@ interface InitState {
  */
 export default function Initialize() {
 
+    const navigate = useNavigate();
+
     const {setServerState} = useAppContext();
     const [state, setState] = useState<InitState>({
         url: "",
@@ -43,6 +46,7 @@ export default function Initialize() {
             let details: ServerDetails = await getServerDetails(url);
             console.table(details);
             setServerState(url, details.version);
+            navigate("/login");
         } catch (e) {
             console.log(e);
             setState(state => ({

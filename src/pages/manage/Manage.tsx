@@ -4,6 +4,7 @@ import Games from "./Games";
 import Home from "./Home";
 import Player from "./player/Player";
 import Players from "./Players";
+import "./Manage.scss";
 
 export default function Manage() {
 
@@ -19,7 +20,7 @@ export default function Manage() {
             <Routes>
                 <Route index element={<Home/>}/>
                 <Route path="/players" element={<Players/>}/>
-                <Route path="/players/:id" element={<Player/>}/>
+                <Route path="/players/:id/*" element={<Player/>}/>
                 <Route path="/games" element={<Games/>}/>
             </Routes>
         </div>
