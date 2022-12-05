@@ -1,4 +1,3 @@
-import { AppContext, Token } from "../contexts/AppContext";
 import { ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
@@ -11,7 +10,7 @@ export interface RequestConfig {
     method: HttpMethod,
     baseURL: string,
     url: string,
-    token?: Token,
+    token?: string,
     body?: any
 }
 
