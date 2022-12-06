@@ -10,7 +10,6 @@ interface Properties {
 }
 
 export default function Inventory({ inventory, saveInventory }: Properties) {
-    console.log("Render inventory");
     return (
         <div className="inventory">
             <h1>Inventory</h1>

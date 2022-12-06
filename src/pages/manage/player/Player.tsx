@@ -72,58 +72,6 @@ export default function Player() {
             <button className="button" onClick={reload}>
                 Reload
             </button>
-            <div className="player__fields">
-                <label className="input">
-                    <span className="input__name">Display Name</span>
-                    <input
-                        className="input__value"
-                        type="text"
-                        alt="Username"
-                        value={player.display_name}
-                        onChange={() => { }}
-                        placeholder=""
-                        name="username"
-                    />
-                </label>
-                <label className="input">
-                    <span className="input__name">Email</span>
-                    <input
-                        className="input__value"
-                        type="text"
-                        alt="Email"
-                        value={player.email}
-                        onChange={() => { }}
-                        placeholder=""
-                        name="email"
-                    />
-                </label>
-                <label className="input">
-                    <span className="input__name">Credits</span>
-                    <input
-                        className="input__value"
-                        type="number"
-                        alt="Credits"
-                        value={player.credits}
-                        onChange={() => { }}
-                        placeholder=""
-                        name="credits"
-                    />
-                </label>
-                <label className="input">
-                    <span className="input__name">Origin</span>
-                    <input
-                        className="input__value"
-                        type="checkbox"
-                        checked={player.origin}
-                        onChange={() => { }}
-                        alt="Origin"
-                        placeholder=""
-                        name="origin"
-                    />
-                </label>
-            </div>
-
-
 
             <Inventory inventory={inventory} saveInventory={saveInventory} />
         </div>
