@@ -33,52 +33,6 @@ export function useOwned(inventory: number[], index: number): [boolean, ToggleOw
     return [isOwned, toggleOwned]
 }
 
-type SetLevelFn = (value: number) => void;
-
-export function useLeveled(inventory: number[], index: number): [number, SetLevelFn, boolean, ToggleOwnedFn] {
-    const [level, setLevelImpl] = useState(0);
-
-    // Effect for keeping the state up to date with the inventory
-    useEffect(() => {
-        setLevelImpl(inventory[index])
-    }, [inventory, index])
-
-    /**
-     * Wrapping function for updating the level state as
-     * well as the level in the actual inventory array
-     * 
-     * @param level The level value
-     */
-    function setLevel(level: number) {
-        if (level < 0) level = 0;
-        if (level > 255) level = 255;
-        inventory[index] = level;
-        setLevelImpl(level);
-    }
-
-
-    const isOwned: boolean = level > 0;
-
-    /**
-     * Function for toggling between the owned and not owned states
-     */
-    function toggleOwned() {
-
-        if (isOwned) {
-            setLevel(0);
-        } else {
-            setLevel(1);
-        }
-    }
-
-    return [
-        level,
-        setLevel,
-        isOwned,
-        toggleOwned
-    ];
-}
-
 type ChangeEventFn = (event: ChangeEvent<HTMLInputElement>) => void;
 
 export function useAmount(inventory: number[], index: number): [number, ChangeEventFn] {

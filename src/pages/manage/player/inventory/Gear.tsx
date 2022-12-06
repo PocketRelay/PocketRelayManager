@@ -1,5 +1,5 @@
-import { GearConsumable } from "../../../../components/inventory/Gear";
-import { GEAR_CONSUMABLES } from "../../../../inventory";
+import LeveledCard from "../../../../components/inventory/LeveledCard";
+import { GEAR_CONSUMABLES, GEAR_MAX } from "../../../../inventory";
 import "./Gear.scss";
 
 interface Properties {
@@ -9,8 +9,16 @@ interface Properties {
 export default function Gear({ inventory }: Properties) {
     return (
         <div className="gears">
-            {GEAR_CONSUMABLES.map((consumable, index) => (
-                <GearConsumable inventory={inventory} consumable={consumable} key={index} />
+            {GEAR_CONSUMABLES.map((gear, index) => (
+                <LeveledCard
+                    key={index}
+                    inventory={inventory}
+                    index={gear.index}
+                    name={gear.name}
+                    imageURL={`/assets/gear/${gear.image}`}
+                    imageHeight={120}
+                    max={GEAR_MAX}
+                />
             ))}
         </div>
     )
