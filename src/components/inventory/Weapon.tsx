@@ -1,5 +1,6 @@
-import { ChangeEvent, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MAX_WEAPON_LEVEL, Weapon as WeaponModel } from "../../inventory";
+import LevelSelect from "../LevelSelect";
 import "./Weapon.scss"
 
 interface Properties {
@@ -45,7 +46,7 @@ export default function Weapon({ inventory, weapon }: Properties) {
             <div className="weapon__img-wrapper">
                 <img className="weapon__img" src={imageURL} alt={`${weapon.name} Image`} />
             </div>
-            <WeaponLevel
+            <LevelSelect
                 level={level}
                 setLevel={setLevel}
                 max={MAX_WEAPON_LEVEL}
@@ -57,65 +58,6 @@ export default function Weapon({ inventory, weapon }: Properties) {
                 onClick={toggleOwned}>
                 {actionText}
             </button>
-        </div>
-    )
-}
-
-interface LevelProperties {
-    level: number;
-    setLevel(value: number): void;
-    max: number;
-    disabled: boolean
-}
-
-function WeaponLevel({ level, setLevel, max, disabled }: LevelProperties) {
-
-    function setLevelEvent(event: ChangeEvent<HTMLInputElement>) {
-        let value = event.target.value;
-        let valueInt = parseInt(value);
-        if (Number.isNaN(valueInt)) {
-            valueInt = 1;
-        }
-        setLevel(valueInt);
-    }
-
-    return (
-        <div className="level" data-disabled={disabled}>
-            <label className="level__input input">
-                <span className="level__input__name input__name">Level</span>
-                <input
-                    disabled={disabled}
-                    className="input__value"
-                    type="number"
-                    value={level}
-                    onChange={setLevelEvent} />
-            </label>
-            <div className="level__actions">
-                <button
-                    className="level__actions__button"
-                    onClick={() => setLevel(1)}
-                    title="Set the level to the minimum level (1)"
-                    disabled={disabled}
-                >
-                    Min
-                </button>
-                <button
-                    className="level__actions__button"
-                    onClick={() => setLevel(max)}
-                    title="Set the level to the max normal level"
-                    disabled={disabled}
-                >
-                    Max
-                </button>
-                <button
-                    className="level__actions__button"
-                    onClick={() => setLevel(255)}
-                    title="Set the level to the max cheated level"
-                    disabled={disabled}
-                >
-                    GOD
-                </button>
-            </div>
         </div>
     )
 }
