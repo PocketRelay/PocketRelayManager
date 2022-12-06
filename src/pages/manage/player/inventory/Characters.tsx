@@ -25,9 +25,8 @@ export default function Characters({ inventory, setInventory }: Properties) {
         const indexes: number[] = []
         CHARACTER_CLASSES.forEach(value => value.values.forEach(value => indexes.push(value.index)));
         setInventory(inventory.map((value, index) => {
-            return indexes.includes(index) ? 1 : 0
+            return indexes.includes(index) ? 1 : value
         }))
-
     }
 
     return (
