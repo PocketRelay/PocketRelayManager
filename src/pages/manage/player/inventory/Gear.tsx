@@ -4,7 +4,7 @@ import "./Gear.scss";
 import { InventoryProperties } from "./Inventory";
 
 export default function Gear({ inventory, setInventory }: InventoryProperties) {
-    
+
     /**
       * Function for setting the level of all the gear
       */
@@ -18,6 +18,7 @@ export default function Gear({ inventory, setInventory }: InventoryProperties) {
 
     return (
         <div className="inventory__section">
+            <h1 className="inventory__section__title">Gear</h1>
             <div className="inventory__section__header">
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All

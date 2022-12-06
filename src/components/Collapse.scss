@@ -2,14 +2,14 @@
     display: flex;
     flex-flow: column;
     background-color: #1b1b25;
-    width: 100%;
+    width: calc(100% - 10px);
 
     border: 5px solid #1b1b25;
     transition: border-color 0.25s ease;
     border-radius: 0.5rem;
     
     &[data-collapsed="false"] {
-        border-color: #292950;
+        border-color: #3a3a74;
     }
 }
 
@@ -45,9 +45,8 @@
 
 .collapse__value {
     width: 100%;
-    flex-wrap: nowrap;
     display: flex;
-    flex-flow: row;
+    flex-flow: row nowrap;
     overflow-x: auto;
     gap: 1rem;
     padding: 2rem;

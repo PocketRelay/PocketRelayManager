@@ -4,7 +4,7 @@ import { MAX_WEAPON_MOD_LEVEL, WEAPON_MODS } from "../../../../inventory";
 import { InventoryProperties } from "./Inventory";
 
 export default function WeaponMods({ inventory, setInventory }: InventoryProperties) {
-    
+
     /**
      * Function for setting the level of all the weapon mods
      */
@@ -18,6 +18,7 @@ export default function WeaponMods({ inventory, setInventory }: InventoryPropert
 
     return (
         <div className="inventory__section">
+            <h1 className="inventory__section__title">Weapon Mods</h1>
             <div className="inventory__section__header">
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All

@@ -4,7 +4,7 @@ import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES } from "../../../../in
 import { InventoryProperties } from "./Inventory";
 
 export default function Consumables({ inventory, setInventory }: InventoryProperties) {
-    
+
     /**
      * Function for setting the level of all the weapons
      */
@@ -20,6 +20,7 @@ export default function Consumables({ inventory, setInventory }: InventoryProper
 
     return (
         <div className="inventory__section">
+            <h1 className="inventory__section__title">Consumables</h1>
             <div className="inventory__section__header">
                 <button className="button" onClick={setMaxAll}>
                     Max All

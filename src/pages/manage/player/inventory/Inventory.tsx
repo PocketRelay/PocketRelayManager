@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Route, Routes } from "react-router-dom"
 import Characters from "./Characters"
 import Consumables from "./Consumables";
@@ -20,6 +20,7 @@ export interface InventoryProperties {
 }
 
 export default function Inventory({ inventory, saveInventory, resetInventory, setInventory }: Properties) {
+    let location = useLocation();
     return (
         <div className="inventory">
             <div className="inventory__actions">
@@ -27,18 +28,43 @@ export default function Inventory({ inventory, saveInventory, resetInventory, se
                 <button onClick={resetInventory} className="button">Reset</button>
             </div>
             <nav className="inventory__nav">
-                <Link className="inventory__nav__button button" to="characters">Characters</Link>
-                <Link className="inventory__nav__button button" to="weapons">Weapons</Link>
-                <Link className="inventory__nav__button button" to="weapon-mods">Weapon Mods</Link>
-                <Link className="inventory__nav__button button" to="consumables">Consumables</Link>
-                <Link className="inventory__nav__button button" to="gear">Gear</Link>
+                <Link
+                    className="inventory__nav__button button"
+                    data-active={location.pathname.endsWith("characters")}
+                    to="characters">
+                    Characters
+                </Link>
+                <Link
+                    className="inventory__nav__button button"
+                    data-active={location.pathname.endsWith("weapons")}
+                    to="weapons">
+                    Weapons
+                </Link>
+                <Link
+                    className="inventory__nav__button button"
+                    data-active={location.pathname.endsWith("weapon-mods")}
+                    to="weapon-mods">
+                    Weapon Mods
+                </Link>
+                <Link
+                    className="inventory__nav__button button"
+                    data-active={location.pathname.endsWith("consumables")}
+                    to="consumables">
+                    Consumables
+                </Link>
+                <Link
+                    className="inventory__nav__button button"
+                    data-active={location.pathname.endsWith("gear")}
+                    to="gear">
+                    Gear
+                </Link>
             </nav>
             <Routes >
-                <Route path="characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
-                <Route path="weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
-                <Route path="weapon-mods" element={<WeaponMods inventory={inventory} setInventory={setInventory} />} />
-                <Route path="consumables" element={<Consumables inventory={inventory} setInventory={setInventory} />} />
-                <Route path="gear" element={<Gear inventory={inventory} setInventory={setInventory} />} />
+                <Route path="/characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
+                <Route path="/weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
+                <Route path="/weapon-mods" element={<WeaponMods inventory={inventory} setInventory={setInventory} />} />
+                <Route path="/consumables" element={<Consumables inventory={inventory} setInventory={setInventory} />} />
+                <Route path="/gear" element={<Gear inventory={inventory} setInventory={setInventory} />} />
             </Routes>
         </div>
     )

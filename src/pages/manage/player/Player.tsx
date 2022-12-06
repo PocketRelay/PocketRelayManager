@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { Link, Navigate, useParams } from "react-router-dom"
+import { Link, Navigate, Route, Routes, useParams } from "react-router-dom"
 import { getPlayer, updatePlayer } from "../../../api/routes";
 import Loader from "../../../components/Loader";
 import { useAppContext } from "../../../contexts/AppContext";
 import { encodeInventory, parseInventory } from "../../../inventory";
 import Inventory from "./inventory/Inventory";
+import "./Player.scss";
 
 type PlayerParams = {
     id?: string
@@ -69,19 +70,34 @@ export default function Player() {
 
     return (
         <div className="player">
-            <Link to="/players" className="button">
-                Back
-            </Link>
-            <button className="button" onClick={reload}>
-                Reload
-            </button>
+            <div className="player__nav">
+                <Link to="/players" className="button">
+                    Back
+                </Link>
+                <button className="button" onClick={reload}>
+                    Reload
+                </button>
+                <Link to="./" className="button">
+                    Base
+                </Link>
+                <Link to="inventory" className="button">
+                    Inventory
+                </Link>
+            </div>
+            <Routes>
+                <Route index path="/" element={
+                    <h1>Basic</h1>
+                } />
+                <Route path="/inventory/*" element={
+                    <Inventory
+                        inventory={inventory}
+                        setInventory={setInventory}
+                        saveInventory={saveInventory}
+                        resetInventory={resetInventory}
+                    />
+                } />
+            </Routes>
 
-            <Inventory
-                inventory={inventory}
-                setInventory={setInventory}
-                saveInventory={saveInventory}
-                resetInventory={resetInventory}
-            />
         </div>
     )
 }

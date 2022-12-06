@@ -25,6 +25,7 @@ export default function Characters({ inventory, setInventory }: InventoryPropert
 
     return (
         <div className="inventory__section">
+            <h1 className="inventory__section__title">Characters</h1>
             <div className="inventory__section__header">
                 <button className="button" onClick={unlockAll}>
                     Unlock All

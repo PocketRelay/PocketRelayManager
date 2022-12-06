@@ -18,6 +18,7 @@ export default function Weapons({ inventory, setInventory }: InventoryProperties
 
     return (
         <div className="inventory__section">
+            <h1 className="inventory__section__title">Weapons</h1>
             <div className="inventory__section__header">
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
