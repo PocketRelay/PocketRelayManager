@@ -31,7 +31,7 @@ export default function Inventory({ inventory, saveInventory, resetInventory, se
                 <Route path="characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
                 <Route path="weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
                 <Route path="weapon-mods" element={<WeaponMods inventory={inventory} setInventory={setInventory} />} />
-                <Route path="consumables" element={<Consumables inventory={inventory} />} />
+                <Route path="consumables" element={<Consumables inventory={inventory} setInventory={setInventory}  />} />
                 <Route path="gear" element={<Gear inventory={inventory} />} />
             </Routes>
         </div>
