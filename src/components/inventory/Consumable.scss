@@ -1,4 +1,4 @@
-.weapon-mod {
+.consumable {
     display: flex;
     flex-flow: column;
     position: relative;
@@ -19,38 +19,33 @@
     transition: border-color 0.25s;
 
     padding: 0.5rem;
-
+    &[data-owned="true"] {
+        border-color: #4e4e9c;
+        background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
+    }
 }
 
-
-// Common Rarirty
-.weapon-mod[data-owned="true"] {
-    border-color: #4e4e9c;
-    background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
-}
-
-
-.weapon-mod__img-wrapper {
+.consumable__img-wrapper {
     width: 100%;
     background-color: rgb(37, 37, 58, 0.5);
     border-radius: 0.45rem;
-    height: 110px;
-    overflow: hidden;
+    height: 120px;
 }
 
-.weapon-mod__img {
-    width: 160px;
+.consumable__img {
+    max-width: 160px;
+    width: 100%;
     margin: 0 auto;
 }
 
-.weapon-mod__name {
+.consumable__name {
     padding: 1rem;
     background-color: #25253a;
     border-radius: 0.45rem;
 
 }
 
-.weapon-mod__action {
+.consumable__action {
     background-color: #313155;
     display: block;
     width: 100%;
@@ -65,7 +60,7 @@
     border-radius: 0.25rem;
 }
 
-.weapon-mod[data-owned="true"] .weapon-mod__action {
+.consumable[data-owned="true"] .consumable__action {
     background-color: #4d3455;
 
 }

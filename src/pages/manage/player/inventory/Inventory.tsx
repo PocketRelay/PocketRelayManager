@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { Route, Routes } from "react-router-dom"
 import Characters from "./Characters"
+import Consumables from "./Consumables";
 import WeaponMods from "./WeaponMods";
 import Weapons from "./Weapons"
 
@@ -25,7 +26,7 @@ export default function Inventory({ inventory, saveInventory }: Properties) {
                 <Route path="characters" element={<Characters inventory={inventory} />} />
                 <Route path="weapons" element={<Weapons inventory={inventory} />} />
                 <Route path="weapon-mods" element={<WeaponMods inventory={inventory} />} />
-                <Route path="consumables" />
+                <Route path="consumables" element={<Consumables inventory={inventory} />} />
                 <Route path="gear" />
             </Routes>
         </div>

@@ -308,7 +308,9 @@ export const WEAPON_MODS: WeaponModCategory[] = [
 
 export const CONSUMABLE_MAX: number = 255;
 
-export interface Consumable {
+export type Consumable = TieredConsumable | GearConsumable | CoreConsumable | OtherConsumable
+
+export interface TieredConsumable {
     // The base name of the consumable
     name: string;
     // The consumable icon image
@@ -319,7 +321,7 @@ export interface Consumable {
     unused?: boolean;
 }
 
-export const ARMOR_CONSUMABLES: Consumable[] = [
+export const ARMOR_CONSUMABLES: TieredConsumable[] = [
     {
         name: "Adrenaline Module",
         image: "SpeedBonus.png",
@@ -353,7 +355,7 @@ export const ARMOR_CONSUMABLES: Consumable[] = [
 
 ];
 
-export const WEAPON_CONSUMABLES: Consumable[] = [
+export const WEAPON_CONSUMABLES: TieredConsumable[] = [
     {
         name: "Assault Rifle Rail Amp",
         image: "WeaponDamageBonus_AssaultRifle.png",
@@ -391,7 +393,7 @@ export const WEAPON_CONSUMABLES: Consumable[] = [
     },
 ];
 
-export const AMMO_CONSUMABLES: Consumable[] = [
+export const AMMO_CONSUMABLES: TieredConsumable[] = [
     {
         name: "Armor Piercing Rounds",
         image: "AmmoPower_ArmorPiercing.png",
@@ -442,7 +444,7 @@ export const AMMO_CONSUMABLES: Consumable[] = [
 
 export interface ConsumableCategory {
     name: string;
-    values: Consumable[],
+    values: TieredConsumable[],
 }
 
 export const CONSUMABLES: ConsumableCategory[] = [
