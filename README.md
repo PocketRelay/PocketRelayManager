@@ -1,7 +1,4 @@
-# Tauri + React + Typescript
+# Pocket Relay Manager
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+This is a work in progress management application for managing Pocket Relay servers
+it is intended for administrators to modify player data, player inventories, active games etc from a GUI 
