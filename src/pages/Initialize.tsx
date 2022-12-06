@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { ServerDetails } from "../api/models";
 import { getServerDetails } from "../api/routes";
 import { useAppContext } from "../contexts/AppContext";
-import "./Initialize.scss";
 
 enum State {
     INITIAL,

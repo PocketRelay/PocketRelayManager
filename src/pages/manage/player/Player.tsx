@@ -6,7 +6,6 @@ import Loader from "../../../components/Loader";
 import { useAppContext } from "../../../contexts/AppContext";
 import { encodeInventory, parseInventory } from "../../../inventory";
 import Inventory from "./inventory/Inventory";
-import "./Player.scss"
 
 type PlayerParams = {
     id?: string
@@ -73,7 +72,7 @@ export default function Player() {
                 Reload
             </button>
 
-            <Inventory inventory={inventory} saveInventory={saveInventory} />
+            <Inventory inventory={inventory} setInventory={setInventory} saveInventory={saveInventory} />
         </div>
     )
 }

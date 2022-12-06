@@ -1,5 +1,4 @@
-import { stat } from "fs";
-import { ReactNode, useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom";
 import { useAsyncRetry } from "react-use";
 import { GetPlayersResponse } from "../../api/models";
@@ -17,8 +16,6 @@ export default function Players() {
     }, [offset, count, appContext])
 
 
-
-    
     if (state.loading) {
         return <Loader />
     } else if (state.value) {

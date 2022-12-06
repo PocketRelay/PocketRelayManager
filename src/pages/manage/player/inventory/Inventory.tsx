@@ -8,10 +8,11 @@ import Weapons from "./Weapons"
 
 interface Properties {
     inventory: number[],
+    setInventory(value: number[]): void;
     saveInventory(): Promise<void>;
 }
 
-export default function Inventory({ inventory, saveInventory }: Properties) {
+export default function Inventory({ inventory, saveInventory, setInventory }: Properties) {
     return (
         <div className="inventory">
             <h1>Inventory</h1>
@@ -24,7 +25,7 @@ export default function Inventory({ inventory, saveInventory }: Properties) {
                 <Link to="gear">Gear</Link>
             </nav>
             <Routes >
-                <Route path="characters" element={<Characters inventory={inventory} />} />
+                <Route path="characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
                 <Route path="weapons" element={<Weapons inventory={inventory} />} />
                 <Route path="weapon-mods" element={<WeaponMods inventory={inventory} />} />
                 <Route path="consumables" element={<Consumables inventory={inventory} />} />

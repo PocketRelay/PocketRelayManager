@@ -13,10 +13,10 @@ export function TieredConsumable({ inventory, consumable }: { inventory: number[
     const tierNames = ["I", "II", "III", "IV", "V"]
 
     return (
-        <div className="consumable">
-            <h2 className="consumable__name">{consumable.name}</h2>
-            <div className="consumable__img-wrapper">
-                <img className="consumable__img" src={imageURL} alt={`${consumable.name} Image`} />
+        <div className="card" data-owned="true">
+            <h2 className="card__name">{consumable.name}</h2>
+            <div className="card__img-wrapper">
+                <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
             </div>
             <div className="consumable__tiers">
                 {

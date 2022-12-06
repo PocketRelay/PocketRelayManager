@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { TokenResponse } from "../api/models";
 import { getToken, RequestError } from "../api/routes";
-import { ServerState, useAppContext } from "../contexts/AppContext"
+import { useAppContext } from "../contexts/AppContext"
 
 enum State {
     INITIAL,
