@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLeveled } from "../../hooks/inventory";
 import { MAX_WEAPON_LEVEL, Weapon as WeaponModel } from "../../inventory";
 import LevelSelect from "../LevelSelect";
 import "./Weapon.scss"
@@ -9,33 +9,10 @@ interface Properties {
 }
 
 export default function Weapon({ inventory, weapon }: Properties) {
-    const [level, setLevelImpl] = useState(0);
+    const [level, setLevel, isOwned, toggleOwned] = useLeveled(inventory, weapon.level_index);
 
-    // Effect for keeping the state up to date with the inventory
-    useEffect(() => {
-        setLevelImpl(inventory[weapon.level_index])
-    }, [inventory, weapon])
-
-
-    const isOwned = level > 0;
     // Path to the weapon image
     const imageURL: string = `/assets/weapons/${weapon.image}`;
-
-    function setLevel(level: number) {
-        if (level < 0) level = 0;
-        if (level > 255) level = 255;
-        inventory[weapon.level_index] = level;
-        setLevelImpl(level);
-    }
-
-
-    function toggleOwned() {
-        if (isOwned) {
-            setLevel(0);
-        } else {
-            setLevel(1);
-        }
-    }
 
     const actionText: string = isOwned ? "Remove" : "Add";
     const actionTitle: string = isOwned ? "Removes the weapon from the player inventory" : "Adds the weapon to the player inventory"

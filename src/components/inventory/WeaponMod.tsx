@@ -1,41 +1,18 @@
-import { useEffect, useState } from "react";
+import { useLeveled } from "../../hooks/inventory";
 import { MAX_WEAPON_MOD_LEVEL, WeaponMod as WeaponModModel } from "../../inventory";
 import LevelSelect from "../LevelSelect";
 import "./WeaponMod.scss"
 
 interface Properties {
     inventory: number[];
-    weapon: WeaponModModel;
+    weaponMod: WeaponModModel;
 }
 
-export default function WeaponMod({ inventory, weapon: weaponMod }: Properties) {
-    const [level, setLevelImpl] = useState(0);
+export default function WeaponMod({ inventory, weaponMod }: Properties) {
+    const [level, setLevel, isOwned, toggleOwned] = useLeveled(inventory, weaponMod.level_index);
 
-    // Effect for keeping the state up to date with the inventory
-    useEffect(() => {
-        setLevelImpl(inventory[weaponMod.level_index])
-    }, [inventory, weaponMod])
-
-
-    const isOwned = level > 0;
     // Path to the weapon image
     const imageURL: string = `/assets/weapon_mods/${weaponMod.image}`;
-
-    function setLevel(level: number) {
-        if (level < 0) level = 0;
-        if (level > 255) level = 255;
-        inventory[weaponMod.level_index] = level;
-        setLevelImpl(level);
-    }
-
-
-    function toggleOwned() {
-        if (isOwned) {
-            setLevel(0);
-        } else {
-            setLevel(1);
-        }
-    }
 
     const actionText: string = isOwned ? "Remove" : "Add";
     const actionTitle: string = isOwned ? "Removes the weapon mod from the player inventory" : "Adds the weapon mod to the player inventory"

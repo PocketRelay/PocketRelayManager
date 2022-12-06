@@ -13,7 +13,7 @@ export default function WeaponMods({ inventory }: Properties) {
             {WEAPON_MODS.map((category, index) => (
                 <Collapse name={category.name} key={index}>
                     {category.values.map((weapon, index) => (
-                        <WeaponMod inventory={inventory} weapon={weapon} key={index} />
+                        <WeaponMod inventory={inventory} weaponMod={weapon} key={index} />
                     ))}
                 </Collapse>
             ))}

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useOwned } from "../../hooks/inventory";
 import { Character as CharacterModel } from "../../inventory";
 import "./Character.scss"
 
@@ -9,33 +9,11 @@ interface Properties {
 
 export default function Character({ inventory, character }: Properties) {
     // State determining whether the character is owned
-    const [isOwned, setOwnedImpl] = useState<boolean>(false);
+    const [isOwned, toggleOwned] = useOwned(inventory, character.index);
     // Path to the character image
     const imageURL: string = `/assets/characters_full/${character.image}`;
-
-    // Effect for keeping the state up to date with the inventory
-    useEffect(() => {
-        setOwnedImpl(inventory[character.index] > 0)
-    }, [inventory, character])
-
-
-    /**
-     * Wrapper for changing the owned state to ensure
-     * the changes are persisted to the underlying
-     * 
-     * @param owned Whether the character is owned
-     */
-    function toggleOwned() {
-        setOwnedImpl(owned => {
-            let value = !owned;
-            inventory[character.index] = value ? 1 : 0;
-            return value;
-        })
-    }
-
     // Text to be displayed on the toggle button
     const actionText: string = isOwned ? "Remove" : "Add";
-
     return (
         <div className="character" data-owned={isOwned}>
             <h2 className="character__name">{character.name}</h2>
@@ -44,8 +22,7 @@ export default function Character({ inventory, character }: Properties) {
             </div>
             <button
                 className="character__action"
-                onClick={toggleOwned}
-            >
+                onClick={toggleOwned}>
                 {actionText}
             </button>
         </div>
