@@ -8,7 +8,7 @@ interface Properties {
 
 export default function Weapons({ inventory }: Properties) {
     return (
-        <div className="weapon-categories">
+        <div className="collapse-list">
             {WEAPON_CATEGORIES.map((category, index) => (
                 <Collapse name={category.name} key={index}>
                     {category.values.map((weapon, index) => (
