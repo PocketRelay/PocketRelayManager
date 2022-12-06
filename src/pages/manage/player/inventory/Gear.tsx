@@ -8,6 +8,7 @@ interface Properties {
 }
 
 export default function Gear({ inventory, setInventory }: Properties) {
+    
     /**
       * Function for setting the level of all the gear
       */
