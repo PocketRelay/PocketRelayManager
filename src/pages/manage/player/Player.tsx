@@ -62,6 +62,10 @@ export default function Player() {
         }
     }
 
+    function resetInventory() {
+        if (!player) return;
+        setInventory(parseInventory(player.inventory));
+    }
 
     return (
         <div className="player">
@@ -72,7 +76,12 @@ export default function Player() {
                 Reload
             </button>
 
-            <Inventory inventory={inventory} setInventory={setInventory} saveInventory={saveInventory} />
+            <Inventory
+                inventory={inventory}
+                setInventory={setInventory}
+                saveInventory={saveInventory}
+                resetInventory={resetInventory}
+            />
         </div>
     )
 }

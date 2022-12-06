@@ -10,13 +10,16 @@ interface Properties {
     inventory: number[],
     setInventory(value: number[]): void;
     saveInventory(): Promise<void>;
+    resetInventory(): void;
 }
 
-export default function Inventory({ inventory, saveInventory, setInventory }: Properties) {
+
+export default function Inventory({ inventory, saveInventory, resetInventory, setInventory }: Properties) {
     return (
         <div className="inventory">
             <h1>Inventory</h1>
             <button onClick={saveInventory} className="button">Save</button>
+            <button onClick={resetInventory} className="button">Reset</button>
             <nav>
                 <Link to="characters">Characters</Link>
                 <Link to="weapons">Weapons</Link>
@@ -26,10 +29,10 @@ export default function Inventory({ inventory, saveInventory, setInventory }: Pr
             </nav>
             <Routes >
                 <Route path="characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
-                <Route path="weapons" element={<Weapons inventory={inventory} />} />
+                <Route path="weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
                 <Route path="weapon-mods" element={<WeaponMods inventory={inventory} />} />
                 <Route path="consumables" element={<Consumables inventory={inventory} />} />
-                <Route path="gear" element={<Gear inventory={inventory}/>}/>
+                <Route path="gear" element={<Gear inventory={inventory} />} />
             </Routes>
         </div>
     )
