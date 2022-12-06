@@ -9,7 +9,7 @@ interface Properties {
 
 export default function WeaponMods({ inventory, setInventory }: Properties) {
     /**
-     * Function for setting the level of all the weapons
+     * Function for setting the level of all the weapon mods
      */
     function setLevelAll(level: number) {
         const indexes: number[] = [];
