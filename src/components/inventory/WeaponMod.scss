@@ -1,0 +1,107 @@
+.weapon-mod {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+
+    flex: 0 0 auto;
+    gap: 0.5rem;
+
+    max-width: 300px;
+    width: 100%;
+
+
+    background-color: #232331;
+
+    text-align: center;
+    border-radius: 0.5rem;
+
+    border: 5px solid #232331;
+    transition: border-color 0.25s;
+
+    padding: 0.5rem;
+
+}
+
+
+// Common Rarirty
+.weapon-mod[data-owned="true"] {
+    border-color: #4e4e9c;
+    background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
+}
+
+
+.weapon-mod__img-wrapper {
+    width: 100%;
+    background-color: rgb(37, 37, 58, 0.5);
+    border-radius: 0.45rem;
+    height: 85px;
+}
+
+.weapon-mod__img {
+    max-width: 160px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.weapon-mod__name {
+    padding: 1rem;
+    background-color: #25253a;
+    border-radius: 0.45rem;
+
+}
+
+.weapon-mod__action {
+    background-color: #313155;
+    display: block;
+    width: 100%;
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    padding: 1rem;
+    color: white;
+    font-size: 1.25rem;
+    border-radius: 0.25rem;
+}
+
+.weapon-mod[data-owned="true"] .weapon-mod__action {
+    background-color: #4d3455;
+
+}
+
+.level {
+    background-color: #25253a90;
+    padding: 0.5rem;
+    opacity: 1;
+    border-radius: 0.4rem;
+}
+
+.level__input__name {
+    color: white !important;
+}
+
+.level[data-disabled="true"] {
+    opacity: 0.25;
+}
+
+.level__actions {
+    display: flex;
+    flex-flow: row;
+    justify-content: stretch;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.level__actions__button {
+    flex: auto;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    background-color: rgb(71, 60, 82);
+    border: none;
+    color: white;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
