@@ -5,6 +5,7 @@ import Consumables from "./Consumables";
 import Gear from "./Gear";
 import WeaponMods from "./WeaponMods";
 import Weapons from "./Weapons"
+import "./Inventory.scss"
 
 interface Properties {
     inventory: number[],
@@ -13,19 +14,24 @@ interface Properties {
     resetInventory(): void;
 }
 
+export interface InventoryProperties {
+    inventory: number[],
+    setInventory(value: number[]): void;
+}
 
 export default function Inventory({ inventory, saveInventory, resetInventory, setInventory }: Properties) {
     return (
         <div className="inventory">
-            <h1>Inventory</h1>
-            <button onClick={saveInventory} className="button">Save</button>
-            <button onClick={resetInventory} className="button">Reset</button>
-            <nav>
-                <Link to="characters">Characters</Link>
-                <Link to="weapons">Weapons</Link>
-                <Link to="weapon-mods">Weapon Mods</Link>
-                <Link to="consumables">Consumables</Link>
-                <Link to="gear">Gear</Link>
+            <div className="inventory__actions">
+                <button onClick={saveInventory} className="button">Save</button>
+                <button onClick={resetInventory} className="button">Reset</button>
+            </div>
+            <nav className="inventory__nav">
+                <Link className="inventory__nav__button button" to="characters">Characters</Link>
+                <Link className="inventory__nav__button button" to="weapons">Weapons</Link>
+                <Link className="inventory__nav__button button" to="weapon-mods">Weapon Mods</Link>
+                <Link className="inventory__nav__button button" to="consumables">Consumables</Link>
+                <Link className="inventory__nav__button button" to="gear">Gear</Link>
             </nav>
             <Routes >
                 <Route path="characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />

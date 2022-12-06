@@ -1,13 +1,7 @@
 import { CHARACTER_CLASSES } from "../../../../inventory";
 import Character from "../../../../components/inventory/Character";
 import Collapse from "../../../../components/Collapse";
-
-// Properties passed to the characters element
-interface Properties {
-    // The inventory array of the player
-    inventory: number[],
-    setInventory(value: number[]): void;
-}
+import { InventoryProperties } from "./Inventory";
 
 /**
  * Element for rendering a list of characters that can be collapsed
@@ -15,7 +9,7 @@ interface Properties {
  * @param inventory The inventory array of the player
  * @returns 
  */
-export default function Characters({ inventory, setInventory }: Properties) {
+export default function Characters({ inventory, setInventory }: InventoryProperties) {
 
     /**
      * Function for unlocking all the characters all at once
@@ -32,7 +26,7 @@ export default function Characters({ inventory, setInventory }: Properties) {
     return (
         <div className="inventory__section">
             <div className="inventory__section__header">
-                <button onClick={unlockAll}>
+                <button className="button" onClick={unlockAll}>
                     Unlock All
                 </button>
             </div>

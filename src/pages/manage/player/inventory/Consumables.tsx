@@ -1,13 +1,10 @@
 import Collapse from "../../../../components/Collapse";
 import { CoreConsumable, OtherConsumable, TieredConsumable } from "../../../../components/inventory/Consumable";
 import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES } from "../../../../inventory";
+import { InventoryProperties } from "./Inventory";
 
-interface Properties {
-    inventory: number[];
-    setInventory(value: number[]): void;
-}
-
-export default function Consumables({ inventory, setInventory }: Properties) {
+export default function Consumables({ inventory, setInventory }: InventoryProperties) {
+    
     /**
      * Function for setting the level of all the weapons
      */
@@ -21,11 +18,10 @@ export default function Consumables({ inventory, setInventory }: Properties) {
         }));
     }
 
-
     return (
         <div className="inventory__section">
             <div className="inventory__section__header">
-                <button onClick={setMaxAll}>
+                <button className="button" onClick={setMaxAll}>
                     Max All
                 </button>
             </div>

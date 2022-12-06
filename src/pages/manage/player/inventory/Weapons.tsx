@@ -1,14 +1,9 @@
 import Collapse from "../../../../components/Collapse";
 import LeveledCard from "../../../../components/inventory/LeveledCard";
 import { MAX_WEAPON_LEVEL, WEAPON_CATEGORIES } from "../../../../inventory";
+import { InventoryProperties } from "./Inventory";
 
-interface Properties {
-    inventory: number[];
-    setInventory(value: number[]): void;
-}
-
-export default function Weapons({ inventory, setInventory }: Properties) {
-
+export default function Weapons({ inventory, setInventory }: InventoryProperties) {
 
     /**
      * Function for setting the level of all the weapons
@@ -21,17 +16,16 @@ export default function Weapons({ inventory, setInventory }: Properties) {
         }));
     }
 
-
     return (
         <div className="inventory__section">
             <div className="inventory__section__header">
-                <button onClick={() => setLevelAll(1)}>
+                <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
                 </button>
-                <button onClick={() => setLevelAll(MAX_WEAPON_LEVEL)}>
+                <button className="button" onClick={() => setLevelAll(MAX_WEAPON_LEVEL)}>
                     Max Level All
                 </button>
-                <button onClick={() => setLevelAll(255)}>
+                <button className="button" onClick={() => setLevelAll(255)}>
                     God Level All
                 </button>
             </div>
