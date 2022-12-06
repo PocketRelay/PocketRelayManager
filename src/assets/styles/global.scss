@@ -104,3 +104,16 @@ a {
     color: #7272d1;
     font-weight: bold;
 }
+
+.collapse-list {
+    display: flex;
+    flex-flow: column;
+
+    gap: 2rem;
+
+    width: 100%;
+    padding: 1rem;
+}
+
+
+.card {}
