@@ -1,0 +1,19 @@
+.gears {
+    width: 100%;
+    flex-wrap: nowrap;
+    display: flex;
+    flex-flow: row wrap;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 2rem;
+    justify-content: space-evenly;
+}
+.gears::-webkit-scrollbar {
+    background-color: #1b1b25;
+    height: 8px;
+}
+
+.gears::-webkit-scrollbar-thumb {
+    background-color: #4e4e9c;
+    border-radius: 16px;
+}
