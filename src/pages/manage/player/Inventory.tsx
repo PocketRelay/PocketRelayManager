@@ -33,7 +33,6 @@ export default function Inventory({ player, setPlayer }: Properties) {
     // Effect for updating the inventory when the player changes
     useEffect(() => {
         setInventory(parseInventory(player.inventory));
-        console.log("Player CHanged");
     }, [player]);
 
     /**

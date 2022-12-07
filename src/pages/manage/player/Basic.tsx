@@ -1,18 +1,26 @@
-import { Player } from "@api/models";
+import { Player, PlayerUpdate } from "@api/models";
+import { updatePlayer } from "@api/routes";
+import { AppContext, useAppContext } from "@contexts/AppContext";
 import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 
 import "./Basic.scss";
 
 interface Properties {
     player: Player;
+    setPlayer(player: Player): void;
 }
 
-export default function Basic({ player }: Properties) {
-
+export default function Basic({ player, setPlayer }: Properties) {
+    const context: AppContext = useAppContext();
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
     const [credits, setCredits] = useState(0);
     const [origin, setOrigin] = useState(false);
+    const [password, setPassword] = useState("");
+
+    // Mutation state for saving the inventory
+    const saveMutation = useMutation(save);
 
     useEffect(() => {
         setDisplayName(player.display_name);
@@ -21,6 +29,18 @@ export default function Basic({ player }: Properties) {
         setOrigin(player.origin);
     }, [player]);
 
+    async function save() {
+        const update: PlayerUpdate = {};
+        if (email != player.email)  update.email = email;
+        if (displayName != player.display_name)  update.display_name = displayName;
+        if (password.length > 0)  update.password = password;
+        if (credits != player.credits)  update.credits = credits;
+        if (origin != player.origin)   update.origin = origin;
+
+        console.log(update);
+        const newPlayer = await updatePlayer(context, player.id, update);
+        setPlayer(newPlayer);
+    }
 
     return (
         <div className="basic">
@@ -31,7 +51,7 @@ export default function Basic({ player }: Properties) {
                     className="input__value"
                     type="text"
                     value={displayName}
-                    onChange={() => { }}
+                    onChange={(event) => setDisplayName(event.target.value)}
                     alt="Username"
                     placeholder=""
                     name="username"
@@ -43,7 +63,7 @@ export default function Basic({ player }: Properties) {
                     className="input__value"
                     type="text"
                     value={email}
-                    onChange={() => { }}
+                    onChange={(event) => setEmail(event.target.value)}
                     alt="Username"
                     placeholder=""
                     name="username"
@@ -68,6 +88,7 @@ export default function Basic({ player }: Properties) {
                     type="checkbox"
                     checked={origin}
                     onClick={() => { setOrigin(origin => !origin) }}
+                    onChange={() => {}}
                     alt="Username"
                     placeholder=""
                     name="username"
@@ -80,23 +101,24 @@ export default function Basic({ player }: Properties) {
                 </p>
             )}
 
-            <div>
-                <label className="input">
-                    <span className="input__name">Password</span>
-                    <input
-                        className="input__value"
-                        type="password"
-                        value={""}
-                        onChange={() => { }}
-                        alt="Password"
-                        placeholder=""
-                        name="password"
-                    />
-                </label>
-                <button className="button">Update Password</button>
-            </div>
+            <label className="input">
+                <span className="input__name">Password</span>
+                <input
+                    className="input__value"
+                    type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    alt="Password"
+                    placeholder=""
+                    name="password"
+                />
+            </label>
+            <p>
+                If you don't want to change the account password ensure the password
+                field is left blank
+            </p>
 
-            <button className="button">Save</button>
+            <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
         </div>
     )
 }

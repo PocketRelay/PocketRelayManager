@@ -66,7 +66,7 @@ export default function Player() {
 
 
             <Routes>
-                <Route index path="/" element={<Basic player={player} />} />
+                <Route index path="/" element={<Basic player={player} setPlayer={setPlayer} />} />
                 <Route path="/classes" element={<Classes player={player} />} />
                 <Route path="/inventory/*" element={<Inventory player={player} setPlayer={setPlayer} />} />
             </Routes>
