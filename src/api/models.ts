@@ -59,3 +59,16 @@ export interface PlayerUpdate {
     inventory?: string;
     csreward?: string;
 }
+
+export interface PlayerClass {
+    index: number;
+    name: string;
+    level: number;
+    exp: number;
+    promotions: number;
+}
+
+export interface PlayerClassUpdate {
+    level: number;
+    promotions: number;
+}

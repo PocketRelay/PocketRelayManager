@@ -7,6 +7,7 @@ import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
 import Inventory from "./Inventory";
 import "./Player.scss";
+import Classes from "./Classes";
 
 type PlayerParams = {
     id?: string
@@ -57,6 +58,9 @@ export default function Player() {
                 <Link to="inventory/characters" className="button">
                     Inventory
                 </Link>
+                <Link to="classes" className="button">
+                    Classes
+                </Link>
             </div>
 
 
@@ -64,6 +68,7 @@ export default function Player() {
                 <Route index path="/" element={
                     <h1>Basic</h1>
                 } />
+                <Route path="/classes" element={<Classes player={player} />} />
                 <Route path="/inventory/*" element={<Inventory player={player} setPlayer={setPlayer} />} />
             </Routes>
 

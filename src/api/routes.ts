@@ -1,5 +1,5 @@
-import { AppContext } from "../contexts/AppContext";
-import { GetPlayersResponse, Player, PlayerUpdate, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
+import { AppContext } from "@contexts/AppContext";
+import { GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -128,11 +128,20 @@ export function getPlayer(context: AppContext, id: string): Promise<Player> {
 }
 
 export function updatePlayer(context: AppContext, id: number, update: PlayerUpdate): Promise<Player> {
-  return makeRequest({
+    return makeRequest({
         method: "PUT",
         baseURL: context.serverState.baseURL,
         token: context.token,
         url: `api/players/${id}`,
         body: update,
+    });
+}
+
+export function getPlayerClasses(context: AppContext, player: Player): Promise<PlayerClass[]> {
+    return makeRequest({
+        method: "GET",
+        baseURL: context.serverState.baseURL,
+        token: context.token,
+        url: `api/players/${player.id}/classes`,
     });
 }
