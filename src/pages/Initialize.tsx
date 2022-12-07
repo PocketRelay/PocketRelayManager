@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ServerDetails } from "../api/models";
-import { getServerDetails } from "../api/routes";
+import { ServerDetails } from "@api/models";
+import { getServerDetails } from "@api/routes";
 import { useAppContext } from "../contexts/AppContext";
 
 enum State {

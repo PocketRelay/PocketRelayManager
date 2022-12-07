@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Loader from "./components/Loader";
-import RequireAuth from "./components/RequireAuth";
-import { useAppContext } from "./contexts/AppContext";
-import Manage from "./pages/manage/Manage";
-import Initialize from "./pages/Initialize";
-import Login from "./pages/Login";
+import Loader from "@components/Loader";
+import RequireAuth from "@components/RequireAuth";
+import { useAppContext } from "@contexts/AppContext";
+import Manage from "@pages/manage/Manage";
+import Initialize from "@pages/Initialize";
+import Login from "@pages/Login";
 
 function App() {
   const { loading } = useAppContext();

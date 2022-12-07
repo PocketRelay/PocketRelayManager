@@ -1,6 +1,6 @@
-import { CHARACTER_CLASSES } from "../../../../inventory";
-import Character from "../../../../components/inventory/Character";
-import Collapse from "../../../../components/Collapse";
+import { CHARACTER_CLASSES } from "@data/inventory";
+import Character from "@components/inventory/Character";
+import Collapse from "@components/Collapse";
 import { InventoryProperties } from "../Inventory";
 
 /**

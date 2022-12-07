@@ -1,7 +1,7 @@
-import LeveledCard from "../../../../components/inventory/LeveledCard";
-import { GEAR_CONSUMABLES, GEAR_MAX } from "../../../../inventory";
-import "./Gear.scss";
+import LeveledCard from "@components/inventory/LeveledCard";
+import { GEAR_CONSUMABLES, GEAR_MAX } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
+import "./Gear.scss";
 
 export default function Gear({ inventory, setInventory }: InventoryProperties) {
 

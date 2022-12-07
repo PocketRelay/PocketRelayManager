@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
 import { useAsyncRetry } from "react-use";
-import { GetPlayersResponse } from "../../api/models";
-import { getPlayers } from "../../api/routes";
-import Loader from "../../components/Loader";
-import { useAppContext } from "../../contexts/AppContext";
+import { GetPlayersResponse } from "@api/models";
+import { getPlayers } from "@api/routes";
+import Loader from "@components/Loader";
+import { useAppContext } from "@contexts/AppContext";
 
 export default function Players() {
     const appContext = useAppContext();

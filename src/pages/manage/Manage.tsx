@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useAppContext } from "../../contexts/AppContext";
+import { useAppContext } from "@contexts/AppContext";
 import Games from "./Games";
 import Home from "./Home";
 import Player from "./player/Player";

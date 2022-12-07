@@ -1,6 +1,6 @@
-import Collapse from "../../../../components/Collapse";
-import { CoreConsumable, OtherConsumable, TieredConsumable } from "../../../../components/inventory/Consumable";
-import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES } from "../../../../inventory";
+import Collapse from "@components/Collapse";
+import { CoreConsumable, OtherConsumable, TieredConsumable } from "@components/inventory/Consumable";
+import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
 
 export default function Consumables({ inventory, setInventory }: InventoryProperties) {
