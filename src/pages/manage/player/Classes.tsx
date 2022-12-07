@@ -53,15 +53,6 @@ export default function Classes({ player }: Properties) {
         )
     }
 
-    if (classes.length == 0) {
-        return (
-            <div>
-                Player has no classes. This could be because this account
-                hasn't be used with the Mass Effect 3 client yet.
-            </div>
-        )
-    }
-
     async function reload() {
         setClasses([]);
         await refetch();
@@ -73,7 +64,7 @@ export default function Classes({ player }: Properties) {
                 <button className="button" onClick={reload} >Reload</button>
                 <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
             </div>
-            {saveMutation.isLoading && (
+                   {saveMutation.isLoading && (
                     <div>
                         Saving classess
                     </div>
