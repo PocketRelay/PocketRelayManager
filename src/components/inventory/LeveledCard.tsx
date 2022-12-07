@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Rarity } from "../../inventory";
+import { Rarity } from "@data/inventory";
 import "./LeveledCard.scss"
 
 interface Properties {

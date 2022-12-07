@@ -1,9 +1,9 @@
-import { useAmount } from "../../hooks/inventory";
+import { useAmount } from "@hooks/inventory";
 import {
     TieredConsumable as TieredConsumableModel,
     CoreConsumable as CoreConsumableModel,
     OtherConsumable as OtherConsumableModel,
-} from "../../inventory";
+} from "@data/inventory";
 import "./Consumable.scss"
 
 export function TieredConsumable({ inventory, consumable }: { inventory: number[], consumable: TieredConsumableModel }) {
@@ -21,7 +21,7 @@ export function TieredConsumable({ inventory, consumable }: { inventory: number[
             <div className="consumable__tiers">
                 {
                     consumable.indexes.map((value, index) => (
-                        <ConsumableTier inventory={inventory} index={value} name={tierNames[index]} />
+                        <ConsumableTier key={index} inventory={inventory} index={value} name={tierNames[index]} />
                     ))
                 }
             </div>

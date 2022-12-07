@@ -52,9 +52,6 @@ export default function Basic({ player, setPlayer }: Properties) {
                     type="text"
                     value={displayName}
                     onChange={(event) => setDisplayName(event.target.value)}
-                    alt="Username"
-                    placeholder=""
-                    name="username"
                 />
             </label>
             <label className="input">
@@ -64,9 +61,6 @@ export default function Basic({ player, setPlayer }: Properties) {
                     type="text"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    alt="Username"
-                    placeholder=""
-                    name="username"
                 />
             </label>
             <label className="input">
@@ -76,9 +70,6 @@ export default function Basic({ player, setPlayer }: Properties) {
                     type="text"
                     value={credits}
                     onChange={() => { }}
-                    alt="Username"
-                    placeholder=""
-                    name="username"
                 />
             </label>
             <label className="input">
@@ -88,9 +79,6 @@ export default function Basic({ player, setPlayer }: Properties) {
                     type="checkbox"
                     checked={origin}
                     onChange={() => setOrigin(origin => !origin)}
-                    alt="Username"
-                    placeholder=""
-                    name="username"
                 />
             </label>
             {(player.origin && !origin) && (
@@ -107,9 +95,6 @@ export default function Basic({ player, setPlayer }: Properties) {
                     type="password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    alt="Password"
-                    placeholder=""
-                    name="password"
                 />
             </label>
             <p>

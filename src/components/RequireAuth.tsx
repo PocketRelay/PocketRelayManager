@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAppContext } from "../contexts/AppContext";
+import { useAppContext } from "@contexts/AppContext";
 
 export default function RequireAuth({ children }: {children: JSX.Element }): JSX.Element {
     let { token, serverState } = useAppContext();
