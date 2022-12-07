@@ -1,17 +1,17 @@
 import { Link, useLocation } from "react-router-dom"
 import { Route, Routes } from "react-router-dom"
-import Characters from "./Characters"
-import Consumables from "./Consumables";
-import Gear from "./Gear";
-import WeaponMods from "./WeaponMods";
-import Weapons from "./Weapons"
+import Characters from "./inventory/Characters"
+import Consumables from "./inventory/Consumables";
+import Gear from "./inventory/Gear";
+import WeaponMods from "./inventory/WeaponMods";
+import Weapons from "./inventory/Weapons"
 import "./Inventory.scss"
-import { Player } from "../../../../api/models";
+import { Player } from "../../../api/models";
 import { useEffect, useState } from "react";
-import { encodeInventory, parseInventory } from "../../../../inventory";
+import { encodeInventory, parseInventory } from "../../../inventory";
 import { useMutation } from "react-query";
-import { updatePlayer } from "../../../../api/routes";
-import { AppContext, useAppContext } from "../../../../contexts/AppContext";
+import { updatePlayer } from "../../../api/routes";
+import { AppContext, useAppContext } from "../../../contexts/AppContext";
 
 interface Properties {
     player: Player;

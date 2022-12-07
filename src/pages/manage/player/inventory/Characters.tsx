@@ -1,7 +1,7 @@
 import { CHARACTER_CLASSES } from "../../../../inventory";
 import Character from "../../../../components/inventory/Character";
 import Collapse from "../../../../components/Collapse";
-import { InventoryProperties } from "./Inventory";
+import { InventoryProperties } from "../Inventory";
 
 /**
  * Element for rendering a list of characters that can be collapsed

@@ -1,7 +1,7 @@
 import Collapse from "../../../../components/Collapse";
 import LeveledCard from "../../../../components/inventory/LeveledCard";
 import { MAX_WEAPON_MOD_LEVEL, WEAPON_MODS } from "../../../../inventory";
-import { InventoryProperties } from "./Inventory";
+import { InventoryProperties } from "../Inventory";
 
 export default function WeaponMods({ inventory, setInventory }: InventoryProperties) {
 
