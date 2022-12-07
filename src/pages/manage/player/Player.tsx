@@ -8,6 +8,7 @@ import { useAppContext } from "@contexts/AppContext";
 import Inventory from "./Inventory";
 import "./Player.scss";
 import Classes from "./Classes";
+import Basic from "./Basic";
 
 type PlayerParams = {
     id?: string
@@ -63,11 +64,9 @@ export default function Player() {
                 </Link>
             </div>
 
-            
+
             <Routes>
-                <Route index path="/" element={
-                    <h1>Basic</h1>
-                } />
+                <Route index path="/" element={<Basic player={player} />} />
                 <Route path="/classes" element={<Classes player={player} />} />
                 <Route path="/inventory/*" element={<Inventory player={player} setPlayer={setPlayer} />} />
             </Routes>
