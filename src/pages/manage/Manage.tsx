@@ -16,7 +16,7 @@ export default function Manage() {
 
     return (
         <div className="manage">
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} className="logout button">Logout</button>
             <Routes>
                 <Route index element={<Home/>}/>
                 <Route path="/players" element={<Players/>}/>

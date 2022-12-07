@@ -1,6 +1,11 @@
 .player {
+    display: flex;
+    flex-flow: column;
+    
     position: relative;
     width: 100%;
+    height: 100%;
+
     &__nav {
         display: flex;
         flex-flow: row;

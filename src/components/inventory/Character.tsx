@@ -1,5 +1,5 @@
-import { useOwned } from "../../hooks/inventory";
-import { Character as CharacterModel } from "../../inventory";
+import { useOwned } from "@hooks/inventory";
+import { Character as CharacterModel } from "@data/inventory";
 import "./LeveledCard.scss"
 
 interface Properties {
@@ -15,10 +15,10 @@ export default function Character({ inventory, character }: Properties) {
     // Text to be displayed on the toggle button
     const actionText: string = isOwned ? "Remove" : "Add";
     return (
-        <div className="card" style={{maxWidth: 250}} data-owned={isOwned}>
+        <div className="card" style={{maxWidth: 240}} data-owned={isOwned}>
             <h2 className="card__name">{character.name}</h2>
             <div className="card__img-wrapper">
-                <img className="card__img" style={{width: 140}} src={imageURL} alt={`${character.name} Image`} />
+                <img className="card__img" style={{width:  90}} src={imageURL} alt={`${character.name} Image`} />
             </div>
             <button
                 className="card__action"

@@ -63,7 +63,7 @@ export default function Player() {
                 </Link>
             </div>
 
-
+            
             <Routes>
                 <Route index path="/" element={
                     <h1>Basic</h1>

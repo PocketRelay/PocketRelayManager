@@ -120,3 +120,15 @@ a {
     width: 100%;
 }
 
+
+
+*::-webkit-scrollbar {
+    background-color: #1b1b25;
+    height: 8px;
+    width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #4e4e9c;
+    border-radius: 16px;
+}
