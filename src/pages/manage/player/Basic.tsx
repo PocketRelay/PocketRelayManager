@@ -87,8 +87,7 @@ export default function Basic({ player, setPlayer }: Properties) {
                     className="input__value"
                     type="checkbox"
                     checked={origin}
-                    onClick={() => { setOrigin(origin => !origin) }}
-                    onChange={() => {}}
+                    onChange={() => setOrigin(origin => !origin)}
                     alt="Username"
                     placeholder=""
                     name="username"
