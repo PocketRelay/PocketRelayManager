@@ -55,6 +55,24 @@ body {
 .input {
     display: flex;
     flex-flow: column;
+
+    &--small {
+        flex-flow: row;
+        align-items: center;
+        gap: 1rem;
+
+        .input__name {
+            margin-bottom: 0;
+            flex: auto;
+            text-align: left;
+        }
+
+        .input__value {
+            max-width: 4.5rem;
+            text-align: center;
+        }
+
+    }
 }
 
 .input__name {
@@ -132,3 +150,5 @@ a {
     background-color: #4e4e9c;
     border-radius: 16px;
 }
+
+@import "./card.scss";

@@ -1,66 +1,20 @@
-.consumable {
+.tier {
     display: flex;
-    flex-flow: column;
-    position: relative;
+    flex-flow: row;
+    gap: 1rem;
+    align-items: center;
 
-    flex: 0 0 auto;
-    gap: 0.5rem;
+    &__name {
+        width: 2rem;
+    }
 
-    max-width: 300px;
-    width: 100%;
-
-
-    background-color: #232331;
-
-    text-align: center;
-    border-radius: 0.5rem;
-
-    border: 5px solid #232331;
-    transition: border-color 0.25s;
-
-    padding: 0.5rem;
-    &[data-owned="true"] {
-        border-color: #4e4e9c;
-        background: linear-gradient(25deg, #2f2f46, #6464d4, #393944);
+    &__input {
+        flex: auto;
     }
 }
 
-.consumable__img-wrapper {
-    width: 100%;
-    background-color: rgb(37, 37, 58, 0.5);
-    border-radius: 0.45rem;
-    height: 120px;
-}
-
-.consumable__img {
-    max-width: 160px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.consumable__name {
-    padding: 1rem;
-    background-color: #25253a;
-    border-radius: 0.45rem;
-
-}
-
-.consumable__action {
-    background-color: #313155;
-    display: block;
-    width: 100%;
-    border: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    cursor: pointer;
-    transition: background-color 0.25s;
-    padding: 1rem;
-    color: white;
-    font-size: 1.25rem;
-    border-radius: 0.25rem;
-}
-
-.consumable[data-owned="true"] .consumable__action {
-    background-color: #4d3455;
-
+.tiers {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
 }

@@ -1,6 +1,5 @@
 import { useOwned } from "@hooks/inventory";
 import { Character as CharacterModel } from "@data/inventory";
-import "./LeveledCard.scss"
 
 interface Properties {
     inventory: number[],

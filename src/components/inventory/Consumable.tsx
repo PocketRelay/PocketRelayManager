@@ -18,7 +18,7 @@ export function TieredConsumable({ inventory, consumable }: { inventory: number[
             <div className="card__img-wrapper">
                 <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
             </div>
-            <div className="consumable__tiers">
+            <div className="tiers">
                 {
                     consumable.indexes.map((value, index) => (
                         <ConsumableTier key={index} inventory={inventory} index={value} name={tierNames[index]} />
@@ -40,7 +40,7 @@ function ConsumableTier({ inventory, index, name }: TierProperties) {
     return (
         <div className="tier">
             <span className="tier__name">{name}</span>
-            <label className="tier__input input">
+            <label className="tier__input input input--small">
                 <span className="tier__input__name input__name">Amount</span>
                 <input
                     className="input__value"
@@ -60,21 +60,21 @@ export function CoreConsumable({ inventory, consumable }: { inventory: number[],
     const imageURL: string = `/assets/consumables/${consumable.stock_image}`;
 
     return (
-        <div className="consumable">
-            <h2 className="consumable__name">{consumable.name}</h2>
-            <div className="consumable__img-wrapper">
-                <img className="consumable__img" src={imageURL} alt={`${consumable.name} Image`} />
+        <div className="card consumable--core" data-owned="true">
+            <h2 className="card__name">{consumable.name}</h2>
+            <div className="card__img-wrapper">
+                <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
             </div>
-            <label className="tier__input input">
-                <span className="tier__input__name input__name">Capacity</span>
+            <label className="input input--small">
+                <span className="input__name">Capacity</span>
                 <input
                     className="input__value"
                     type="number"
                     value={capacity}
                     onChange={setCapacityEvent} />
             </label>
-            <label className="tier__input input">
-                <span className="tier__input__name input__name">Stock</span>
+            <label className="input input--small">
+                <span className="input__name">Stock</span>
                 <input
                     className="input__value"
                     type="number"
@@ -92,13 +92,13 @@ export function OtherConsumable({ inventory, consumable }: { inventory: number[]
     const imageURL: string = `/assets/consumables/${consumable.image}`;
 
     return (
-        <div className="consumable">
-            <h2 className="consumable__name">{consumable.name}</h2>
-            <div className="consumable__img-wrapper">
-                <img className="consumable__img" src={imageURL} alt={`${consumable.name} Image`} />
+        <div className="card" data-owned="true">
+            <h2 className="card__name">{consumable.name}</h2>
+            <div className="card__img-wrapper">
+                <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
             </div>
-            <label className="level__input input">
-                <span className="level__input__name input__name">Count</span>
+            <label className="input input--small">
+                <span className="input__name">Count</span>
                 <input
                     className="input__value"
                     type="number"
