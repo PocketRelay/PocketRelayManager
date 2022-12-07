@@ -23,37 +23,35 @@ export default function Inventory({ inventory, saveInventory, resetInventory, se
     let location = useLocation();
     return (
         <div className="inventory">
-            <div className="inventory__actions">
+            <nav className="inventory__actions">
                 <button onClick={saveInventory} className="button">Save</button>
                 <button onClick={resetInventory} className="button">Reset</button>
-            </div>
-            <nav className="inventory__nav">
                 <Link
-                    className="inventory__nav__button button"
+                    className="inventory__actions__button button"
                     data-active={location.pathname.endsWith("characters")}
                     to="characters">
                     Characters
                 </Link>
                 <Link
-                    className="inventory__nav__button button"
+                    className="inventory__actions__button button"
                     data-active={location.pathname.endsWith("weapons")}
                     to="weapons">
                     Weapons
                 </Link>
                 <Link
-                    className="inventory__nav__button button"
+                    className="inventory__actions__button button"
                     data-active={location.pathname.endsWith("weapon-mods")}
                     to="weapon-mods">
                     Weapon Mods
                 </Link>
                 <Link
-                    className="inventory__nav__button button"
+                    className="inventory__actions__button button"
                     data-active={location.pathname.endsWith("consumables")}
                     to="consumables">
                     Consumables
                 </Link>
                 <Link
-                    className="inventory__nav__button button"
+                    className="inventory__actions__button button"
                     data-active={location.pathname.endsWith("gear")}
                     to="gear">
                     Gear

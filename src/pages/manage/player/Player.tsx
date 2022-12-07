@@ -80,7 +80,7 @@ export default function Player() {
                 <Link to="./" className="button">
                     Base
                 </Link>
-                <Link to="inventory" className="button">
+                <Link to="inventory/characters" className="button">
                     Inventory
                 </Link>
             </div>

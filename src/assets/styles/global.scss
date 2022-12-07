@@ -34,7 +34,6 @@ body {
     height: 100vh;
 }
 
-
 .button {
 
     border: none;
@@ -45,6 +44,7 @@ body {
     border-radius: 0.25rem;
     transition: background-color 0.25s ease;
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
         background-color: #4e4e9c;
