@@ -1,10 +1,10 @@
 import { Player, PlayerClass as PlayerClassModel } from "@api/models";
-import { getPlayerClasses } from "@api/routes";
+import { getPlayerClasses, updatePlayerClass } from "@api/routes";
 import Loader from "@components/Loader";
 import PlayerClass from "@components/PlayerClass";
 import { AppContext, useAppContext } from "@contexts/AppContext";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import "./Classes.scss";
 
 interface Properties {
@@ -23,6 +23,22 @@ export default function Classes({ player }: Properties) {
             setClasses(classes);
         }
     });
+
+    const saveMutation = useMutation(save);
+
+    async function save() {
+        for (let i = 0; i < classes.length; i++) {
+            const original: PlayerClassModel = classes[i];
+            const newModel: PlayerClassModel = await updatePlayerClass(
+                context,
+                player,
+                original.index,
+                original.level,
+                original.promotions
+            );
+            classes[i] = newModel;
+        }
+    }
 
 
     if (isLoading) {
@@ -51,17 +67,28 @@ export default function Classes({ player }: Properties) {
         await refetch();
     }
 
-    
-    async function save() {
-        
-    }
-
-
     return (
         <div className="classes">
-            {classes.map((playerClass, index) => (
-                <PlayerClass key={index} playerClass={playerClass} />
-            ))}
+            <div className="classes__actions">
+                <button className="button" onClick={reload} >Reload</button>
+                <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
+            </div>
+            {saveMutation.isLoading && (
+                    <div>
+                        Saving classess
+                    </div>
+                )}
+
+                {saveMutation.isError && (
+                    <div>
+                        Failed to save classes
+                    </div>
+                )}
+            <div className="classes__values">
+                {classes.map((playerClass, index) => (
+                    <PlayerClass key={index} playerClass={playerClass} />
+                ))}
+            </div>
         </div>
     )
 }

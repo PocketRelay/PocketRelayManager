@@ -145,3 +145,16 @@ export function getPlayerClasses(context: AppContext, player: Player): Promise<P
         url: `api/players/${player.id}/classes`,
     });
 }
+
+export function updatePlayerClass(context: AppContext, player: Player, index: number, level: number, promotions: number): Promise<PlayerClass> {
+    return makeRequest({
+        method: "PUT",
+        baseURL: context.serverState.baseURL,
+        token: context.token,
+        url: `api/players/${player.id}/classes/${index}`,
+        body: {
+            level,
+            promotions
+        }
+    });
+}

@@ -23,17 +23,19 @@ export default function PlayerClass({ playerClass }: Properties) {
         if (level < 0) level = 0;
         if (level > 20) level = 20;
         setLevel(level);
+        playerClass.level = level;
     }
 
     function setPromotionsEvent(event: ChangeEvent<HTMLInputElement>) {
         let value = event.target.value;
-        let level = parseInt(value);
-        if (Number.isNaN(level)) {
-            level = 0;
+        let promotions = parseInt(value);
+        if (Number.isNaN(promotions)) {
+            promotions = 0;
         }
-        if (level < 0) level = 0;
-        if (level > 1000) level = 1000;
-        setPromotions(level);
+        if (promotions < 0) promotions = 0;
+        if (promotions > 1000) promotions = 1000;
+        setPromotions(promotions);
+        playerClass.promotions = promotions;
     }
 
     return (
