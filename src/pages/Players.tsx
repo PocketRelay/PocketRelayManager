@@ -24,8 +24,8 @@ export default function Players() {
         [offset, count, appContext]
     );
 
-    
-    
+
+
     if (error) {
         return (
             <div>
@@ -37,7 +37,7 @@ export default function Players() {
             </div>
         )
     }
-    
+
     let prevDisabled: boolean = offset <= 0 || loading;
     let nextDisabled: boolean = loading || !value!.more;
 
@@ -91,24 +91,22 @@ export default function Players() {
                             </tr>
                         </thead>
                         <tbody className="table__body">
-                            {[0, 1, 2, 3, 4, 5, 6].map(() => {
-                                return value!.players.map((player, index) => (
-                                    <tr key={index}>
-                                        <td>{player.id}</td>
-                                        <td>{player.display_name}</td>
-                                        <td>{player.email}</td>
-                                        <td>{player.origin ? "Yes" : "No"}</td>
-                                        <td>{player.credits}</td>
-                                        <td>
-                                            <Link
-                                                to={"/players/" + player.id}
-                                                className="players__edit">
-                                                Edit
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))
-                            })}
+                            {value!.players.map((player, index) => (
+                                <tr key={index}>
+                                    <td>{player.id}</td>
+                                    <td>{player.display_name}</td>
+                                    <td>{player.email}</td>
+                                    <td>{player.origin ? "Yes" : "No"}</td>
+                                    <td>{player.credits}</td>
+                                    <td>
+                                        <Link
+                                            to={"/players/" + player.id}
+                                            className="players__edit">
+                                            Edit
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
