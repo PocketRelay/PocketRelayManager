@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { useAppContext } from "@contexts/AppContext";
-import Games from "./Games";
-import Home from "./Home";
-import Player from "./player/Player";
-import Players from "./Players";
+import Games from "./manage/Games";
+import Home from "./manage/Home";
+import Player from "./manage/player/Player";
+import Players from "./manage/Players";
 import "./Manage.scss";
 
 export default function Manage() {
