@@ -24,9 +24,9 @@ export default function Players() {
         [offset, count, appContext]
     );
 
-
-
-    if (!value || error) {
+    
+    
+    if (error) {
         return (
             <div>
                 <h1>Failed to load players</h1>
@@ -37,9 +37,9 @@ export default function Players() {
             </div>
         )
     }
-
+    
     let prevDisabled: boolean = offset <= 0 || loading;
-    let nextDisabled: boolean = !value.more || loading;
+    let nextDisabled: boolean = loading || !value!.more;
 
     function nextPage() {
         setOffset(offset => offset + 1);
@@ -54,7 +54,6 @@ export default function Players() {
         if (Number.isNaN(value)) {
             value = 10;
         }
-        console.log(value)
         setCount(value);
     }
 
@@ -93,7 +92,7 @@ export default function Players() {
                         </thead>
                         <tbody className="table__body">
                             {[0, 1, 2, 3, 4, 5, 6].map(() => {
-                                return value.players.map((player, index) => (
+                                return value!.players.map((player, index) => (
                                     <tr key={index}>
                                         <td>{player.id}</td>
                                         <td>{player.display_name}</td>
@@ -110,9 +109,6 @@ export default function Players() {
                                     </tr>
                                 ))
                             })}
-
-
-
                         </tbody>
                     </table>
                 </div>
