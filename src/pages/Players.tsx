@@ -1,58 +1,86 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Link } from "react-router-dom";
-import { useAsyncRetry } from "react-use";
 import { GetPlayersResponse } from "@api/models";
 import { getPlayers } from "@api/routes";
 import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
+import { useAsyncRetry } from "react-use";
+import "./Players";
 
 export default function Players() {
     const appContext = useAppContext();
     const [offset, setOffset] = useState(0);
     const [count, setCount] = useState(10);
 
-    const state = useAsyncRetry(async () => {
-        return await getPlayers(appContext, offset, count);
-    }, [offset, count, appContext])
+
+    const { value, error, loading, retry } = useAsyncRetry(
+        async () => {
+            const response: GetPlayersResponse = await getPlayers(appContext, offset, count);
+            if (response.players.length == 0 && offset > 0) {
+                setOffset(offset => offset - 1);
+            }
+            return response;
+        },
+        [offset, count, appContext]
+    );
 
 
-    if (state.loading) {
-        return <Loader />
-    } else if (state.value) {
-        let value: GetPlayersResponse = state.value;
-        let prevDisabled: boolean = offset <= 0;
-        let nextDisabled: boolean = !value.more;
 
-        function nextPage() {
-            setOffset(offset => offset + 1);
-        }
-
-        function prevPage() {
-            setOffset(offset => offset == 0 ? 0 : offset - 1);
-        }
-
+    if (!value || error) {
         return (
             <div>
-                <div>
-                    <div>
-                    <Link to="/" className="button">
-                        Back
-                    </Link>
-                        <button className="button" disabled={prevDisabled} onClick={prevPage}>Previous</button>
-                        <label>
-                            <span>Rows</span>
-                            <select name="" id="" defaultValue={10}>
-                                <option value={5}>5</option>
-                                <option value={10}>10</option>
-                                <option value={20}>20</option>
-                                <option value={30}>30</option>
-                            </select>
-                        </label>
-                        <button className="button" disabled={nextDisabled} onClick={nextPage}>Next</button>
-                    </div>
+                <h1>Failed to load players</h1>
+                <button className="button" onClick={() => retry()}>Retry</button>
+                <Link to="/" className="button">
+                    Back
+                </Link>
+            </div>
+        )
+    }
+
+    let prevDisabled: boolean = offset <= 0 || loading;
+    let nextDisabled: boolean = !value.more || loading;
+
+    function nextPage() {
+        setOffset(offset => offset + 1);
+    }
+
+    function prevPage() {
+        setOffset(offset => offset == 0 ? 0 : offset - 1);
+    }
+
+    function onRowsEvent(event: ChangeEvent<HTMLSelectElement>) {
+        let value: number = parseInt(event.target.value);
+        if (Number.isNaN(value)) {
+            value = 10;
+        }
+        console.log(value)
+        setCount(value);
+    }
+
+    return (
+        <div className="players">
+            <div className="players__actions">
+                <Link to="/" className="button">
+                    Back
+                </Link>
+                <div className="players__actions__buttons">
+                    <button className="button" disabled={prevDisabled} onClick={prevPage}>Previous</button>
+                    <label>
+                        <span>Rows</span>
+                        <select name="" id="" value={count} onChange={onRowsEvent}>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                            <option value={30}>30</option>
+                        </select>
+                    </label>
+                    <button className="button" disabled={nextDisabled} onClick={nextPage}>Next</button>
                 </div>
-                <table>
-                    <thead>
+            </div>
+            {loading ? <Loader /> : (
+                <table className="table">
+                    <thead className="table__head">
                         <tr>
                             <th>ID</th>
                             <th>Display Name</th>
@@ -62,7 +90,7 @@ export default function Players() {
                             <th>Edit</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table__body">
                         {value.players.map((player, index) => (
                             <tr key={index}>
                                 <td>{player.id}</td>
@@ -78,18 +106,7 @@ export default function Players() {
                         ))}
                     </tbody>
                 </table>
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                <h1>Failed to load players</h1>
-                <button className="button" onClick={state.retry}>Retry</button>
-                <Link to="/" className="button">
-                    Back
-                </Link>
-            </div>
-        )
-    }
-
+            )}
+        </div>
+    )
 }

@@ -50,6 +50,10 @@ body {
         background-color: #4e4e9c;
 
     }
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .input {
