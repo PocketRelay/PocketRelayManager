@@ -22,7 +22,7 @@ export interface AppContext {
 
     // The initial loading state for checking stored tokens and
     // stored baseURL
-    loading: boolean,
+    isLoading: boolean,
 
     setServerState(baseURL: string, version: string): void;
     clearServerState(): void;
@@ -51,7 +51,7 @@ export function useAppContext(): AppContext {
 export function AppContextProvider({ children }: { children: ReactNode }) {
 
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     const [tokenState, setTokenState] = useState<string>(null!);
     const [serverState, setServerStateImpl] = useState<ServerState>(null!);
 
@@ -157,7 +157,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     const contextValue: AppContext = {
         serverState,
         token: tokenState,
-        loading,
+        isLoading,
         setServerState,
         clearServerState,
         setToken

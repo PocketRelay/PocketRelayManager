@@ -1,28 +1,44 @@
-import { Route, Routes } from "react-router-dom";
 import Loader from "@components/Loader";
-import RequireAuth from "@components/RequireAuth";
 import { useAppContext } from "@contexts/AppContext";
-import Manage from "@pages/Manage";
+import Games from "@pages/Games";
+import Home from "@pages/Home";
 import Initialize from "@pages/Initialize";
 import Login from "@pages/Login";
+import Player from "@pages/player/Player";
+import Players from "@pages/Players";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const { loading } = useAppContext();
-  if (loading) {
+  const { isLoading: isLoading, serverState, token } = useAppContext();
+
+  // If loading old state display loader
+  if (isLoading) {
     return <Loader />
-  } else {
-    return (
-      <Routes>
-        <Route path="/init" element={<Initialize />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/*" element={
-          <RequireAuth>
-            <Manage />
-          </RequireAuth>
-        } />
-      </Routes>
-    )
   }
+
+  // If missing server details prompt server url
+  if (!serverState) {
+    return <Initialize />
+  }
+
+  // If missing token prompt for authentication
+  if (!token) {
+    return <Login />
+  }
+
+  return (
+    <div className="full-size">
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/players">
+          <Route index element={<Players />} />
+          <Route path=":id/*" element={<Player />} />
+        </Route>
+        <Route path="/games" element={<Games />} />
+      </Routes>
+    </div>
+  )
+
 }
 
 export default App;
