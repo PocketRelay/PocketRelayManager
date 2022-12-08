@@ -28,6 +28,13 @@
 
         }
     }
+
+    &__rows {
+        display: flex;
+        flex-flow: row;
+        gap: 1rem;
+        align-items: center;
+    }
 }
 
 .table {

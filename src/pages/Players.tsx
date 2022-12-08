@@ -63,19 +63,17 @@ export default function Players() {
                 <Link to="/" className="button">
                     Back
                 </Link>
-                <div className="players__actions__buttons">
-                    <button className="button" disabled={prevDisabled} onClick={prevPage}>Previous</button>
-                    <label>
-                        <span>Rows</span>
-                        <select name="" id="" value={count} onChange={onRowsEvent}>
-                            <option value={5}>5</option>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                            <option value={30}>30</option>
-                        </select>
-                    </label>
-                    <button className="button" disabled={nextDisabled} onClick={nextPage}>Next</button>
-                </div>
+                <button className="button" disabled={prevDisabled} onClick={prevPage}>Previous</button>
+                <label className="players__rows">
+                    <span>Rows</span>
+                    <select className="select" name="" id="" value={count} onChange={onRowsEvent}>
+                        <option value={5}>5</option>
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={30}>30</option>
+                    </select>
+                </label>
+                <button className="button" disabled={nextDisabled} onClick={nextPage}>Next</button>
             </div>
             {loading ? <Loader /> : (
                 <div className="table-wrapper">
