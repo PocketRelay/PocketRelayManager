@@ -1,8 +1,6 @@
-import { Context, createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useEffectOnce from "react-use/lib/useEffectOnce";
-import { ServerDetails, TokenValidateResponse } from "../api/models";
-import { getServerDetails, validateToken } from "../api/routes";
+import { Context, createContext, ReactNode, useContext, useState } from "react";
+import { TokenValidateResponse } from "../api/models";
+import { validateToken } from "../api/routes";
 
 export interface ServerState {
     /// The base url path to the Pocket Relay server 
@@ -20,11 +18,7 @@ export interface AppContext {
     // the initial login is complete
     token: string;
 
-    // The initial loading state for checking stored tokens and
-    // stored baseURL
-    isLoading: boolean,
-
-    setServerState(baseURL: string, version: string): void;
+    setServerState(serverState: ServerState): void;
     clearServerState(): void;
     setToken(token: string | null): void;
 }
@@ -33,9 +27,9 @@ export interface AppContext {
 const AppContext: Context<AppContext> = createContext<AppContext>(null!);
 
 // Local storage key for the BaseURL 
-const BASE_URL_KEY: string = "pocket_relay_url";
+export const BASE_URL_KEY: string = "pocket_relay_url";
 // Local storage key for the token
-const TOKEN_KEY: string = "pocket_relay_token";
+export const TOKEN_KEY: string = "pocket_relay_token";
 
 export function useAppContext(): AppContext {
     return useContext(AppContext);
@@ -50,62 +44,9 @@ export function useAppContext(): AppContext {
  */
 export function AppContextProvider({ children }: { children: ReactNode }) {
 
-    const navigate = useNavigate();
-    const [isLoading, setLoading] = useState(true);
     const [tokenState, setTokenState] = useState<string>(null!);
-    const [serverState, setServerStateImpl] = useState<ServerState>(null!);
+    const [serverState, setServerState] = useState<ServerState>(null!);
 
-    useEffectOnce(() => { loadServerState().then().catch() });
-
-    /**
-     * Sets the current server state from the provided baseURL
-     * and version and stores the baseURL in the local storage
-     * 
-     * @param baseURL The baseURL
-     * @param version The server version
-     */
-    function setServerState(baseURL: string, version: string) {
-        // Store the state
-        localStorage.setItem(BASE_URL_KEY, baseURL);
-        // Update the state
-        setServerStateImpl({
-            baseURL,
-            version
-        });
-    }
-
-    /**
-     * Function for loading the server state from the local storage. This
-     * first obtains the BaseURL from the local storage and then connects
-     * to that server in order
-     * 
-     * @returns The server state if or null if it was unable to be loaded
-     */
-    async function loadServerState(): Promise<void> {
-        setLoading(true);
-        const baseURL: string | null = localStorage.getItem(BASE_URL_KEY);
-        if (baseURL == null) {
-            setLoading(false);
-            return;
-        }
-        try {
-            // Attempt to validate the server baseURL
-            const response: ServerDetails = await getServerDetails(baseURL);
-            const serverState: ServerState = {
-                baseURL,
-                version: response.version
-            }
-            setServerStateImpl(serverState);
-
-            // Attempt to validate any stored tokens
-            await checkStoredToken(serverState.baseURL);
-        } catch (e) {
-            // Error handling remove the saved state
-            clearServerState();
-        }
-        setLoading(false);
-        navigate("/");
-    }
 
     /**
      * Checks the token stored in the local storage to see if its
@@ -137,7 +78,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
      */
     function clearServerState(): void {
         localStorage.removeItem(BASE_URL_KEY);
-        setServerStateImpl(null!);
+        setServerState(null!);
     }
 
     /**
@@ -157,7 +98,6 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     const contextValue: AppContext = {
         serverState,
         token: tokenState,
-        isLoading,
         setServerState,
         clearServerState,
         setToken

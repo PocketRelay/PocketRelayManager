@@ -1,58 +1,64 @@
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { ServerDetails } from "@api/models";
 import { getServerDetails } from "@api/routes";
-import { useAppContext } from "../contexts/AppContext";
-
-enum State {
-    INITIAL,
-    CONNECTING,
-    ERROR,
-}
-
-interface InitState {
-    url: string;
-    error: string;
-    state: State,
-}
-
+import { BASE_URL_KEY, useAppContext } from "@contexts/AppContext";
+import { useMutation } from "react-query";
+import { useEffectOnce } from "react-use";
+import Loader from "@components/Loader";
 
 /**
  * This component is the initialization component which takes in the
  * initial connection url for the Pocket Relay server 
  */
 export default function Initialize() {
+    const { setServerState } = useAppContext();
+    // State for the baseURL field
+    const [url, setURL] = useState("");
+    // Mutation for connecting to the server
+    const { isLoading, error, mutate } = useMutation<void, [number, string]>(connect);
+    // State for initial load from localStorage state
+    const [isLoadingInit, setLoadingInit] = useState(false);
 
-    const navigate = useNavigate();
+    useEffectOnce(() => {
+        tryConnectExisting();
+    })
 
-    const {setServerState} = useAppContext();
-    const [state, setState] = useState<InitState>({
-        url: "",
-        error: "",
-        state: State.INITIAL,
-    });
-
-    const inputDisabled = state.state == State.CONNECTING;
-    const buttonDisbaled = state.url.length < 1;
-
-    async function tryConnect() {
-        setState(state => ({
-            ...state,
-            state: State.CONNECTING,
-        }));
-        let url = fixUrl(state.url);
+    /**
+     * Attempts to connect to an existing server present in the
+     * localStorage removing the local storage key if its invalid
+     */
+    async function tryConnectExisting() {
+        const baseURL: string | null = localStorage.getItem(BASE_URL_KEY);
+        if (baseURL == null) return;
+        setLoadingInit(true);
         try {
-            let details: ServerDetails = await getServerDetails(url);
-            console.table(details);
-            setServerState(url, details.version);
-            navigate("/login");
-        } catch (e) {
-            console.log(e);
-            setState(state => ({
-                url: state.url,
-                error: "Unable to connect or server url was not a Pocket Relay server",
-                state: State.ERROR,
-            }));
+            const response: ServerDetails = await getServerDetails(baseURL);
+            const version: string | undefined = response.version;
+            if (version !== undefined) {
+                setServerState({ baseURL, version });
+                setLoadingInit(false);
+                return;
+            }
+        } catch (e) { }
+        localStorage.removeItem(BASE_URL_KEY);
+        setLoadingInit(false);
+    }
+
+    /**
+     * Function for connecting to the server checking that
+     * the response is correct and if it is then the server
+     * state is updated
+     */
+    async function connect(): Promise<void> {
+        const baseURL: string = fixUrl(url);
+        const response: ServerDetails = await getServerDetails(baseURL);
+        const version: string | undefined = response.version;
+        if (version !== undefined) {
+            // Store the key and update the state
+            localStorage.setItem(BASE_URL_KEY, baseURL);
+            setServerState({ baseURL, version });
+        } else {
+            throw [400, "Response was missing a version field. It's unlikley that its a Pocket Relay server."]
         }
     }
 
@@ -76,19 +82,8 @@ export default function Initialize() {
         return url;
     }
 
-    /**
-     * Handles the value changes for the URL input 
-     * in order to keep the state up to date
-     * 
-     * @param event The input changed event
-     */
-     function onValueChange(event: ChangeEvent<HTMLInputElement>) {
-        const element: HTMLInputElement = event.target;
-        const name: string = element.name;
-        setState(state => ({
-            ...state,
-            [name]: element.value
-        }));
+    if (isLoading || isLoadingInit) {
+        return <Loader/>
     }
 
     return (
@@ -96,9 +91,9 @@ export default function Initialize() {
             <div className="modal">
                 <h1 className="modal__title">Connect</h1>
 
-                {(state.state == State.ERROR) && (
+                {error && (
                     <p className="init__error">
-                        {state.error}
+                        {error[1]}
                     </p>
                 )}
 
@@ -107,10 +102,10 @@ export default function Initialize() {
                     <input
                         className="input__value"
                         type="text"
-                        value={state.url}
-                        onChange={onValueChange}
+                        value={url}
+                        onChange={(event) => setURL(event.target.value)}
                         alt="Connection URL"
-                        disabled={inputDisabled}
+                        disabled={isLoading}
                         placeholder="e.g localhost"
                         name="url"
                     />
@@ -121,7 +116,11 @@ export default function Initialize() {
                     <a href="https://github.com/PocketRelay/Client" target="_blank"> Here</a>
                 </p>
 
-                <button className="button" onClick={tryConnect} disabled={buttonDisbaled}>
+                <button
+                    className="button"
+                    onClick={() => mutate()}
+                    disabled={url.length < 1}
+                >
                     Connect
                 </button>
 

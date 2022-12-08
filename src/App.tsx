@@ -9,12 +9,7 @@ import Players from "@pages/Players";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const { isLoading: isLoading, serverState, token } = useAppContext();
-
-  // If loading old state display loader
-  if (isLoading) {
-    return <Loader />
-  }
+  const { serverState, token } = useAppContext();
 
   // If missing server details prompt server url
   if (!serverState) {

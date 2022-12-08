@@ -1,8 +1,8 @@
 // Structure of the server details response from the Pocket Relay server
 // this response includes the version and other server details
 export interface ServerDetails {
-    version: string;
-    services: Service[]
+    version?: string;
+    services?: Service[]
 }
 
 // The different types of services
