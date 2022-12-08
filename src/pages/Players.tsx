@@ -5,7 +5,7 @@ import { getPlayers } from "@api/routes";
 import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
 import { useAsyncRetry } from "react-use";
-import "./Players";
+import "./Players.scss";
 
 export default function Players() {
     const appContext = useAppContext();
@@ -79,33 +79,43 @@ export default function Players() {
                 </div>
             </div>
             {loading ? <Loader /> : (
-                <table className="table">
-                    <thead className="table__head">
-                        <tr>
-                            <th>ID</th>
-                            <th>Display Name</th>
-                            <th>Email</th>
-                            <th>Origin</th>
-                            <th>Credits</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody className="table__body">
-                        {value.players.map((player, index) => (
-                            <tr key={index}>
-                                <td>{player.id}</td>
-                                <td>{player.display_name}</td>
-                                <td>{player.email}</td>
-                                <td>{player.origin}</td>
-                                <td>{player.credits}</td>
-                                <td>
-                                    <Link to={"/players/" + player.id} > Edit
-                                    </Link>
-                                </td>
+                <div className="table-wrapper">
+                    <table className="table">
+                        <thead className="table__head">
+                            <tr className="table__head__row">
+                                <th>ID</th>
+                                <th>Display Name</th>
+                                <th>Email</th>
+                                <th>Origin</th>
+                                <th>Credits</th>
+                                <th>Edit</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="table__body">
+                            {[0, 1, 2, 3, 4, 5, 6].map(() => {
+                                return value.players.map((player, index) => (
+                                    <tr key={index}>
+                                        <td>{player.id}</td>
+                                        <td>{player.display_name}</td>
+                                        <td>{player.email}</td>
+                                        <td>{player.origin ? "Yes" : "No"}</td>
+                                        <td>{player.credits}</td>
+                                        <td>
+                                            <Link
+                                                to={"/players/" + player.id}
+                                                className="players__edit">
+                                                Edit
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            })}
+
+
+
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     )
