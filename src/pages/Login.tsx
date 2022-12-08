@@ -5,6 +5,10 @@ import { BASE_URL_KEY, TOKEN_KEY, useAppContext } from "@contexts/AppContext"
 import { useMutateWithInitial } from "@hooks/init";
 import Loader from "@components/Loader";
 
+/**
+ * Component for handling authentication using the credentials
+ * provided by the user and the baseURL provided in the previous step
+ */
 export default function Login() {
     const { setToken, setServerState, serverState } = useAppContext();
 
@@ -33,7 +37,7 @@ export default function Login() {
                 return;
             }
         } catch (e) { }
-        setToken(null!);
+        localStorage.removeItem(TOKEN_KEY);
     }
 
     /**

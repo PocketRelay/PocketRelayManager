@@ -40,21 +40,29 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
 
     init.headers = headers;
 
-    return new Promise((resolve, reject) => {
-        fetch(`${config.baseURL}/${config.url}`, init)
-            .then(response => {
-                if (Math.floor(response.status / 100) === 2) {
-                    response.json()
-                        .then(resolve)
-                        .catch(_ => reject([response.status, "Invalid JSON response"]));
-                } else {
-                    response.text()
-                        .then(text => reject([response.status, text]))
-                        .catch(_ => reject([response.status, "Unknown error"]));
-                }
-            })
-            .catch(_ => reject([-1, "Failed to connect"]));
-    });
+    let response: Response;
+    // Handle initial fetch errors
+    try {
+        response = await fetch(`${config.baseURL}/${config.url}`, init);
+    } catch (e) {
+        throw [-1, "Failed to connect"];
+    }
+    
+    if (Math.floor(response.status / 100) === 2) {
+        try {
+            return await response.json();
+        } catch (e) {
+            throw [response.status, "Invalid JSON response"];
+        }
+    } else {
+        // Handle non 200 status codes by taking the text response
+        try {
+            const text: string = await response.text();
+            throw [response.status, text];
+        } catch (_) {
+            throw [response.status, "Unknown error"];
+        }
+    }
 }
 
 
@@ -83,6 +91,7 @@ async function makeRequestSafe<T>(config: SafeRequestConfig, context: AppContext
         });
     } catch (e) {
         const error: RequestError = e as RequestError;
+        console.log(e);
         if (error[0] == 401) {
             // Authentication failed
             context.setToken(null!);
