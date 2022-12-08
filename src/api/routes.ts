@@ -1,5 +1,5 @@
 import { AppContext } from "@contexts/AppContext";
-import { GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenResponse, TokenValidateResponse } from "./models";
+import { GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -57,6 +57,40 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
     });
 }
 
+
+export interface SafeRequestConfig {
+    method: HttpMethod,
+    url: string,
+    body?: any
+}
+
+/**
+ * Request wrapping function for requests that are using the
+ * app context which contains a token and baseURL. Ensures
+ * that if the request return 401 Unauthorized to clear 
+ * the token and prompt for authentication again
+ * 
+ * @param config 
+ * @param context 
+ * @returns 
+ */
+async function makeRequestSafe<T>(config: SafeRequestConfig, context: AppContext): Promise<T> {
+    try {
+        return await makeRequest({
+            ...config,
+            token: context.token,
+            baseURL: context.serverState.baseURL,
+        });
+    } catch (e) {
+        const error: RequestError = e as RequestError;
+        if (error[0] == 401) {
+            // Authentication failed
+            context.setToken(null!);
+        }
+        throw error;
+    }
+}
+
 /**
  * Obtains the server details of the server at the provided baseURL
  * using the api/server endpoint
@@ -81,15 +115,12 @@ export function getServerDetails(baseURL: string): Promise<ServerDetails> {
  * @param password The password to authenticate with 
  * @returns The token response
  */
-export function getToken(baseURL: string, username: string, password: string): Promise<TokenResponse> {
+export function getToken(baseURL: string, request: TokenRequest): Promise<TokenResponse> {
     return makeRequest({
         method: "POST",
         baseURL,
         url: "api/token",
-        body: {
-            username,
-            password
-        }
+        body: request
     });
 }
 
@@ -110,51 +141,41 @@ export function validateToken(baseURL: string, token: string): Promise<TokenVali
 }
 
 export function getPlayers(context: AppContext, offset: number, count: number): Promise<GetPlayersResponse> {
-    return makeRequest({
+    return makeRequestSafe({
         method: "GET",
-        baseURL: context.serverState.baseURL,
-        token: context.token,
         url: `api/players?offset=${offset}&count=${count}`
-    });
+    }, context);
 }
 
 export function getPlayer(context: AppContext, id: string): Promise<Player> {
-    return makeRequest({
+    return makeRequestSafe({
         method: "GET",
-        baseURL: context.serverState.baseURL,
-        token: context.token,
         url: `api/players/${id}`
-    });
+    }, context);
 }
 
 export function updatePlayer(context: AppContext, id: number, update: PlayerUpdate): Promise<Player> {
-    return makeRequest({
+    return makeRequestSafe({
         method: "PUT",
-        baseURL: context.serverState.baseURL,
-        token: context.token,
         url: `api/players/${id}`,
         body: update,
-    });
+    }, context);
 }
 
 export function getPlayerClasses(context: AppContext, player: Player): Promise<PlayerClass[]> {
-    return makeRequest({
+    return makeRequestSafe({
         method: "GET",
-        baseURL: context.serverState.baseURL,
-        token: context.token,
         url: `api/players/${player.id}/classes`,
-    });
+    }, context);
 }
 
 export function updatePlayerClass(context: AppContext, player: Player, index: number, level: number, promotions: number): Promise<PlayerClass> {
-    return makeRequest({
+    return makeRequestSafe({
         method: "PUT",
-        baseURL: context.serverState.baseURL,
-        token: context.token,
         url: `api/players/${player.id}/classes/${index}`,
         body: {
             level,
             promotions
         }
-    });
+    }, context);
 }

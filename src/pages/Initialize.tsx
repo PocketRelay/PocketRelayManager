@@ -2,46 +2,37 @@ import { useState } from "react";
 import { ServerDetails } from "@api/models";
 import { getServerDetails } from "@api/routes";
 import { BASE_URL_KEY, useAppContext } from "@contexts/AppContext";
-import { useMutation } from "react-query";
-import { useEffectOnce } from "react-use";
 import Loader from "@components/Loader";
+import { useMutateWithInitial } from "@hooks/init";
 
 /**
- * This component is the initialization component which takes in the
- * initial connection url for the Pocket Relay server 
+ * Component for handling setting up the initial state for the server
+ * this involves taking the connection URL as user input and checking
+ * whether it is a valid Pocket Relay server. 
  */
 export default function Initialize() {
     const { setServerState } = useAppContext();
     // State for the baseURL field
     const [url, setURL] = useState("");
     // Mutation for connecting to the server
-    const { isLoading, error, mutate } = useMutation<void, [number, string]>(connect);
-    // State for initial load from localStorage state
-    const [isLoadingInit, setLoadingInit] = useState(false);
-
-    useEffectOnce(() => {
-        tryConnectExisting();
-    })
-
+    const { isLoading, error, mutate } = useMutateWithInitial(tryConnectExisting, connect);
+    
     /**
      * Attempts to connect to an existing server present in the
      * localStorage removing the local storage key if its invalid
      */
-    async function tryConnectExisting() {
+    async function tryConnectExisting(): Promise<void> {
         const baseURL: string | null = localStorage.getItem(BASE_URL_KEY);
         if (baseURL == null) return;
-        setLoadingInit(true);
         try {
             const response: ServerDetails = await getServerDetails(baseURL);
             const version: string | undefined = response.version;
             if (version !== undefined) {
                 setServerState({ baseURL, version });
-                setLoadingInit(false);
                 return;
             }
         } catch (e) { }
         localStorage.removeItem(BASE_URL_KEY);
-        setLoadingInit(false);
     }
 
     /**
@@ -82,8 +73,9 @@ export default function Initialize() {
         return url;
     }
 
-    if (isLoading || isLoadingInit) {
-        return <Loader/>
+    // Display loading screen if loading 
+    if (isLoading) {
+        return <Loader />
     }
 
     return (
@@ -92,7 +84,7 @@ export default function Initialize() {
                 <h1 className="modal__title">Connect</h1>
 
                 {error && (
-                    <p className="init__error">
+                    <p className="error">
                         {error[1]}
                     </p>
                 )}
@@ -119,8 +111,7 @@ export default function Initialize() {
                 <button
                     className="button"
                     onClick={() => mutate()}
-                    disabled={url.length < 1}
-                >
+                    disabled={url.length < 1}>
                     Connect
                 </button>
 

@@ -1,11 +1,12 @@
-import { useAppContext } from "@contexts/AppContext";
+import { TOKEN_KEY, useAppContext } from "@contexts/AppContext";
 import { Link } from "react-router-dom";
 
 export default function Home() {
     const { setToken } = useAppContext();
 
     function logout(): void {
-        setToken(null);
+        localStorage.removeItem(TOKEN_KEY);
+        setToken(null!);
     }
 
     return (

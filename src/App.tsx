@@ -1,4 +1,3 @@
-import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
 import Games from "@pages/Games";
 import Home from "@pages/Home";

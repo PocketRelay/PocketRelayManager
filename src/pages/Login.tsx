@@ -1,65 +1,85 @@
 import { ChangeEvent, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { TokenResponse } from "@api/models";
-import { getToken, RequestError } from "@api/routes";
-import { useAppContext } from "@contexts/AppContext"
-
-enum State {
-    INITIAL,
-    CONNECTING,
-    ERROR,
-}
-
-interface LoginState {
-    username: string;
-    password: string;
-    error: string;
-    state: State;
-}
+import { TokenRequest, TokenResponse, TokenValidateResponse } from "@api/models";
+import { getToken, validateToken } from "@api/routes";
+import { BASE_URL_KEY, TOKEN_KEY, useAppContext } from "@contexts/AppContext"
+import { useMutateWithInitial } from "@hooks/init";
+import Loader from "@components/Loader";
 
 export default function Login() {
-    const navigate = useNavigate();
-    const { setToken, clearServerState, serverState } = useAppContext();
-    const [state, setState] = useState<LoginState>({
+    const { setToken, setServerState, serverState } = useAppContext();
+
+    // State for the user credentials
+    const [credentials, setCredentials] = useState<TokenRequest>({
         username: "",
-        password: "",
-        error: "",
-        state: State.INITIAL,
+        password: ""
     });
 
-    if (!serverState) {
-        return <Navigate to="/init"/>
+    // Mutation for logging in
+    const { isLoading, error, mutate } = useMutateWithInitial(tryLoginExisting, login);
+
+    /**
+     * Attempts to login to an existing token from local storage
+     */
+    async function tryLoginExisting(): Promise<void> {
+        const token: string | null = localStorage.getItem(TOKEN_KEY);
+        if (token == null) return;
+        try {
+            const response: TokenValidateResponse = await validateToken(
+                serverState.baseURL,
+                token
+            );
+            if (response.valid) {
+                setToken(token);
+                return;
+            }
+        } catch (e) { }
+        setToken(null!);
     }
 
-    function onValueChange(event: ChangeEvent<HTMLInputElement>) {
+    /**
+     * Attempts to login to the server using the provided
+     * credentials. Storing the token provided if the 
+     * login attempt was successful
+     */
+    async function login(): Promise<void> {
+        let details: TokenResponse = await getToken(
+            serverState.baseURL,
+            credentials,
+        );
+        localStorage.setItem(TOKEN_KEY, details.token);
+        setToken(details.token);
+    }
+
+    // Display loading screen if loading 
+    if (isLoading) {
+        return <Loader />
+    }
+
+    /**
+     * Clears the current server state returning the
+     * user back to the Initialize screen
+     */
+    function clearServerState() {
+        localStorage.removeItem(BASE_URL_KEY);
+        setServerState(null!);
+    }
+
+    /**
+     * Handles the change events for the username
+     * and password fields and updates the credentials
+     * state accordingly
+     * 
+     * @param event The change event
+     */
+    function onChangeEvent(event: ChangeEvent<HTMLInputElement>) {
         const element: HTMLInputElement = event.target;
         const name: string = element.name;
-        setState(state => ({
+        setCredentials(state => ({
             ...state,
-            [name]: element.value
+            [name]: element.value,
         }));
     }
 
-    async function tryLogin() {
-        setState(state => ({
-            ...state,
-            state: State.CONNECTING,
-        }));
-        try {
-            let details: TokenResponse = await getToken(serverState.baseURL, state.username, state.password);
-            console.table(details);
-            setToken(details.token);
-            navigate("/");
-        } catch (e) {
-            const err: RequestError = e as RequestError;
-            console.log(err);
-            setState(state => ({
-                ...state,
-                error: "Unable to connect or server url was not a Pocket Relay server",
-                state: State.ERROR,
-            }));
-        }
-    }
 
     return (
         <div className="modal-wrapper">
@@ -72,6 +92,12 @@ export default function Login() {
                 <p className="modal__text">
                     Host: {serverState.baseURL}
                 </p>
+
+                {error && (
+                    <p className="error">
+                        {error[1]}
+                    </p>
+                )}
                 <div>
 
                     <label className="input">
@@ -79,8 +105,8 @@ export default function Login() {
                         <input
                             className="input__value"
                             type="text"
-                            value={state.username}
-                            onChange={onValueChange}
+                            value={credentials.username}
+                            onChange={onChangeEvent}
                             alt="Username"
                             placeholder=""
                             name="username"
@@ -93,15 +119,19 @@ export default function Login() {
                         <input
                             className="input__value"
                             type="password"
-                            value={state.password}
-                            onChange={onValueChange}
+                            value={credentials.password}
+                            onChange={onChangeEvent}
                             alt="Password"
                             placeholder=""
                             name="password"
                         />
                     </label>
 
-                    <button className="button" onClick={tryLogin}>Login</button>
+                    <button
+                        className="button"
+                        onClick={() => mutate()}>
+                        Login
+                    </button>
                 </div>
             </div>
         </div>

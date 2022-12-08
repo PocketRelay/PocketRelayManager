@@ -18,6 +18,14 @@ export interface Service {
     type: ServiceType;
 }
 
+// Structure for a token request
+export interface TokenRequest {
+    // The authentication username
+    username: string;
+    // The authentication password
+    password: string;
+}
+
 // Structure of a response for a succesfull authentication attempt
 export interface TokenResponse {
     // The authentication token
