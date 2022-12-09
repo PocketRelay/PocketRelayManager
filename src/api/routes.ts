@@ -1,5 +1,5 @@
 import { AppContext } from "@contexts/AppContext";
-import { GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
+import { Game, GamesResponse, GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -186,5 +186,12 @@ export function updatePlayerClass(context: AppContext, player: Player, index: nu
             level,
             promotions
         }
+    }, context);
+}
+
+export function getGames(context: AppContext): Promise<GamesResponse> {
+    return makeRequestSafe({
+        method: "GET",
+        url: `api/games`,
     }, context);
 }

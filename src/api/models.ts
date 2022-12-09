@@ -80,3 +80,47 @@ export interface PlayerClassUpdate {
     level: number;
     promotions: number;
 }
+
+export interface GamesResponse {
+    games: Game[]
+}
+
+export interface Game {
+    id: number;
+    state: string;
+    setting: number;
+    attributes: Record<string, string>;
+    players: GamePlayer[];
+}
+
+export interface GamePlayer {
+    session_id: number;
+    player_id: number;
+    display_name: string;
+    net: GamePlayerNet;
+}
+
+export interface GamePlayerNet {
+    groups: NetGroup,
+    qos: QosNetworkData;
+    hardware_flags: number;
+    is_set: boolean;
+}
+
+export type NattType = "Open" | "Moderate" | "Sequential" | "Strict" | string;
+
+export interface QosNetworkData {
+    dbps: number;
+    natt: NattType;
+    ubps: number;
+}
+
+export interface NetGroups {
+    internal: NetGroup;
+    external: NetGroup;
+}
+
+export interface NetGroup {
+    address: string;
+    port: number;
+}
