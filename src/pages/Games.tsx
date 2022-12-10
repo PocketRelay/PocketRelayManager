@@ -10,6 +10,7 @@ export default function Games() {
     const context = useAppContext();
     const { data, isLoading, error } = useQuery({
         queryKey: "games",
+        refetchOnWindowFocus: false,
         queryFn: async () => {
             return await getGames(context);
         }
