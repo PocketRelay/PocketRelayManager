@@ -1,22 +1,82 @@
 export const ENEMY_ATTR: string = "ME3gameEnemyType";
 export const DIFFICULTY_ATTR: string = "ME3gameDifficulty";
 export const MAP_ATTR: string = "ME3map";
+export const VISIBILITY_ATTR :string = "ME3privacy";
 
-
-export const ENEMY_IMAGES: Record<string, string> = {
-    "random": "OptEmyRandom.png",
-    "enemy1": "OptEmyCerberus.png",
-    "enemy2": "OptEmyGeth.png",
-    "enemy3": "OptEmyReapers.png",
-    "enemy4": "OptEmyCollector.png",
+export interface Visibility {
+    name: string;
+    image: string;
 }
 
-export const DIFFICULTY_IMAGES: Record<string, string> = {
-    "random": "OptChallgRandom.png",
-    "difficulty0": "OptChallgBrnz.png",
-    "difficulty1": "OptChallgSilver.png",
-    "difficulty2": "OptChallgGold.png",
-    "difficulty3": "OptChallgPlatinum.png",
+export const VISIBILITIES: Record<string, Visibility> = {
+    "PUBLIC": {
+        name: "Public",
+        image: "OptTeamPublic"
+    },
+    "PRIVATE": {
+        name: "Private",
+        image: "OptTeamPrivate"
+    },
+    "FRIENDS": {
+        name: "Friends",
+        image: "OptTeamFriends"
+    },
+}
+
+export interface Enemy {
+    name: string;
+    image: string;
+}
+
+export const ENEMIES: Record<string, Enemy> = {
+    "random": {
+        name: "Any Enemy",
+        image: "OptEmyRandom"
+    },
+    "enemy1": {
+        name: "Cerberus",
+        image: "OptEmyCerberus"
+    },
+    "enemy2": {
+        name: "Geth",
+        image: "OptEmyGeth"
+    },
+    "enemy3": {
+        name: "Reapers",
+        image: "OptEmyReapers"
+    },
+    "enemy4": {
+        name: "Collectors",
+        image: "OptEmyCollector"
+    }
+}
+
+export interface Challenge {
+    name: string;
+    image: string;
+}
+
+export const CHALLENGES: Record<string, Challenge> = {
+    "random": {
+        name: "Any Challenge",
+        image: "OptChallgRandom"
+    },
+    "difficulty0": {
+        name: "Bronze",
+        image: "OptChallgBrnz"
+    },
+    "difficulty1": {
+        name: "Silver",
+        image: "OptChallgSilver"
+    },
+    "difficulty2": {
+        name: "Gold",
+        image: "OptChallgGold"
+    },
+    "difficulty3": {
+        name: "Platinum",
+        image: "OptChallgPlatinum"
+    }
 }
 
 export interface Map {
@@ -28,7 +88,7 @@ export interface Map {
 const UNKNOWN_MAP: Map = {
     name: "Unknown Location",
     location: "?",
-    image: "OptMapRandom.png"
+    image: "OptMapRandom"
 }
 
 export function getMap(name: string): Map {

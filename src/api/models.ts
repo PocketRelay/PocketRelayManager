@@ -101,7 +101,7 @@ export interface GamePlayer {
 }
 
 export interface GamePlayerNet {
-    groups: NetGroup,
+    groups: NetGroups,
     qos: QosNetworkData;
     hardware_flags: number;
     is_set: boolean;
