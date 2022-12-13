@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { TokenRequest, TokenResponse, TokenValidateResponse } from "@api/models";
 import { getToken, validateToken } from "@api/routes";
 import { BASE_URL_KEY, TOKEN_KEY, useAppContext } from "@contexts/AppContext"
@@ -84,11 +84,35 @@ export default function Login() {
         }));
     }
 
+    /**
+     * Retrieves the text representation for the provided
+     * HTTP status code error
+     * 
+     * @param error 
+     */
+    function getErrorText(error: number): string {
+        if (error == 401) {
+            return "Invalid Username or Password"
+        } else {
+            return "Unknown Error"
+        }
+    }
+
+    /**
+     * Handles submission of the form preventing
+     * the default event and triggering the mutation
+     * 
+     * @param event 
+     */
+    function submit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        mutate();
+    }
 
     return (
         <div className="modal-wrapper">
-            <div className="modal">
-                <button onClick={clearServerState} className="button">Clear Server</button>
+            <form className="modal" onSubmit={submit}>
+                <button type="button" onClick={clearServerState} className="button">Clear Server</button>
                 <h1 className="modal__title">Login</h1>
                 <p className="modal__text">
                     Version: v{serverState.version}
@@ -99,10 +123,10 @@ export default function Login() {
 
                 {error && (
                     <p className="error">
-                        {error[1]}
+                        {getErrorText(error[0])}
                     </p>
                 )}
-                <div>
+                <div className="list__contents list__contents--gap">
 
                     <label className="input">
                         <span className="input__name">Username</span>
@@ -132,13 +156,14 @@ export default function Login() {
                     </label>
 
                     <button
-                        className="button"
-                        onClick={() => mutate()}>
+                        type="submit"
+                        className="button button--fill"
+                        disabled={credentials.username.length < 1 || credentials.password.length < 1}>
                         Login
                     </button>
                 </div>
-            </div>
-        </div>
+            </form>
+        </div >
 
     )
 }

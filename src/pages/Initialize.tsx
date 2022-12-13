@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { ServerDetails } from "@api/models";
-import { getServerDetails } from "@api/routes";
+import { getServerDetails, RequestError } from "@api/routes";
 import { BASE_URL_KEY, useAppContext } from "@contexts/AppContext";
 import Loader from "@components/Loader";
 import { useMutateWithInitial } from "@hooks/init";
@@ -16,7 +16,7 @@ export default function Initialize() {
     const [url, setURL] = useState("");
     // Mutation for connecting to the server
     const { isLoading, error, mutate } = useMutateWithInitial(tryConnectExisting, connect);
-    
+
     /**
      * Attempts to connect to an existing server present in the
      * localStorage removing the local storage key if its invalid
@@ -78,9 +78,20 @@ export default function Initialize() {
         return <Loader />
     }
 
+    /**
+     * Handles submission of the form preventing
+     * the default event and triggering the mutation
+     * 
+     * @param event 
+     */
+    function submit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        mutate();
+    }
+
     return (
         <div className="modal-wrapper">
-            <div className="modal">
+            <form className="modal" onSubmit={submit}>
                 <h1 className="modal__title">Connect</h1>
 
                 {error && (
@@ -109,13 +120,13 @@ export default function Initialize() {
                 </p>
 
                 <button
+                    type="submit"
                     className="button"
-                    onClick={() => mutate()}
                     disabled={url.length < 1}>
                     Connect
                 </button>
 
-            </div>
-        </div>
+            </form>
+        </div >
     )
 }
