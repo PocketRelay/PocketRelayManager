@@ -7,6 +7,10 @@
 
 This is a management tool for managing Pocket Relay servers. It allows administrators to modify player data, player inventories, etc and view active games etc from a GUI application
 
+# 📦 Release
+
+You can find the latest release download [Here (https://github.com/PocketRelay/PocketRelayManager/releases/latest)](https://github.com/PocketRelay/PocketRelayManager/releases/latest)
+
 # 🎥 Showcase
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/8hjhgn363Jw/0.jpg)](https://www.youtube.com/watch?v=8hjhgn363Jw)
