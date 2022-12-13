@@ -24,7 +24,7 @@ export default function Home() {
                     <span>Games</span>
                 </Link>
             </nav>
-            <div className="list__contents home">
+            <div className="list__contents list__contents--gap home">
                 <img className="home__logo" src="/assets/logo.svg"/>
                 <h1 className="home__version">Pocket Relay Server</h1>
                 <div className="home__attrs">

@@ -5,7 +5,6 @@ import PlayerClass from "@components/PlayerClass";
 import { AppContext, useAppContext } from "@contexts/AppContext";
 import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import "./Classes.scss";
 
 interface Properties {
     player: Player;
@@ -59,23 +58,23 @@ export default function Classes({ player }: Properties) {
     }
 
     return (
-        <div className="classes">
-            <div className="classes__actions">
+        <div className="list__contents">
+            <div className="list__contents__header">
                 <button className="button" onClick={reload} >Reload</button>
                 <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
             </div>
-                   {saveMutation.isLoading && (
-                    <div>
-                        Saving classess
-                    </div>
-                )}
+            {saveMutation.isLoading && (
+                <div>
+                    Saving classess
+                </div>
+            )}
 
-                {saveMutation.isError && (
-                    <div>
-                        Failed to save classes
-                    </div>
-                )}
-            <div className="classes__values">
+            {saveMutation.isError && (
+                <div>
+                    Failed to save classes
+                </div>
+            )}
+            <div className="list__contents__value list__contents--rows">
                 {classes.map((playerClass, index) => (
                     <PlayerClass key={index} playerClass={playerClass} />
                 ))}

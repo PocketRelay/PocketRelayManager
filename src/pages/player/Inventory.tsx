@@ -1,17 +1,16 @@
-import { Link, useLocation } from "react-router-dom"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import Characters from "./inventory/Characters"
 import Consumables from "./inventory/Consumables";
 import Gear from "./inventory/Gear";
 import WeaponMods from "./inventory/WeaponMods";
 import Weapons from "./inventory/Weapons"
-import "./Inventory.scss"
 import { Player } from "@api/models";
 import { useEffect, useState } from "react";
 import { encodeInventory, parseInventory } from "@data/inventory";
 import { useMutation } from "react-query";
 import { updatePlayer } from "@api/routes";
 import { AppContext, useAppContext } from "@contexts/AppContext";
+import { NavLink } from "react-router-dom";
 
 interface Properties {
     player: Player;
@@ -58,42 +57,36 @@ export default function Inventory({ player, setPlayer }: Properties) {
         setInventory(parseInventory(player.inventory));
     }
 
-    let location = useLocation();
     return (
-        <div className="inventory">
-            <nav className="inventory__actions">
+        <div className="list__contents">
+            <nav className="list__contents__header">
                 <button onClick={() => saveMutation.mutate()} className="button">Save</button>
                 <button onClick={reset} className="button">Reset</button>
-                <Link
-                    className="inventory__actions__button button"
-                    data-active={location.pathname.endsWith("characters")}
+                <NavLink
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
                     to="characters">
                     Characters
-                </Link>
-                <Link
-                    className="inventory__actions__button button"
-                    data-active={location.pathname.endsWith("weapons")}
+                </NavLink>
+                <NavLink
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
                     to="weapons">
                     Weapons
-                </Link>
-                <Link
-                    className="inventory__actions__button button"
-                    data-active={location.pathname.endsWith("weapon-mods")}
+                </NavLink>
+                <NavLink
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
                     to="weapon-mods">
                     Weapon Mods
-                </Link>
-                <Link
-                    className="inventory__actions__button button"
-                    data-active={location.pathname.endsWith("consumables")}
+                </NavLink>
+                <NavLink
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
                     to="consumables">
                     Consumables
-                </Link>
-                <Link
-                    className="inventory__actions__button button"
-                    data-active={location.pathname.endsWith("gear")}
+                </NavLink>
+                <NavLink
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
                     to="gear">
                     Gear
-                </Link>
+                </NavLink>
             </nav>
 
             {saveMutation.isLoading && (
@@ -109,6 +102,7 @@ export default function Inventory({ player, setPlayer }: Properties) {
             )}
 
             <Routes >
+                <Route path="/" element={<Navigate to="characters"/>}/>
                 <Route path="/characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
                 <Route path="/weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
                 <Route path="/weapon-mods" element={<WeaponMods inventory={inventory} setInventory={setInventory} />} />

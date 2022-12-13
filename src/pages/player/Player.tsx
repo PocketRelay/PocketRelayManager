@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Link, Navigate, Route, Routes, useParams } from "react-router-dom"
+import { Navigate, NavLink, Route, Routes, useParams } from "react-router-dom"
 import { Player as PlayerModel } from "@api/models";
 import { getPlayer } from "@api/routes";
 import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
 import Inventory from "./Inventory";
-import "./Player.scss";
 import Classes from "./Classes";
 import Basic from "./Basic";
 
@@ -45,23 +44,36 @@ export default function Player() {
     }
 
     return (
-        <div className="player">
-            <div className="player__nav">
-                <Link to="/players" className="button">
+        <div className="list">
+            <div className="list__actions">
+                <NavLink to="/players" className="button">
                     Back
-                </Link>
+                </NavLink>
+
                 <button className="button" onClick={reload}>
                     Reload
                 </button>
-                <Link to="./" className="button">
+
+                <NavLink
+                    to="./"
+                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
+                    >
                     Base
-                </Link>
-                <Link to="inventory/characters" className="button">
+                </NavLink>
+
+                <NavLink
+                    to="inventory"
+                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
+                    >
                     Inventory
-                </Link>
-                <Link to="classes" className="button">
+                </NavLink>
+
+                <NavLink
+                    to="classes"
+                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
+                    >
                     Classes
-                </Link>
+                </NavLink>
             </div>
 
 

@@ -1,7 +1,6 @@
 import LeveledCard from "@components/inventory/LeveledCard";
 import { GEAR_CONSUMABLES, GEAR_MAX } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
-import "./Gear.scss";
 
 export default function Gear({ inventory, setInventory }: InventoryProperties) {
 
@@ -17,9 +16,9 @@ export default function Gear({ inventory, setInventory }: InventoryProperties) {
     }
 
     return (
-        <div className="inventory__section">
-            <h1 className="inventory__section__title">Gear</h1>
-            <div className="inventory__section__header">
+        <div className="list__contents">
+            <h1 className="list__contents__title">Gear</h1>
+            <div className="list__contents__header">
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
                 </button>
@@ -30,7 +29,7 @@ export default function Gear({ inventory, setInventory }: InventoryProperties) {
                     God Level All
                 </button>
             </div>
-            <div className="inventory__section__value gears">
+            <div className="list__contents__value list__contents--rows">
                 {GEAR_CONSUMABLES.map((gear, index) => (
                     <LeveledCard
                         key={index}

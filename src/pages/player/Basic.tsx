@@ -4,8 +4,6 @@ import { AppContext, useAppContext } from "@contexts/AppContext";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
-import "./Basic.scss";
-
 interface Properties {
     player: Player;
     setPlayer(player: Player): void;
@@ -31,11 +29,11 @@ export default function Basic({ player, setPlayer }: Properties) {
 
     async function save() {
         const update: PlayerUpdate = {};
-        if (email != player.email)  update.email = email;
-        if (displayName != player.display_name)  update.display_name = displayName;
-        if (password.length > 0)  update.password = password;
-        if (credits != player.credits)  update.credits = credits;
-        if (origin != player.origin)   update.origin = origin;
+        if (email != player.email) update.email = email;
+        if (displayName != player.display_name) update.display_name = displayName;
+        if (password.length > 0) update.password = password;
+        if (credits != player.credits) update.credits = credits;
+        if (origin != player.origin) update.origin = origin;
 
         console.log(update);
         const newPlayer = await updatePlayer(context, player.id, update);
@@ -43,66 +41,68 @@ export default function Basic({ player, setPlayer }: Properties) {
     }
 
     return (
-        <div className="basic">
-            <h1>Basic</h1>
-            <label className="input">
-                <span className="input__name">Display Name</span>
-                <input
-                    className="input__value"
-                    type="text"
-                    value={displayName}
-                    onChange={(event) => setDisplayName(event.target.value)}
-                />
-            </label>
-            <label className="input">
-                <span className="input__name">Email</span>
-                <input
-                    className="input__value"
-                    type="text"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                />
-            </label>
-            <label className="input">
-                <span className="input__name">Credits</span>
-                <input
-                    className="input__value"
-                    type="text"
-                    value={credits}
-                    onChange={() => { }}
-                />
-            </label>
-            <label className="input">
-                <span className="input__name">Origin</span>
-                <input
-                    className="input__value"
-                    type="checkbox"
-                    checked={origin}
-                    onChange={() => setOrigin(origin => !origin)}
-                />
-            </label>
-            {(player.origin && !origin) && (
+        <div className="list__contents">
+            <h1 className="list__contents__title">Basic</h1>
+            <div className="list__contents__value list__contents list__contents--gap">
+                <label className="input">
+                    <span className="input__name">Display Name</span>
+                    <input
+                        className="input__value"
+                        type="text"
+                        value={displayName}
+                        onChange={(event) => setDisplayName(event.target.value)}
+                    />
+                </label>
+                <label className="input">
+                    <span className="input__name">Email</span>
+                    <input
+                        className="input__value"
+                        type="text"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                </label>
+                <label className="input">
+                    <span className="input__name">Credits</span>
+                    <input
+                        className="input__value"
+                        type="text"
+                        value={credits}
+                        onChange={() => { }}
+                    />
+                </label>
+                <label className="input">
+                    <span className="input__name">Origin</span>
+                    <input
+                        className="input__value"
+                        type="checkbox"
+                        checked={origin}
+                        onChange={() => setOrigin(origin => !origin)}
+                    />
+                </label>
+                {(player.origin && !origin) && (
+                    <p>
+                        If you disable Origin on an Origin account in order to access it you will
+                        need to set a password
+                    </p>
+                )}
+
+                <label className="input">
+                    <span className="input__name">Password</span>
+                    <input
+                        className="input__value"
+                        type="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+                </label>
                 <p>
-                    If you disable Origin on an Origin account in order to access it you will
-                    need to set a password
+                    If you don't want to change the account password ensure the password
+                    field is left blank
                 </p>
-            )}
 
-            <label className="input">
-                <span className="input__name">Password</span>
-                <input
-                    className="input__value"
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                />
-            </label>
-            <p>
-                If you don't want to change the account password ensure the password
-                field is left blank
-            </p>
-
-            <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
+                <button className="button" onClick={() => saveMutation.mutate()}>Save</button>
+            </div>
         </div>
     )
 }

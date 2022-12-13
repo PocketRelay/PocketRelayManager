@@ -54,6 +54,21 @@ body {
         opacity: 0.5;
         cursor: not-allowed;
     }
+
+    &--nav {
+        &:hover {
+            background-color: #444475;
+        }
+
+        &--active {
+            background-color: #6060be;
+
+            &:hover {
+                background-color: #3d3d7e;
+            }
+        }
+
+    }
 }
 
 .select {
@@ -167,15 +182,16 @@ a {
     border-radius: 16px;
 }
 
-.full-size {
-    width: 100%;
-    height: 100%;
-}
-
 .flex-height {
+    position: relative;
     flex: auto;
     height: 100%;
     overflow-y: auto;
+}
+
+.full-size {
+    width: 100%;
+    height: 100%;
 }
 
 .list {
@@ -185,6 +201,7 @@ a {
     height: 100%;
     gap: 1rem;
     padding: 1rem;
+    overflow-y: auto;
 
     &__actions {
         display: flex;
@@ -204,6 +221,89 @@ a {
         height: 100%;
         flex: auto;
         overflow-y: auto;
+
+        display: flex;
+        flex-flow: column;
+    
+        &__title {
+            margin-bottom: 1rem;
+        }
+
+        &__header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        &__value {
+            width: 100%;
+            flex: auto;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        &--rows {
+            display: flex;
+            flex-flow: row wrap;
+            gap: 1rem;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+
+        &--gap {
+            gap: 1rem;
+        }
+    }
+}
+
+.list--slim {
+    padding: 0 1rem 1rem;
+}
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__head {
+        position: sticky;
+        top: 0;
+        left: 0;
+
+        &__row {
+            background-color: #34345a !important;
+            border-radius: 0.5rem;
+        }
+    }
+
+    tr {
+        background-color: #191922;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #1d1d29;
+    }
+
+    td,
+    th {
+        padding: 0.5rem;
+        text-align: left;
+    }
+    &__button {
+        margin: 0.25rem;
+        display: block;
+        text-align: center;
+        color: white;
+        background-color: #2c2c47;
+        cursor: pointer;
+        transition: background-color 0.25s ease;
+        padding: 0.25rem;
+        text-decoration: none;
+    
+        &:hover {
+            background-color: #4e4e9c;
+    
+        }
     }
 }
 

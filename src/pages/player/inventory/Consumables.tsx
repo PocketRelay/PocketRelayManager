@@ -19,14 +19,14 @@ export default function Consumables({ inventory, setInventory }: InventoryProper
     }
 
     return (
-        <div className="inventory__section">
-            <h1 className="inventory__section__title">Consumables</h1>
-            <div className="inventory__section__header">
+        <div className="list__contents">
+            <h1 className="list__contents__title">Consumables</h1>
+            <div className="list__contents__header">
                 <button className="button" onClick={setMaxAll}>
                     Max All
                 </button>
             </div>
-            <div className="inventory__section__value collapse-list">
+            <div className="list__contents__value collapse-list">
                 <Collapse name="Basic">
                     {CORE_CONSUMABLES.map((consumable, index) => (
                         <CoreConsumable inventory={inventory} consumable={consumable} key={index} />

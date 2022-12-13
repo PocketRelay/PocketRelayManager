@@ -5,7 +5,6 @@ import { useAppContext } from "@contexts/AppContext";
 import { ChangeEvent, ReactNode, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import "./Games.scss"
 
 export default function Games() {
     const context = useAppContext();
@@ -31,7 +30,7 @@ export default function Games() {
     } else {
         console.table(data);
         content = (
-            <div className="list__contents games__values">
+            <div className="list__contents list__contents--gap">
                 {data.games.map((game, index) => (
                     <Game game={game} key={index} />
                 ))}

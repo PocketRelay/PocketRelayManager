@@ -17,9 +17,9 @@ export default function WeaponMods({ inventory, setInventory }: InventoryPropert
     }
 
     return (
-        <div className="inventory__section">
-            <h1 className="inventory__section__title">Weapon Mods</h1>
-            <div className="inventory__section__header">
+        <div className="list__contents">
+            <h1 className="list__contents__title">Weapon Mods</h1>
+            <div className="list__contents__header">
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
                 </button>
@@ -30,7 +30,7 @@ export default function WeaponMods({ inventory, setInventory }: InventoryPropert
                     God Level All
                 </button>
             </div>
-            <div className="inventory__section__value collapse-list">
+            <div className="list__contents__value collapse-list">
                 {WEAPON_MODS.map((category, index) => (
                     <Collapse name={category.name} key={index}>
                         {category.values.map((weaponMod, index) => (

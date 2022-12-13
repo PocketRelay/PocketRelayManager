@@ -5,7 +5,6 @@ import { getPlayers } from "@api/routes";
 import Loader from "@components/Loader";
 import { useAppContext } from "@contexts/AppContext";
 import { useAsyncRetry } from "react-use";
-import "./Players.scss";
 
 export default function Players() {
     const appContext = useAppContext();
@@ -99,7 +98,7 @@ export default function Players() {
                                     <td>
                                         <Link
                                             to={"/players/" + player.id}
-                                            className="players__edit">
+                                            className="table__button">
                                             Edit
                                         </Link>
                                     </td>

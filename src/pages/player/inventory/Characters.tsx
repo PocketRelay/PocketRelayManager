@@ -24,14 +24,14 @@ export default function Characters({ inventory, setInventory }: InventoryPropert
     }
 
     return (
-        <div className="inventory__section">
-            <h1 className="inventory__section__title">Characters</h1>
-            <div className="inventory__section__header">
+        <div className="list__contents">
+            <h1 className="list__contents__title">Characters</h1>
+            <div className="list__contents__header">
                 <button className="button" onClick={unlockAll}>
                     Unlock All
                 </button>
             </div>
-            <div className="inventory__section__value collapse-list">
+            <div className="list__contents__value collapse-list">
                 {CHARACTER_CLASSES.map((characterClass, index) => (
                     <Collapse name={characterClass.name} key={index}>
                         {characterClass.values.map((character, index) => (
