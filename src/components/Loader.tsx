@@ -1,8 +1,10 @@
+import "./Loader.scss";
+
 export default function Loader() {
     return (
         <div className="loader">
-            <h1 className="loader__text">Loading</h1>
             <div className="loader__spinner"></div>
+            <span className="loader__text">Loading</span>
         </div>
     )
 }
