@@ -189,9 +189,9 @@ export function updatePlayerClass(context: AppContext, player: Player, index: nu
     }, context);
 }
 
-export function getGames(context: AppContext): Promise<GamesResponse> {
+export function getGames(context: AppContext, offset: number, count: number): Promise<GamesResponse> {
     return makeRequestSafe({
         method: "GET",
-        url: `api/games`,
+        url: `api/games?offset=${offset}&count=${count}`,
     }, context);
 }

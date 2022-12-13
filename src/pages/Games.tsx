@@ -14,7 +14,7 @@ export default function Games() {
     const { data, isLoading, error } = useQuery({
         queryKey: ["games", offset, count],
         queryFn: async () => {
-            return await getGames(context);
+            return await getGames(context, offset, count);
         }
     });
 
@@ -68,6 +68,7 @@ export default function Games() {
                 <label className="list__actions__row">
                     <span>Rows</span>
                     <select className="select" name="" id="" value={count} onChange={onRowsEvent}>
+                        <option value={2}>2</option>
                         <option value={5}>5</option>
                         <option value={10}>10</option>
                         <option value={20}>20</option>
