@@ -8,7 +8,7 @@ interface Properties {
 
 export default function Game({ game }: Properties) {
     return (
-        <div className="card game" data-owned="true">
+        <div className="game" data-owned="true">
             <div className="game__settings">
                 <GameVisibility game={game} />
                 <GameMap game={game} />
@@ -31,15 +31,28 @@ function GamePlayer({ player }: { player: GamePlayerModel }) {
 
     return (
         <div className="game__player">
-            <span className="game__player__id">ID: {player.player_id}</span>
-            <span className="game__player__name">Name: {player.display_name}</span>
-            <span className="game__player__address">
-                Internal Address: <span className="game__player__address__value">{internal.address}:{internal.port}</span>
-            </span>
-            <span className="game__player__address">
-                External Address: <span className="game__player__address__value">{external.address}:{external.port}</span>
-            </span>
+            <span className="game__player__name">{player.display_name} <span className="game__player__id">(ID: {player.player_id})</span></span>
+            <div className="game__player__attrs">
+                <div className="game__player__attr">
+                    <span className="game__player__attr__name">Internal Address:</span>
+                    <span className="game__player__attr__value game__player__attr__value--hidden">
+                        {internal.address}:{internal.port}
+                    </span>
+                </div>
+                <div className="game__player__attr">
+                    <span className="game__player__attr__name">External Address:</span>
+                    <span className="game__player__attr__value game__player__attr__value--hidden">
+                        {external.address}:{external.port}
+                    </span>
+                </div>
 
+                <div className="game__player__attr">
+                    <span className="game__player__attr__name">NATT:</span>
+                    <span className="game__player__attr__value">
+                        {player.net.qos.natt}
+                    </span>
+                </div>
+            </div>
         </div>
     )
 }

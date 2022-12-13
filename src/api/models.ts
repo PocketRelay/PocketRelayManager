@@ -82,7 +82,8 @@ export interface PlayerClassUpdate {
 }
 
 export interface GamesResponse {
-    games: Game[]
+    games: Game[];
+    more: boolean;
 }
 
 export interface Game {

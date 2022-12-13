@@ -58,13 +58,13 @@ export default function Players() {
     }
 
     return (
-        <div className="players">
-            <div className="players__actions">
+        <div className="list">
+            <div className="list__actions">
                 <Link to="/" className="button">
                     Back
                 </Link>
                 <button className="button" disabled={prevDisabled} onClick={prevPage}>Previous</button>
-                <label className="players__rows">
+                <label className="list__actions__row">
                     <span>Rows</span>
                     <select className="select" name="" id="" value={count} onChange={onRowsEvent}>
                         <option value={5}>5</option>
@@ -76,7 +76,7 @@ export default function Players() {
                 <button className="button" disabled={nextDisabled} onClick={nextPage}>Next</button>
             </div>
             {loading ? <Loader /> : (
-                <div className="table-wrapper">
+                <div className="list__contents">
                     <table className="table">
                         <thead className="table__head">
                             <tr className="table__head__row">
