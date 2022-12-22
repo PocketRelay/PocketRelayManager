@@ -1,6 +1,6 @@
 import { Player } from "@api/models";
 import { encodePlayerClass, parsePlayerClass, PlayerClass as PlayerClassModel } from "@api/parser";
-import { getPlayerDataList, setPlayerData, updatePlayerClass } from "@api/routes";
+import { getPlayerDataList, setPlayerData } from "@api/routes";
 import Loader from "@components/Loader";
 import PlayerClass from "@components/PlayerClass";
 import { AppContext, useAppContext } from "@contexts/AppContext";

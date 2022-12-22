@@ -83,7 +83,6 @@ export default function Players() {
                                 <th>Display Name</th>
                                 <th>Email</th>
                                 <th>Origin</th>
-                                <th>Credits</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -94,7 +93,6 @@ export default function Players() {
                                     <td>{player.display_name}</td>
                                     <td>{player.email}</td>
                                     <td>{player.origin ? "Yes" : "No"}</td>
-                                    <td>{player.credits}</td>
                                     <td>
                                         <Link
                                             to={"/players/" + player.id}
