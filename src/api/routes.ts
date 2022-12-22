@@ -1,5 +1,5 @@
 import { AppContext } from "@contexts/AppContext";
-import { Game, GamesResponse, GetPlayersResponse, Player, PlayerClass, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
+import { Game, GamesResponse, GetPlayersResponse, Player, PlayerData, PlayerDataList, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
@@ -47,7 +47,7 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
     } catch (e) {
         throw [-1, "Failed to connect"];
     }
-    
+
     if (Math.floor(response.status / 100) === 2) {
         try {
             return await response.json();
@@ -171,20 +171,26 @@ export function updatePlayer(context: AppContext, id: number, update: PlayerUpda
     }, context);
 }
 
-export function getPlayerClasses(context: AppContext, player: Player): Promise<PlayerClass[]> {
+export function getPlayerData(context: AppContext, player: Player, key: string): Promise<PlayerData> {
     return makeRequestSafe({
         method: "GET",
-        url: `api/players/${player.id}/classes`,
+        url: `api/players/${player.id}/data/${key}`,
     }, context);
 }
 
-export function updatePlayerClass(context: AppContext, player: Player, index: number, level: number, promotions: number): Promise<PlayerClass> {
+export function getPlayerDataList(context: AppContext, player: Player): Promise<PlayerDataList> {
+    return makeRequestSafe({
+        method: "GET",
+        url: `api/players/${player.id}/data`,
+    }, context);
+}
+
+export function setPlayerData(context: AppContext, player: Player, key: string, value: string): Promise<void> {
     return makeRequestSafe({
         method: "PUT",
-        url: `api/players/${player.id}/classes/${index}`,
+        url: `api/players/${player.id}/data/${key}`,
         body: {
-            level,
-            promotions
+            value,
         }
     }, context);
 }

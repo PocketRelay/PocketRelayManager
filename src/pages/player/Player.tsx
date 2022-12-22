@@ -56,22 +56,22 @@ export default function Player() {
 
                 <NavLink
                     to="./"
-                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
-                    >
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
+                >
                     Base
                 </NavLink>
 
                 <NavLink
                     to="inventory"
-                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
-                    >
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
+                >
                     Inventory
                 </NavLink>
 
                 <NavLink
                     to="classes"
-                    className={({isActive}) => isActive ? "button button--nav--active" : "button button--nav"}
-                    >
+                    className={({ isActive }) => isActive ? "button button--nav--active" : "button button--nav"}
+                >
                     Classes
                 </NavLink>
             </div>
@@ -80,7 +80,7 @@ export default function Player() {
             <Routes>
                 <Route index path="/" element={<Basic player={player} setPlayer={setPlayer} />} />
                 <Route path="/classes" element={<Classes player={player} />} />
-                <Route path="/inventory/*" element={<Inventory player={player} setPlayer={setPlayer} />} />
+                <Route path="/inventory/*" element={<Inventory player={player} />} />
             </Routes>
 
         </div>

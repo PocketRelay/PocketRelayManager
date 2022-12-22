@@ -1,8 +1,8 @@
-import { PlayerClass as PlayerClassModel } from "@api/models";
+import { PlayerClassData } from "@pages/player/Classes";
 import { ChangeEvent, useEffect, useState } from "react";
 
 interface Properties {
-    playerClass: PlayerClassModel
+    playerClass: PlayerClassData
 }
 
 export default function PlayerClass({ playerClass }: Properties) {

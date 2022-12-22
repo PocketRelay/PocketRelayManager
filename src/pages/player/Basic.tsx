@@ -23,7 +23,7 @@ export default function Basic({ player, setPlayer }: Properties) {
     useEffect(() => {
         setDisplayName(player.display_name);
         setEmail(player.email);
-        setCredits(player.credits);
+        // setCredits(player.credits);
         setOrigin(player.origin);
     }, [player]);
 
@@ -32,7 +32,7 @@ export default function Basic({ player, setPlayer }: Properties) {
         if (email != player.email) update.email = email;
         if (displayName != player.display_name) update.display_name = displayName;
         if (password.length > 0) update.password = password;
-        if (credits != player.credits) update.credits = credits;
+        // if (credits != player.credits) update.credits = credits;
         if (origin != player.origin) update.origin = origin;
 
         console.log(update);

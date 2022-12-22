@@ -1,5 +1,6 @@
-import { Player, PlayerClass as PlayerClassModel } from "@api/models";
-import { getPlayerClasses, updatePlayerClass } from "@api/routes";
+import { Player } from "@api/models";
+import { encodePlayerClass, parsePlayerClass, PlayerClass as PlayerClassModel } from "@api/parser";
+import { getPlayerDataList, setPlayerData, updatePlayerClass } from "@api/routes";
 import Loader from "@components/Loader";
 import PlayerClass from "@components/PlayerClass";
 import { AppContext, useAppContext } from "@contexts/AppContext";
@@ -10,15 +11,30 @@ interface Properties {
     player: Player;
 }
 
+export type PlayerClassData = {
+    key: string;
+} & PlayerClassModel
+
 export default function Classes({ player }: Properties) {
     const context: AppContext = useAppContext();
-    const [classes, setClasses] = useState<PlayerClassModel[]>([]);
+    const [classes, setClasses] = useState<PlayerClassData[]>([]);
 
     const { isLoading, error, refetch } = useQuery({
         queryKey: ["player_clases", player.id],
         refetchOnWindowFocus: false,
         queryFn: async () => {
-            const classes: PlayerClassModel[] = await getPlayerClasses(context, player);
+            const data = await getPlayerDataList(context, player);
+            const keys = Object.keys(data);
+            const classes: PlayerClassData[] = [];
+            for (let key of keys) {
+                if (key.startsWith("class")) {
+                    const parsed = parsePlayerClass(data[key]);
+                    if (parsed != null) {
+                        classes.push({ key, ...parsed });
+                    }
+                }
+            }
+
             setClasses(classes);
         }
     });
@@ -27,15 +43,9 @@ export default function Classes({ player }: Properties) {
 
     async function save() {
         for (let i = 0; i < classes.length; i++) {
-            const original: PlayerClassModel = classes[i];
-            const newModel: PlayerClassModel = await updatePlayerClass(
-                context,
-                player,
-                original.index,
-                original.level,
-                original.promotions
-            );
-            classes[i] = newModel;
+            const original: PlayerClassData = classes[i];
+            const encoded = encodePlayerClass(original);
+            await setPlayerData(context, player, original.key, encoded);
         }
     }
 

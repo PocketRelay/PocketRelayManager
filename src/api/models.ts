@@ -48,9 +48,6 @@ export interface Player {
     email: string;
     display_name: string;
     origin: boolean;
-    credits: number;
-    inventory: string;
-    csreward: number;
 }
 
 export interface GetPlayersResponse {
@@ -63,23 +60,8 @@ export interface PlayerUpdate {
     display_name?: string;
     origin?: boolean;
     password?: string;
-    credits?: number;
-    inventory?: string;
-    csreward?: string;
 }
 
-export interface PlayerClass {
-    index: number;
-    name: string;
-    level: number;
-    exp: number;
-    promotions: number;
-}
-
-export interface PlayerClassUpdate {
-    level: number;
-    promotions: number;
-}
 
 export interface GamesResponse {
     games: Game[];
@@ -125,3 +107,9 @@ export interface NetGroup {
     address: string;
     port: number;
 }
+
+export interface PlayerData {
+    value: string | null;
+}
+
+export type PlayerDataList = Record<"Base" | string, string>;

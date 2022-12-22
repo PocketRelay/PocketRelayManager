@@ -6,15 +6,15 @@ import WeaponMods from "./inventory/WeaponMods";
 import Weapons from "./inventory/Weapons"
 import { Player } from "@api/models";
 import { useEffect, useState } from "react";
-import { encodeInventory, parseInventory } from "@data/inventory";
 import { useMutation } from "react-query";
-import { updatePlayer } from "@api/routes";
+import { getPlayerData, setPlayerData, updatePlayer } from "@api/routes";
 import { AppContext, useAppContext } from "@contexts/AppContext";
 import { NavLink } from "react-router-dom";
+import { parsePlayerBase, PlayerBase, encodeInventory, parseInventory, encodePlayerBase } from "@api/parser";
+import { useAsync } from "react-use";
 
 interface Properties {
     player: Player;
-    setPlayer(player: Player): void;
 }
 
 export interface InventoryProperties {
@@ -22,16 +22,35 @@ export interface InventoryProperties {
     setInventory(value: number[]): void;
 }
 
-export default function Inventory({ player, setPlayer }: Properties) {
+export default function Inventory({ player }: Properties) {
     const context: AppContext = useAppContext();
+
+    const [base, setBase] = useState<PlayerBase>(null!);
+
     const [inventory, setInventory] = useState<number[]>([]);
+    const [failedParse, setFailedParse] = useState(false)
 
     // Mutation state for saving the inventory
     const saveMutation = useMutation(save);
 
+
     // Effect for updating the inventory when the player changes
-    useEffect(() => {
-        setInventory(parseInventory(player.inventory));
+    useAsync(async () => {
+        setFailedParse(false);
+        const data = await getPlayerData(context, player, "Base");
+
+        if (data.value == null) {
+            setFailedParse(true);
+            return;
+        }
+
+        const base = parsePlayerBase(data.value);
+        if (base == null) {
+            setFailedParse(true);
+            return;
+        }
+        setBase(base);
+        setInventory(parseInventory(base.inventory));
     }, [player]);
 
     /**
@@ -43,10 +62,15 @@ export default function Inventory({ player, setPlayer }: Properties) {
      */
     async function save(): Promise<void> {
         const newInventory = encodeInventory(inventory);
-        const newPlayer = await updatePlayer(context, player.id, {
-            inventory: newInventory,
-        });
-        setPlayer(newPlayer);
+
+        const newBase: PlayerBase = {
+            ...base,
+            inventory: newInventory
+        }
+
+        setBase(newBase);
+
+        await setPlayerData(context, player, "Base", encodePlayerBase(newBase));
     }
 
     /**
@@ -54,7 +78,13 @@ export default function Inventory({ player, setPlayer }: Properties) {
      * stored on the player
      */
     function reset(): void {
-        setInventory(parseInventory(player.inventory));
+        setInventory(parseInventory(base.inventory));
+    }
+
+    if (failedParse) {
+        return <div className="list__contents">
+            <h1>Inventory contents were missing or unparsable. Possibly not initialized yet?</h1>
+        </div>
     }
 
     return (
@@ -102,7 +132,7 @@ export default function Inventory({ player, setPlayer }: Properties) {
             )}
 
             <Routes >
-                <Route path="/" element={<Navigate to="characters"/>}/>
+                <Route path="/" element={<Navigate to="characters" />} />
                 <Route path="/characters" element={<Characters inventory={inventory} setInventory={setInventory} />} />
                 <Route path="/weapons" element={<Weapons inventory={inventory} setInventory={setInventory} />} />
                 <Route path="/weapon-mods" element={<WeaponMods inventory={inventory} setInventory={setInventory} />} />

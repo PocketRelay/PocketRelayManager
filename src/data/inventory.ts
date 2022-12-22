@@ -565,28 +565,3 @@ export const FLAGS: Flag[] = [
     { index: 270, name: "Wecome screen" }
 ]
 
-export function parseInventory(inventory: string): number[] {
-    let values: number[] = [];
-    for (let index = 0; index < inventory.length; index += 2) {
-        let first: string = inventory.substring(index, index + 2);
-        let value: number = parseInt(first, 16);
-        values.push(value);
-    }
-    return values;
-}
-
-export function encodeInventory(inventory: number[]): string {
-    let output = "";
-    for (let value of inventory) {
-        if (value > 255) {
-            output += "FF";
-        } else {
-            let hex = value.toString(16).toUpperCase();
-            while (hex.length < 2) {
-                hex = "0" + hex;
-            }
-            output += hex;
-        }
-    }
-    return output;
-}
