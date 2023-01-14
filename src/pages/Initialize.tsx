@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { ServerDetails } from "@api/models";
+import { EXPECTED_IDENT, ServerDetails } from "@api/models";
 import { getServerDetails } from "@api/routes";
 import { BASE_URL_KEY, useAppContext } from "@contexts/AppContext";
 import Loader from "@components/Loader";
@@ -27,7 +27,8 @@ export default function Initialize() {
         try {
             const response: ServerDetails = await getServerDetails(baseURL);
             const version: string | undefined = response.version;
-            if (version !== undefined) {
+            const ident: string | undefined = response.ident;
+            if (ident === EXPECTED_IDENT && version !== undefined) {
                 setServerState({ baseURL, version });
                 return;
             }
@@ -44,7 +45,8 @@ export default function Initialize() {
         const baseURL: string = fixUrl(url);
         const response: ServerDetails = await getServerDetails(baseURL);
         const version: string | undefined = response.version;
-        if (version !== undefined) {
+        const ident: string | undefined = response.ident;
+        if (ident === EXPECTED_IDENT && version !== undefined) {
             // Store the key and update the state
             localStorage.setItem(BASE_URL_KEY, baseURL);
             setServerState({ baseURL, version });

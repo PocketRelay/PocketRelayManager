@@ -4,24 +4,17 @@
     server
 */
 
+// The expected value of "ident" from server details
+export const EXPECTED_IDENT: string = "POCKET_RELAY_SERVER";
+
 // Structure of the server details response from the Pocket Relay server
 // this response includes the version and other server details
 export interface ServerDetails {
+    // Identifier field which MUST be present to consider the server to
+    // be a Pocket relay server
+    ident?: string;
+    // The version of the server
     version?: string;
-    services?: Service[]
-}
-
-// The different types of services
-export type ServiceType = "HTTP" | "Blaze" | "BlazeSecure" | "DirectBuffer"
-
-// Structure of a service present in the server details response
-export interface Service {
-    // The name of the service
-    name: string;
-    // The port the service is running on
-    port: number;
-    // The type of service
-    type: ServiceType;
 }
 
 // Structure for a token request
