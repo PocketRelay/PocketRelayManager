@@ -1,6 +1,6 @@
 import Collapse from "@components/Collapse";
 import LeveledCard from "@components/inventory/LeveledCard";
-import { MAX_WEAPON_LEVEL, WEAPON_CATEGORIES } from "@data/inventory";
+import { LOCKED, MAX_WEAPON_LEVEL, WEAPON_CATEGORIES } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
 
 export default function Weapons({ inventory, setInventory }: InventoryProperties) {
@@ -20,6 +20,9 @@ export default function Weapons({ inventory, setInventory }: InventoryProperties
         <div className="list__contents">
             <h1 className="list__contents__title">Weapons</h1>
             <div className="list__contents__header">
+                <button className="button" onClick={() => setLevelAll(LOCKED)}>
+                    Lock All
+                </button>
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
                 </button>
