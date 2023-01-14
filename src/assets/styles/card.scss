@@ -44,7 +44,7 @@ $ultra-rare-button-color: #ac5957;
     opacity: 0.5;
 
     &__name {
-        padding: 1rem;
+        padding: 0.5rem;
         background-color: $default-surface-color;
         border-radius: 0.45rem;
     }
@@ -55,6 +55,7 @@ $ultra-rare-button-color: #ac5957;
             width: 100%;
             background-color: $default-surface-color;
             border-radius: 0.45rem;
+            overflow: hidden;
         }
 
         max-width: 160px;
@@ -65,7 +66,7 @@ $ultra-rare-button-color: #ac5957;
     &__action {
         display: block;
         width: 100%;
-        padding: 1rem;
+        padding: 0.5rem;
         font-size: 1.25rem;
 
         border: none;
@@ -104,7 +105,7 @@ $ultra-rare-button-color: #ac5957;
         &__input {
             display: block;
             flex-flow: column;
-            max-width: 4rem;
+            max-width: 3.5rem;
             font-size: 1.25rem;
 
             border: none;
@@ -129,7 +130,7 @@ $ultra-rare-button-color: #ac5957;
 
             &__button {
                 flex: auto;
-                padding: 0.5rem;
+                padding: 0.25rem;
                 font-size: 1.25rem;
                 background-color: $default-button-color;
                 border: none;
@@ -159,9 +160,11 @@ $ultra-rare-button-color: #ac5957;
             background-color: $uncommon-button-color;
         }
 
-        .card__name, .card__img-wrapper, .card__level {
+        .card__name,
+        .card__img-wrapper,
+        .card__level {
             background-color: $uncommon-surface-color;
-        }    
+        }
     }
 
     // Rare Rarirty
@@ -174,11 +177,13 @@ $ultra-rare-button-color: #ac5957;
         .card__action {
             background-color: $rare-button-color;
         }
-        
-        .card__name, .card__img-wrapper, .card__level {
+
+        .card__name,
+        .card__img-wrapper,
+        .card__level {
             background-color: $rare-surface-color;
         }
-    
+
     }
 
 
@@ -193,7 +198,9 @@ $ultra-rare-button-color: #ac5957;
             background-color: $ultra-rare-button-color;
         }
 
-        .card__name, .card__img-wrapper, .card__level {
+        .card__name,
+        .card__img-wrapper,
+        .card__level {
             background-color: $ultra-rare-surface-color;
         }
     }

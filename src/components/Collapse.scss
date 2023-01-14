@@ -7,9 +7,9 @@
     border: 5px solid #1b1b25;
     transition: border-color 0.25s ease;
     border-radius: 0.5rem;
-    
+
     &[data-collapsed="false"] {
-        border-color: #3a3a74;
+        border-color: #3c3c55;
     }
 }
 
@@ -19,6 +19,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .collapse__header__button {
@@ -49,13 +50,13 @@
     flex-flow: row nowrap;
     overflow-x: auto;
     gap: 1rem;
-    padding: 2rem;
+    padding: 0.5rem;
 
     &::-webkit-scrollbar {
         background-color: #1b1b25;
         height: 8px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
         background-color: #4e4e9c;
         border-radius: 16px;
