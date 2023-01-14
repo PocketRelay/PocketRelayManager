@@ -1,6 +1,6 @@
 import Collapse from "@components/Collapse";
 import LeveledCard from "@components/inventory/LeveledCard";
-import { LOCKED, MAX_WEAPON_MOD_LEVEL, WEAPON_MODS } from "@data/inventory";
+import { LOCKED, MAX_WEAPON_MOD_LEVEL, UNLOCKED, UNSAFE_MAX, WEAPON_MODS } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
 
 export default function WeaponMods({ inventory, setInventory }: InventoryProperties) {
@@ -23,13 +23,13 @@ export default function WeaponMods({ inventory, setInventory }: InventoryPropert
                 <button className="button" onClick={() => setLevelAll(LOCKED)}>
                     Lock All
                 </button>
-                <button className="button" onClick={() => setLevelAll(1)}>
+                <button className="button" onClick={() => setLevelAll(UNLOCKED)}>
                     Unlock All
                 </button>
                 <button className="button" onClick={() => setLevelAll(MAX_WEAPON_MOD_LEVEL)}>
                     Max Level All
                 </button>
-                <button className="button" onClick={() => setLevelAll(255)}>
+                <button className="button" onClick={() => setLevelAll(UNSAFE_MAX)}>
                     God Level All
                 </button>
             </div>

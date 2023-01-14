@@ -1,4 +1,4 @@
-import { CHARACTER_CLASSES, LOCKED, MAX_CHARACTER_LEVEL } from "@data/inventory";
+import { CHARACTER_CLASSES, LOCKED, MAX_CHARACTER_LEVEL, UNLOCKED, UNSAFE_MAX } from "@data/inventory";
 import Collapse from "@components/Collapse";
 import { InventoryProperties } from "../Inventory";
 import LeveledCard from "@components/inventory/LeveledCard";
@@ -32,13 +32,13 @@ export default function Characters({ inventory, setInventory }: InventoryPropert
                 <button className="button" onClick={() => setLevelAll(LOCKED)}>
                     Lock All
                 </button>
-                <button className="button" onClick={() => setLevelAll(1)}>
+                <button className="button" onClick={() => setLevelAll(UNLOCKED)}>
                     Unlock All
                 </button>
                 <button className="button" onClick={() => setLevelAll(MAX_CHARACTER_LEVEL)}>
                     Max Level All
                 </button>
-                <button className="button" onClick={() => setLevelAll(255)}>
+                <button className="button" onClick={() => setLevelAll(UNSAFE_MAX)}>
                     God Level All
                 </button>
             </div>

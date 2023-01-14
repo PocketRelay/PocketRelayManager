@@ -1,6 +1,6 @@
 import Collapse from "@components/Collapse";
 import { CoreConsumable, OtherConsumable, TieredConsumable } from "@components/inventory/Consumable";
-import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES } from "@data/inventory";
+import { CONSUMABLES, CORE_CONSUMABLES, OTHER_CONSUMABLES, UNSAFE_MAX } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
 
 export default function Consumables({ inventory, setInventory }: InventoryProperties) {
@@ -14,7 +14,7 @@ export default function Consumables({ inventory, setInventory }: InventoryProper
         OTHER_CONSUMABLES.forEach(value => indexes.push(value.index));
         CONSUMABLES.forEach(value => value.values.forEach(value => indexes.push(...value.indexes)));
         setInventory(inventory.map((value, index) => {
-            return indexes.includes(index) ? 255 : value
+            return indexes.includes(index) ? UNSAFE_MAX : value
         }));
     }
 
