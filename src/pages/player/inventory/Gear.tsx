@@ -1,5 +1,5 @@
 import LeveledCard from "@components/inventory/LeveledCard";
-import { GEAR_CONSUMABLES, GEAR_MAX } from "@data/inventory";
+import { GEAR_CONSUMABLES, MAX_GEAR_LEVEL } from "@data/inventory";
 import { InventoryProperties } from "../Inventory";
 
 export default function Gear({ inventory, setInventory }: InventoryProperties) {
@@ -22,7 +22,7 @@ export default function Gear({ inventory, setInventory }: InventoryProperties) {
                 <button className="button" onClick={() => setLevelAll(1)}>
                     Unlock All
                 </button>
-                <button className="button" onClick={() => setLevelAll(GEAR_MAX)}>
+                <button className="button" onClick={() => setLevelAll(MAX_GEAR_LEVEL)}>
                     Max Level All
                 </button>
                 <button className="button" onClick={() => setLevelAll(255)}>
@@ -38,7 +38,7 @@ export default function Gear({ inventory, setInventory }: InventoryProperties) {
                         name={gear.name}
                         imageURL={`/assets/gear/${gear.image}`}
                         imageHeight={120}
-                        max={GEAR_MAX}
+                        max={MAX_GEAR_LEVEL}
                     />
                 ))}
             </div>

@@ -1,12 +1,20 @@
+// The unlocked value
+export const UNLOCKED: number = 1;
+// The locked value
+export const LOCKED: number = 0;
+// The maximum not normal level value
+export const UNSAFE_MAX: number = 255;
 
-export enum WeaponType {
-    AssaultRifle,
-    SniperRifle,
-    Shotgun,
-    Pistol,
-    SMG,
-}
+// Maximum normal level for weapons 
+export const MAX_WEAPON_LEVEL: number = 10;
+// Maximum normal level for characters
+export const MAX_CHARACTER_LEVEL: number = 5;
+// Maximum normal level for weapon mods
+export const MAX_WEAPON_MOD_LEVEL: number = 5;
+// Maximum normal level for gear
+export const MAX_GEAR_LEVEL: number = 5;
 
+// Rarity level of a specific item
 export enum Rarity {
     Common,
     Uncommon,
@@ -14,9 +22,11 @@ export enum Rarity {
     UltraRare
 }
 
+// Structure of a weapon definition
 export interface Weapon {
     // Index of weapon level in inventory
     level_index: number;
+    // The rarity of the weapon
     rarity: Rarity;
     // Name of the weapon
     name: string;
@@ -26,10 +36,92 @@ export interface Weapon {
     unused?: boolean;
 }
 
-export const MAX_WEAPON_LEVEL: number = 10;
+// Structure defining a character
+export interface Character {
+    // The character level index
+    index: number,
+    // The name of the character
+    name: string,
+    // The character image
+    image: string,
+}
 
-export const MAX_CHARACTER_LEVEL: number = 5;
+// Structure for defining a weapon mod 
+export interface WeaponMod {
+    // The level index of the mod
+    level_index: number;
+    // The name of the mod
+    name: string;
+    // The image for the mod
+    image: string;
+}
 
+// Structure representing a named category of values
+export interface Category<V /* The type of values stored */> {
+    // The name of the category
+    name: string;
+    // The values stored in the category
+    values: V[];
+}
+
+// Structure of a consumable which has multiple tier levels each
+// with their own index
+export interface TieredConsumable {
+    // The base name of the consumable
+    name: string;
+    // The consumable icon image
+    image: string;
+    // The indexes of each tier of the consumable
+    indexes: number[];
+    /// Optional unused marker flag
+    unused?: boolean;
+}
+
+// Structure of gear consumables
+export interface GearConsumable {
+    // The index of the consumable
+    index: number;
+    // The name of the consumable
+    name: string;
+    // The text of the consumable
+    text: string;
+    // The image of the consumable
+    image: string;
+}
+
+// Structure of a core consumable
+export interface CoreConsumable {
+    // The index of the stock value
+    stock_index: number;
+    // The index of the capacity value
+    capacity_index: number;
+    // The name of the consumable
+    name: string;
+    // The text for the consumable
+    text: string;
+    // The stock image for the consumable
+    stock_image: string;
+    // The capacity image for the consumable
+    capacity_image: string;
+}
+
+// Structure for other consumable types
+export interface OtherConsumable {
+    // The index of the consumable
+    index: number;
+    // The name of the consumable
+    name: string;
+    // The image of the consumable
+    image: string;
+}
+
+// Structure for a toggle flag
+export interface Flag {
+    // The index of the flag
+    index: number;
+    // The name of the flag
+    name: string;
+}
 
 export const SNIPER_RIFLES: Weapon[] = [
     { level_index: 136, rarity: Rarity.UltraRare, name: "Black Widow", image: "SniperRifle_Widow.png", },
@@ -109,25 +201,13 @@ export const PISTOLS: Weapon[] = [
     { level_index: 628, rarity: Rarity.Rare, name: "Executioner Pistol", image: "Pistol_Bloodpack_MP.png", },
 ];
 
-
-export interface WeaponCategory {
-    name: string,
-    values: Weapon[],
-}
-
-export const WEAPON_CATEGORIES: WeaponCategory[] = [
+export const WEAPON_CATEGORIES: Category<Weapon>[] = [
     { name: "Sniper Rifles", values: SNIPER_RIFLES },
     { name: "Assault Rifles", values: ASSAULT_RIFLES },
     { name: "Sub Machine Guns", values: SUB_MACHINE_GUNS },
     { name: "Shotguns", values: SHOTGUNS },
     { name: "Pistols", values: PISTOLS },
 ];
-
-export interface Character {
-    index: number,
-    name: string,
-    image: string;
-}
 
 export const ADEPT_CHARACTERS: Character[] = [
     { index: 248, name: "Human Male", image: "AdeptHumanMale.png" },
@@ -215,12 +295,8 @@ export const VANGUARD_CHARACTERS: Character[] = [
     { index: 592, name: "Cabal", image: "MP_TurianVAN.png" },
 ];
 
-export interface CharacterClass {
-    name: string;
-    values: Character[],
-}
 
-export const CHARACTER_CLASSES: CharacterClass[] = [
+export const CHARACTER_CLASSES: Category<Character>[] = [
     { name: "Adept", values: ADEPT_CHARACTERS },
     { name: "Soldier", values: SOLDIER_CHARACTERS },
     { name: "Engineer", values: ENGINEER_CHARACTERS },
@@ -228,12 +304,6 @@ export const CHARACTER_CLASSES: CharacterClass[] = [
     { name: "Infiltrator", values: INFILTRATOR_CHARACTERS },
     { name: "Vanguard", values: VANGUARD_CHARACTERS }
 ]
-
-export interface WeaponMod {
-    level_index: number;
-    name: string;
-    image: string;
-}
 
 export const ASSAULT_RIFLE_MODS: WeaponMod[] = [
     { level_index: 31, name: "Extended Barrel", image: "AssaultRifleDamage.png", },
@@ -291,14 +361,8 @@ export const SUB_MACHINE_GUN_MODS: WeaponMod[] = [
     { level_index: 657, name: "Power Magnifier", image: "SMGPowerDamage_MP5.png", },
 ];
 
-export interface WeaponModCategory {
-    name: string;
-    values: WeaponMod[]
-}
 
-export const MAX_WEAPON_MOD_LEVEL: number = 5;
-
-export const WEAPON_MODS: WeaponModCategory[] = [
+export const WEAPON_MODS: Category<WeaponMod>[] = [
     { name: "Assault Rifle", values: ASSAULT_RIFLE_MODS },
     { name: "Sniper Rifle", values: SNIPER_RIFLE_MODS },
     { name: "Shotugn", values: SHOTGUN_MODS },
@@ -306,20 +370,6 @@ export const WEAPON_MODS: WeaponModCategory[] = [
     { name: "SMG", values: SUB_MACHINE_GUN_MODS }
 ]
 
-export const CONSUMABLE_MAX: number = 255;
-
-export type Consumable = TieredConsumable | GearConsumable | CoreConsumable | OtherConsumable
-
-export interface TieredConsumable {
-    // The base name of the consumable
-    name: string;
-    // The consumable icon image
-    image: string;
-    // The indexes of each tier of the consumable
-    indexes: number[];
-    /// Optional unused marker flag
-    unused?: boolean;
-}
 
 export const ARMOR_CONSUMABLES: TieredConsumable[] = [
     {
@@ -442,25 +492,13 @@ export const AMMO_CONSUMABLES: TieredConsumable[] = [
     },
 ];
 
-export interface ConsumableCategory {
-    name: string;
-    values: TieredConsumable[],
-}
 
-export const CONSUMABLES: ConsumableCategory[] = [
+export const CONSUMABLES: Category<TieredConsumable>[] = [
     { name: "Armor", values: ARMOR_CONSUMABLES },
     { name: "Weapon", values: WEAPON_CONSUMABLES },
     { name: "Ammo", values: AMMO_CONSUMABLES }
 ]
 
-export const GEAR_MAX: number = 5;
-
-export interface GearConsumable {
-    index: number;
-    name: string;
-    text: string;
-    image: string;
-}
 
 export const GEAR_CONSUMABLES: GearConsumable[] = [
     { index: 330, name: "Hydraulic Joints", text: "Improve armor joints to maximize the force and damage delivered through melee blows.", image: "Gear_MeleeDamage.png" },
@@ -501,15 +539,6 @@ export const GEAR_CONSUMABLES: GearConsumable[] = [
 ]
 
 
-export interface CoreConsumable {
-    stock_index: number;
-    capacity_index: number;
-    name: string;
-    text: string;
-    stock_image: string;
-    capacity_image: string;
-}
-
 export const CORE_CONSUMABLES: CoreConsumable[] = [
     {
         stock_index: 86,
@@ -545,21 +574,9 @@ export const CORE_CONSUMABLES: CoreConsumable[] = [
     },
 ];
 
-export interface OtherConsumable {
-    index: number;
-    name: string;
-    image: string;
-}
-
 export const OTHER_CONSUMABLES: OtherConsumable[] = [
     { index: 246, name: "Reset Powers", image: "MPRespec.png" }
 ]
-
-
-export interface Flag {
-    index: number;
-    name: string;
-}
 
 export const FLAGS: Flag[] = [
     { index: 270, name: "Wecome screen" }
