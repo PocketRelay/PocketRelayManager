@@ -5,6 +5,11 @@ interface Properties {
     playerClass: PlayerClassData
 }
 
+// The maximum level a class can reach
+const MAX_CLASS_LEVEL: number = 20;
+// The minimum level a class must be 
+const MIN_CLASS_LEVEL: number = 0;
+
 export default function PlayerClass({ playerClass }: Properties) {
     const [level, setLevel] = useState(0);
     const [promotions, setPromotions] = useState(0);
@@ -20,8 +25,8 @@ export default function PlayerClass({ playerClass }: Properties) {
         if (Number.isNaN(level)) {
             level = 0;
         }
-        if (level < 0) level = 0;
-        if (level > 20) level = 20;
+        if (level < MIN_CLASS_LEVEL) level = MIN_CLASS_LEVEL;
+        if (level > MAX_CLASS_LEVEL) level = MAX_CLASS_LEVEL;
         setLevel(level);
         playerClass.level = level;
     }
