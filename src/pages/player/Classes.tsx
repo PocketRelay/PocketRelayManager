@@ -23,7 +23,7 @@ export default function Classes({ player }: Properties) {
         queryKey: ["player_clases", player.id],
         refetchOnWindowFocus: false,
         queryFn: async () => {
-            const data = await getPlayerDataList(context, player);
+            const data = await getPlayerDataList(context, player.id);
             const keys = Object.keys(data);
             const classes: PlayerClassData[] = [];
             for (let key of keys) {
@@ -45,7 +45,7 @@ export default function Classes({ player }: Properties) {
         for (let i = 0; i < classes.length; i++) {
             const original: PlayerClassData = classes[i];
             const encoded = encodePlayerClass(original);
-            await setPlayerData(context, player, original.key, encoded);
+            await setPlayerData(context, player.id, original.key, encoded);
         }
     }
 

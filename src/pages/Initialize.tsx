@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { ServerDetails } from "@api/models";
-import { getServerDetails, RequestError } from "@api/routes";
+import { getServerDetails } from "@api/routes";
 import { BASE_URL_KEY, useAppContext } from "@contexts/AppContext";
 import Loader from "@components/Loader";
 import { useMutateWithInitial } from "@hooks/init";

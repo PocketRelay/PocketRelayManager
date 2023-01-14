@@ -37,7 +37,7 @@ export default function Inventory({ player }: Properties) {
     // Effect for updating the inventory when the player changes
     useAsync(async () => {
         setFailedParse(false);
-        const data = await getPlayerData(context, player, "Base");
+        const data = await getPlayerData(context, player.id, "Base");
 
         if (data.value == null) {
             setFailedParse(true);
@@ -70,7 +70,7 @@ export default function Inventory({ player }: Properties) {
 
         setBase(newBase);
 
-        await setPlayerData(context, player, "Base", encodePlayerBase(newBase));
+        await setPlayerData(context, player.id, "Base", encodePlayerBase(newBase));
     }
 
     /**

@@ -1,22 +1,29 @@
 import { AppContext } from "@contexts/AppContext";
-import { Game, GamesResponse, GetPlayersResponse, Player, PlayerData, PlayerDataList, PlayerUpdate, ServerDetails, TokenRequest, TokenResponse, TokenValidateResponse } from "./models";
+import * as models from "./models";
 
 // Http request method types
 export type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 // Structure of errors from make request [statusCode, text]
-export type RequestError = [number, string];
+type RequestError = [number, string];
 
-export interface RequestConfig {
-    method: HttpMethod,
-    baseURL: string,
-    url: string,
+// Structure for a configuration object to provide to the
+// makeRequest function
+interface RequestConfig {
+    // The request HTTP method to use
+    method: HttpMethod;
+    // The base portion / prefix of the URL
+    baseURL: string;
+    // The route segment of the URL
+    url: string;
+    // Optional authentication token to use
     token?: string,
+    // Optional body to encode as JSON
     body?: any
 }
 
 /**
- * Makes a request with the proivded details
+ * Makes a request with the provided details
  * 
  * @param method The HTTP method to use for the request
  * @param baseURL THe base portion of the URL
@@ -29,10 +36,12 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
     const init: RequestInit = { method: config.method };
     const headers: Record<string, string> = {};
 
+    // Apply the token if provided
     if (config.token) {
         headers["X-Token"] = config.token;
     }
 
+    // Serialize JSON body if provided
     if (config.method != "GET" && config.body) {
         headers["Content-Type"] = "application/json";
         init.body = JSON.stringify(config.body);
@@ -65,10 +74,14 @@ async function makeRequest<T>(config: RequestConfig): Promise<T> {
     }
 }
 
-
-export interface SafeRequestConfig {
+// Request config type without the token and base url fields as these
+// are filled in already using the app context
+interface SafeRequestConfig {
+    // The request HTTP method to use
     method: HttpMethod,
+    // The route segment of the URL
     url: string,
+    // Optional body to encode as JSON
     body?: any
 }
 
@@ -78,9 +91,9 @@ export interface SafeRequestConfig {
  * that if the request return 401 Unauthorized to clear 
  * the token and prompt for authentication again
  * 
- * @param config 
- * @param context 
- * @returns 
+ * @param config  The request config
+ * @param context The application context
+ * @returns The promise to the response type struct
  */
 async function makeRequestSafe<T>(config: SafeRequestConfig, context: AppContext): Promise<T> {
     try {
@@ -107,7 +120,7 @@ async function makeRequestSafe<T>(config: SafeRequestConfig, context: AppContext
  * @param baseURL The server baseURL 
  * @returns Promise for the server details
  */
-export function getServerDetails(baseURL: string): Promise<ServerDetails> {
+export function getServerDetails(baseURL: string): Promise<models.ServerDetails> {
     return makeRequest({
         method: "GET",
         baseURL,
@@ -124,7 +137,7 @@ export function getServerDetails(baseURL: string): Promise<ServerDetails> {
  * @param password The password to authenticate with 
  * @returns The token response
  */
-export function getToken(baseURL: string, request: TokenRequest): Promise<TokenResponse> {
+export function getToken(baseURL: string, request: models.TokenRequest): Promise<models.TokenResponse> {
     return makeRequest({
         method: "POST",
         baseURL,
@@ -141,7 +154,7 @@ export function getToken(baseURL: string, request: TokenRequest): Promise<TokenR
  * @param token The token to check
  * @returns The token validation response
  */
-export function validateToken(baseURL: string, token: string): Promise<TokenValidateResponse> {
+export function validateToken(baseURL: string, token: string): Promise<models.TokenValidateResponse> {
     return makeRequest({
         method: "GET",
         baseURL,
@@ -149,21 +162,44 @@ export function validateToken(baseURL: string, token: string): Promise<TokenVali
     });
 }
 
-export function getPlayers(context: AppContext, offset: number, count: number): Promise<GetPlayersResponse> {
+/**
+ * Obtains the list of players the length of count at the provided page offset 
+ * 
+ * @param context The app context
+ * @param offset  The page offset
+ * @param count   The number of players to query
+ * @returns       The players list response
+ */
+export function getPlayers(context: AppContext, offset: number, count: number): Promise<models.GetPlayersResponse> {
     return makeRequestSafe({
         method: "GET",
         url: `api/players?offset=${offset}&count=${count}`
     }, context);
 }
 
-export function getPlayer(context: AppContext, id: string): Promise<Player> {
+/**
+ * Obtains the details of a specific player using it player id
+ * 
+ * @param context The app context 
+ * @param id      The id of the player to retrieve
+ * @returns       The player data
+ */
+export function getPlayer(context: AppContext, id: string): Promise<models.Player> {
     return makeRequestSafe({
         method: "GET",
         url: `api/players/${id}`
     }, context);
 }
 
-export function updatePlayer(context: AppContext, id: number, update: PlayerUpdate): Promise<Player> {
+/**
+ * Updates the provided fields on the player with the provided ID
+ * 
+ * @param context The app context
+ * @param id      The id of the player to retrieve
+ * @param update  The fields to update
+ * @returns       The updated player
+ */
+export function updatePlayer(context: AppContext, id: number, update: models.PlayerUpdate): Promise<models.Player> {
     return makeRequestSafe({
         method: "PUT",
         url: `api/players/${id}`,
@@ -171,31 +207,66 @@ export function updatePlayer(context: AppContext, id: number, update: PlayerUpda
     }, context);
 }
 
-export function getPlayerData(context: AppContext, player: Player, key: string): Promise<PlayerData> {
+/**
+ * Gets the player data for the player that has the provided key
+ * 
+ * @param context The app context
+ * @param id      The id of the player to retrieve
+ * @param key     The key to get the value of
+ * @returns       The player data value if present
+ */
+export function getPlayerData(context: AppContext, id: number, key: string): Promise<models.PlayerData> {
     return makeRequestSafe({
         method: "GET",
-        url: `api/players/${player.id}/data/${key}`,
+        url: `api/players/${id}/data/${key}`,
     }, context);
 }
 
-export function getPlayerDataList(context: AppContext, player: Player): Promise<PlayerDataList> {
+/**
+ * Gets a list of all the player data for the player with the 
+ * provided ID
+ * 
+ * @param context The app context
+ * @param id      The id of the player to retrieve
+ * @returns       The list of player data
+ */
+export function getPlayerDataList(context: AppContext, id: number): Promise<models.PlayerDataList> {
     return makeRequestSafe({
         method: "GET",
-        url: `api/players/${player.id}/data`,
+        url: `api/players/${id}/data`,
     }, context);
 }
 
-export function setPlayerData(context: AppContext, player: Player, key: string, value: string): Promise<void> {
+/**
+ * Sets the key value pair of player data for the player with the
+ * provided ID
+ * 
+ * @param context The app context
+ * @param id      The id of the player to retrieve
+ * @param key     The key of the player data to set
+ * @param value   The value to set the data to
+ * @returns       
+ */
+export function setPlayerData(context: AppContext, id: number, key: string, value: string): Promise<void> {
     return makeRequestSafe({
         method: "PUT",
-        url: `api/players/${player.id}/data/${key}`,
+        url: `api/players/${id}/data/${key}`,
         body: {
             value,
         }
     }, context);
 }
 
-export function getGames(context: AppContext, offset: number, count: number): Promise<GamesResponse> {
+/**
+ * Obtains a list of running games on the server at the provided
+ * offset
+ * 
+ * @param context The app context
+ * @param offset  The page offset
+ * @param count   The number of games to obtain
+ * @returns       The list of games
+ */
+export function getGames(context: AppContext, offset: number, count: number): Promise<models.GamesResponse> {
     return makeRequestSafe({
         method: "GET",
         url: `api/games?offset=${offset}&count=${count}`,

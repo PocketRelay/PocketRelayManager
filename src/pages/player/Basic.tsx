@@ -29,7 +29,7 @@ export default function Basic({ player, setPlayer }: Properties) {
     }, [player]);
 
     useAsync(async () => {
-        const data = await getPlayerData(context, player, "Base");
+        const data = await getPlayerData(context, player.id, "Base");
 
         if (data.value != null) {
             const base = parsePlayerBase(data.value);
@@ -55,7 +55,7 @@ export default function Basic({ player, setPlayer }: Properties) {
         }
 
         if (base != null) {
-            await setPlayerData(context, player, "Base", encodePlayerBase(base));
+            await setPlayerData(context, player.id, "Base", encodePlayerBase(base));
         }
     }
 

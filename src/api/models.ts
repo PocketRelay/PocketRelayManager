@@ -1,3 +1,9 @@
+/*
+    This file contains models that describe the structure of 
+    certain data that can be requested from the Pocket Relay
+    server
+*/
+
 // Structure of the server details response from the Pocket Relay server
 // this response includes the version and other server details
 export interface ServerDetails {
