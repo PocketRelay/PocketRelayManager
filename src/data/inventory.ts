@@ -14,8 +14,6 @@ export enum Rarity {
     UltraRare
 }
 
-export const MAX_LEVEL_UNSAFE: number = 255;
-
 export interface Weapon {
     // Index of weapon level in inventory
     level_index: number;
@@ -29,6 +27,8 @@ export interface Weapon {
 }
 
 export const MAX_WEAPON_LEVEL: number = 10;
+
+export const MAX_CHARACTER_LEVEL: number = 5;
 
 
 export const SNIPER_RIFLES: Weapon[] = [

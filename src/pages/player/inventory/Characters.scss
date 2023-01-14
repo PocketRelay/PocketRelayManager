@@ -1,0 +1,9 @@
+.characters {
+    .card__img {
+        width: 90px;
+
+        &-wrapper {
+            height: auto !important;
+        }
+    }
+}
