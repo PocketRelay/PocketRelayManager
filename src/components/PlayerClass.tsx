@@ -36,7 +36,7 @@ export default function PlayerClass({ playerClass }: Properties) {
     const levelHandle = handleNumberInput(
         MIN_CLASS_LEVEL,
         MAX_CLASS_LEVEL,
-        (value) => {
+        (value: number) => {
             setLevel(value);
             playerClass.level = value;
         });
@@ -45,7 +45,7 @@ export default function PlayerClass({ playerClass }: Properties) {
     const promotionsHandle = handleNumberInput(
         MIN_PROMOTIONS,
         MAX_PROMOTIONS,
-        (value) => {
+        (value: number) => {
             setPromotions(value);
             playerClass.promotions = value;
         });

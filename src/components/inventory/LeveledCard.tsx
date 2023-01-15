@@ -31,17 +31,21 @@ export default function LeveledCard(props: Properties) {
     // Effect for keeping the state up to date with the inventory
     useEffect(() => setLevel(props.inventory[props.index]), [props]);
 
-    // Effect for keeping the inventory up to date with the state
-    useEffect(() => { props.inventory[props.index] = level }, [level])
-
     // Function for toggled the unlocked / locked level states
-    const toggleLocked = () => setLevel(level !== LOCKED ? LOCKED : UNLOCKED);
+    const toggleLocked = () => {
+        let value: number = level !== LOCKED ? LOCKED : UNLOCKED;
+        props.inventory[props.index] = value;
+        setLevel(value);
+    };
 
     // Handle for the level changes
     const levelHandle = handleNumberInput(
         LOCKED,
         UNSAFE_MAX,
-        setLevel
+        (value: number) => {
+            props.inventory[props.index] = value;
+            setLevel(value);
+        }
     );
 
     // If the level is greater than zero then the item is owned
