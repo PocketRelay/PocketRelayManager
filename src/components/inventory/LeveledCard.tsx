@@ -1,101 +1,85 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Rarity } from "@data/inventory";
+import { useEffect, useState } from "react";
+import { LOCKED, Rarity, UNLOCKED, UNSAFE_MAX } from "@data/inventory";
+import { handleNumberInput } from "@hooks/number";
 
 interface Properties {
+    // The inventory contents array
     inventory: number[];
+    // Index of the card level field in the inventory
     index: number;
+    // Name of the card
     name: string;
+    // URL to the card image 
     imageURL: string;
+    // The maximum value to assign when the max value is pressed
     max: number;
+    // The height of the image wrapper 
     imageHeight: number;
+    // Optional rarity for the card coloring
     rarity?: Rarity;
 }
 
-export default function LeveledCard({ inventory, index, name, imageURL, max, rarity, imageHeight }: Properties) {
-    const [level, setLevelImpl] = useState(0);
+/**
+ * Reusable card component for items in the inventory where the
+ * index represents a level value
+ * 
+ * @param props The properties for this card
+ */
+export default function LeveledCard(props: Properties) {
+    const [level, setLevel] = useState(0);
 
     // Effect for keeping the state up to date with the inventory
-    useEffect(() => {
-        setLevelImpl(inventory[index])
-    }, [inventory, index])
+    useEffect(() => setLevel(props.inventory[props.index]), [props]);
 
-    /**
-     * Wrapping function for updating the level state as
-     * well as the level in the actual inventory array
-     * 
-     * @param level The level value
-     */
-    function setLevel(level: number) {
-        if (level < 0) level = 0;
-        if (level > 255) level = 255;
-        inventory[index] = level;
-        setLevelImpl(level);
-    }
+    // Effect for keeping the inventory up to date with the state
+    useEffect(() => { props.inventory[props.index] = level }, [level])
 
-    /**
-     * Function for toggling between the owned and not owned states
-     */
-    function toggleOwned() {
-        if (level > 0) {
-            setLevel(0);
-        } else {
-            setLevel(1);
-        }
-    }
+    // Function for toggled the unlocked / locked level states
+    const toggleLocked = () => setLevel(level !== LOCKED ? LOCKED : UNLOCKED);
 
-    /**
-     * Event handler for updating the level value
-     * when the level input value is changed
-     * 
-     * @param event The change event
-     */
-    function setLevelEvent(event: ChangeEvent<HTMLInputElement>) {
-        let value = event.target.value;
-        let valueInt = parseInt(value);
-        if (Number.isNaN(valueInt)) {
-            valueInt = 1;
-        }
-        setLevel(valueInt);
-    }
+    // Handle for the level changes
+    const levelHandle = handleNumberInput(
+        LOCKED,
+        UNSAFE_MAX,
+        setLevel
+    );
 
     // If the level is greater than zero then the item is owned
     const isOwned: boolean = level > 0;
-
+    // Text for the action button
     const actionText: string = isOwned ? "Remove" : "Add";
+    // Description title for the action
     const actionTitle: string = isOwned ? "Removes the item from the player inventory" : "Adds the item to the player inventory"
 
     return (
-        <div className="card" data-owned={isOwned} data-rarity={rarity}>
-            <h2 className="card__name">{name}</h2>
-            <div className="card__img-wrapper" style={{ height: imageHeight }}>
-                <img className="card__img" src={imageURL} alt={`${name} Image`} />
+        <div className="card" data-owned={isOwned} data-rarity={props.rarity}>
+            <h2 className="card__name">{props.name}</h2>
+            <div className="card__img-wrapper" style={{ height: props.imageHeight }}>
+                <img className="card__img" src={props.imageURL} alt={`${props.name} Image`} />
             </div>
             <div className="card__level">
                 <input
                     className="card__level__input"
                     type="number"
                     value={level}
-                    onChange={setLevelEvent} />
+                    onChange={levelHandle} />
                 <div className="card__level__actions">
                     <button
                         className="card__level__actions__button"
-                        onClick={() => setLevel(1)}
-                        title="Set the level to the minimum level (1)"
-                    >
+                        onClick={() => setLevel(UNLOCKED)}
+                        title="Set the level to the minimum level (1)">
                         Min
                     </button>
                     <button
                         className="card__level__actions__button"
-                        onClick={() => setLevel(max)}
-                        title="Set the level to the max normal level"
-                    >
+                        onClick={() => setLevel(props.max)}
+                        title={`Set the level to the max normal level (${props.max})`}>
                         Max
                     </button>
                     <button
                         className="card__level__actions__button"
-                        onClick={() => setLevel(255)}
-                        title="Set the level to the max cheated level"
-                    >
+                        onClick={() => setLevel(UNSAFE_MAX)}
+                        title="Set the level to the max cheated level (255)">
                         GOD
                     </button>
                 </div>
@@ -103,7 +87,7 @@ export default function LeveledCard({ inventory, index, name, imageURL, max, rar
             <button
                 className="card__action"
                 title={actionTitle}
-                onClick={toggleOwned}>
+                onClick={toggleLocked}>
                 {actionText}
             </button>
         </div>
