@@ -73,37 +73,34 @@ export default function LeveledCard({ inventory, index, name, imageURL, max, rar
                 <img className="card__img" src={imageURL} alt={`${name} Image`} />
             </div>
             <div className="card__level" data-disabled={isLevelDisabled}>
-                <span className="card__level__name">Level</span>
-                <div className="card__level__wrapper">
-                    <input
-                        disabled={isLevelDisabled}
-                        className="card__level__input"
-                        type="number"
-                        value={level}
-                        onChange={setLevelEvent} />
-                    <div className="card__level__actions">
-                        <button
-                            className="card__level__actions__button"
-                            onClick={() => setLevel(1)}
-                            title="Set the level to the minimum level (1)"
-                            disabled={isLevelDisabled}>
-                            Min
-                        </button>
-                        <button
-                            className="card__level__actions__button"
-                            onClick={() => setLevel(max)}
-                            title="Set the level to the max normal level"
-                            disabled={isLevelDisabled}>
-                            Max
-                        </button>
-                        <button
-                            className="card__level__actions__button"
-                            onClick={() => setLevel(255)}
-                            title="Set the level to the max cheated level"
-                            disabled={isLevelDisabled}>
-                            GOD
-                        </button>
-                    </div>
+                <input
+                    disabled={isLevelDisabled}
+                    className="card__level__input"
+                    type="number"
+                    value={level}
+                    onChange={setLevelEvent} />
+                <div className="card__level__actions">
+                    <button
+                        className="card__level__actions__button"
+                        onClick={() => setLevel(1)}
+                        title="Set the level to the minimum level (1)"
+                        disabled={isLevelDisabled}>
+                        Min
+                    </button>
+                    <button
+                        className="card__level__actions__button"
+                        onClick={() => setLevel(max)}
+                        title="Set the level to the max normal level"
+                        disabled={isLevelDisabled}>
+                        Max
+                    </button>
+                    <button
+                        className="card__level__actions__button"
+                        onClick={() => setLevel(255)}
+                        title="Set the level to the max cheated level"
+                        disabled={isLevelDisabled}>
+                        GOD
+                    </button>
                 </div>
             </div>
             <button
