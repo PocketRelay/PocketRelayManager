@@ -51,7 +51,7 @@ export default function PlayerClass({ playerClass }: Properties) {
         });
 
     return (
-        <div className="card" data-owned>
+        <div className="card">
             <div className="class__img-wrapper card__img-wrapper">
                 <img className="card__img class__img" src={`/assets/icons/${playerClass.name}.png`}></img>
             </div>

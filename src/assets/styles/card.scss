@@ -41,8 +41,6 @@ $ultra-rare-button-color: #ac5957;
 
     padding: 0.25rem;
 
-    opacity: 0.5;
-
     &__name {
         padding: 0.25rem;
         background-color: $default-surface-color;
@@ -131,6 +129,10 @@ $ultra-rare-button-color: #ac5957;
             }
         }
 
+    }
+
+    &[data-owned="false"] {
+        opacity: 0.5;
     }
 
     // Defaults & Common Rarirty
