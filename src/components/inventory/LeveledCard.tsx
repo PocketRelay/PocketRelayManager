@@ -60,8 +60,6 @@ export default function LeveledCard({ inventory, index, name, imageURL, max, rar
 
     // If the level is greater than zero then the item is owned
     const isOwned: boolean = level > 0;
-    // Level chaning is disabled if the item is not owned
-    const isLevelDisabled: boolean = !isOwned;
 
     const actionText: string = isOwned ? "Remove" : "Add";
     const actionTitle: string = isOwned ? "Removes the item from the player inventory" : "Adds the item to the player inventory"
@@ -72,9 +70,8 @@ export default function LeveledCard({ inventory, index, name, imageURL, max, rar
             <div className="card__img-wrapper" style={{ height: imageHeight }}>
                 <img className="card__img" src={imageURL} alt={`${name} Image`} />
             </div>
-            <div className="card__level" data-disabled={isLevelDisabled}>
+            <div className="card__level">
                 <input
-                    disabled={isLevelDisabled}
                     className="card__level__input"
                     type="number"
                     value={level}
@@ -84,21 +81,21 @@ export default function LeveledCard({ inventory, index, name, imageURL, max, rar
                         className="card__level__actions__button"
                         onClick={() => setLevel(1)}
                         title="Set the level to the minimum level (1)"
-                        disabled={isLevelDisabled}>
+                    >
                         Min
                     </button>
                     <button
                         className="card__level__actions__button"
                         onClick={() => setLevel(max)}
                         title="Set the level to the max normal level"
-                        disabled={isLevelDisabled}>
+                    >
                         Max
                     </button>
                     <button
                         className="card__level__actions__button"
                         onClick={() => setLevel(255)}
                         title="Set the level to the max cheated level"
-                        disabled={isLevelDisabled}>
+                    >
                         GOD
                     </button>
                 </div>
