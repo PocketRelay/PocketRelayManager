@@ -1,8 +1,9 @@
-import { PlayerClassData } from "@pages/player/Classes";
-import { ChangeEvent, useEffect, useState } from "react";
+import { handleNumberInput } from "@hooks/number";
+import { PlayerClass as PlayerClassModel } from "@api/parser";
+import { useEffect, useState } from "react";
 
 interface Properties {
-    playerClass: PlayerClassData
+    playerClass: PlayerClassModel
 }
 
 // The maximum level a class can reach
@@ -10,6 +11,18 @@ const MAX_CLASS_LEVEL: number = 20;
 // The minimum level a class must be 
 const MIN_CLASS_LEVEL: number = 0;
 
+// The minimum number of promotions
+const MIN_PROMOTIONS: number = 0;
+// The maximum number of promotions
+const MAX_PROMOTIONS: number = 1000;
+
+/**
+ * Component for displaying a player class that has editiable
+ * level and promotions fields along with display the name an
+ * an image for the class
+ * 
+ * @param playerClass The player class for this component
+ */
 export default function PlayerClass({ playerClass }: Properties) {
     const [level, setLevel] = useState(0);
     const [promotions, setPromotions] = useState(0);
@@ -19,32 +32,26 @@ export default function PlayerClass({ playerClass }: Properties) {
         setPromotions(playerClass.promotions);
     }, [playerClass]);
 
-    function setLevelEvent(event: ChangeEvent<HTMLInputElement>) {
-        let value = event.target.value;
-        let level = parseInt(value);
-        if (Number.isNaN(level)) {
-            level = 0;
-        }
-        if (level < MIN_CLASS_LEVEL) level = MIN_CLASS_LEVEL;
-        if (level > MAX_CLASS_LEVEL) level = MAX_CLASS_LEVEL;
-        setLevel(level);
-        playerClass.level = level;
-    }
+    // Handler function for updating the level state based on the changed input
+    const levelHandle = handleNumberInput(
+        MIN_CLASS_LEVEL,
+        MAX_CLASS_LEVEL,
+        (value) => {
+            setLevel(value);
+            playerClass.level = value;
+        });
 
-    function setPromotionsEvent(event: ChangeEvent<HTMLInputElement>) {
-        let value = event.target.value;
-        let promotions = parseInt(value);
-        if (Number.isNaN(promotions)) {
-            promotions = 0;
-        }
-        if (promotions < 0) promotions = 0;
-        if (promotions > 1000) promotions = 1000;
-        setPromotions(promotions);
-        playerClass.promotions = promotions;
-    }
+    // Handler function for updating the promotions state based on the changed input
+    const promotionsHandle = handleNumberInput(
+        MIN_PROMOTIONS,
+        MAX_PROMOTIONS,
+        (value) => {
+            setPromotions(value);
+            playerClass.promotions = value;
+        });
 
     return (
-        <div className="card" data-owned={true}>
+        <div className="card" data-owned>
             <div className="class__img-wrapper card__img-wrapper">
                 <img className="card__img class__img" src={`/assets/icons/${playerClass.name}.png`}></img>
             </div>
@@ -53,24 +60,20 @@ export default function PlayerClass({ playerClass }: Properties) {
                 <span className="input__name">Level</span>
                 <input
                     className="input__value"
-                    type="text"
+                    type="number"
                     value={level}
-                    onChange={setLevelEvent}
-                    title="Level"
-                    placeholder=""
-                />
+                    onChange={levelHandle}
+                    title="Level" />
             </label>
 
             <label className="input">
                 <span className="input__name">Promotions</span>
                 <input
                     className="input__value"
-                    type="text"
+                    type="number"
                     value={promotions}
-                    onChange={setPromotionsEvent}
-                    title="Promotions"
-                    placeholder=""
-                />
+                    onChange={promotionsHandle}
+                    title="Promotions" />
             </label>
         </div>
     )
