@@ -1,10 +1,12 @@
-import { useAmount } from "@hooks/inventory";
 import {
     TieredConsumable as TieredConsumableModel,
     CoreConsumable as CoreConsumableModel,
     OtherConsumable as OtherConsumableModel,
+    UNSAFE_MAX,
 } from "@data/inventory";
 import "./Consumable.scss"
+import { useEffect, useState } from "react";
+import { handleNumberInput } from "@hooks/number";
 
 export function TieredConsumable({ inventory, consumable }: { inventory: number[], consumable: TieredConsumableModel }) {
     // Path to the weapon image
@@ -36,7 +38,21 @@ interface TierProperties {
 }
 
 function ConsumableTier({ inventory, index, name }: TierProperties) {
-    const [amount, setAmountEvent] = useAmount(inventory, index);
+    const [amount, setAmount] = useState(0);
+
+    // Effect for keeping the state up to date with the inventory
+    useEffect(() => setAmount(inventory[index]), [inventory, index]);
+
+    // Effect for keeping inventory up to date with amount
+    useEffect(() => { inventory[index] = amount }, [amount]);
+
+    // Handle for handling the amount change events
+    const setAmountEvent = handleNumberInput(
+        0,
+        UNSAFE_MAX,
+        setAmount,
+    );
+
     return (
         <div className="tier">
             <span className="tier__name">{name}</span>
@@ -53,8 +69,33 @@ function ConsumableTier({ inventory, index, name }: TierProperties) {
 }
 
 export function CoreConsumable({ inventory, consumable }: { inventory: number[], consumable: CoreConsumableModel }) {
-    const [stock, setStockEvent] = useAmount(inventory, consumable.stock_index);
-    const [capacity, setCapacityEvent] = useAmount(inventory, consumable.capacity_index);
+    const [stock, setStock] = useState(0);
+    const [capacity, setCapacity] = useState(0);
+
+    // Effect for keeping the state up to date with the inventory
+    useEffect(() => {
+        setStock(inventory[consumable.stock_index]);
+        setCapacity(inventory[consumable.capacity_index]);
+    }, [inventory, consumable]);
+
+    // Effect for keeping inventory up to date with amount
+    useEffect(() => {
+        inventory[consumable.stock_index] = stock;
+        inventory[consumable.capacity_index] = capacity;
+    }, [stock, capacity]);
+
+    // Handle for handling the amount change events
+    const setStockEvent = handleNumberInput(
+        0,
+        UNSAFE_MAX,
+        setStock,
+    );
+    // Handle for handling the amount change events
+    const setCapacityEvent = handleNumberInput(
+        0,
+        UNSAFE_MAX,
+        setCapacity,
+    );
 
     // Path to the weapon image
     const imageURL: string = `/assets/consumables/${consumable.stock_image}`;
@@ -86,7 +127,21 @@ export function CoreConsumable({ inventory, consumable }: { inventory: number[],
 }
 
 export function OtherConsumable({ inventory, consumable }: { inventory: number[], consumable: OtherConsumableModel }) {
-    const [amount, setAmountEvent] = useAmount(inventory, consumable.index);
+    const [amount, setAmount] = useState(0);
+    const index = consumable.index;
+
+    // Effect for keeping the state up to date with the inventory
+    useEffect(() => setAmount(inventory[index]), [inventory, index]);
+
+    // Effect for keeping inventory up to date with amount
+    useEffect(() => { inventory[index] = amount }, [amount]);
+
+    // Handle for handling the amount change events
+    const setAmountEvent = handleNumberInput(
+        0,
+        UNSAFE_MAX,
+        setAmount,
+    );
 
     // Path to the weapon image
     const imageURL: string = `/assets/consumables/${consumable.image}`;

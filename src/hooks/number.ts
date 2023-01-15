@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react"
 
+// Type for an event handler taking events from an input element
 type NumberInputHandler = (event: ChangeEvent<HTMLInputElement>) => void;
 
 /**
