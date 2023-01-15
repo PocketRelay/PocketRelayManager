@@ -103,7 +103,7 @@ export function CoreConsumable({ inventory, consumable }: { inventory: number[],
     const imageURL: string = `/assets/consumables/${consumable.stock_image}`;
 
     return (
-        <div className="card consumable--core" data-owned="true">
+        <div className="card consumable--core">
             <h2 className="card__name">{consumable.name}</h2>
             <div className="card__img-wrapper">
                 <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
@@ -149,7 +149,7 @@ export function OtherConsumable({ inventory, consumable }: { inventory: number[]
     const imageURL: string = `/assets/consumables/${consumable.image}`;
 
     return (
-        <div className="card" data-owned="true">
+        <div className="card">
             <h2 className="card__name">{consumable.name}</h2>
             <div className="card__img-wrapper">
                 <img className="card__img" src={imageURL} alt={`${consumable.name} Image`} />
