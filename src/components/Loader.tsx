@@ -1,5 +1,9 @@
 import "./Loader.scss";
 
+/**
+ * Component for displaying a loading spinner to 
+ * indicate that loading is happening.
+ */
 export default function Loader() {
     return (
         <div className="loader">
